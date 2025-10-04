@@ -170,11 +170,17 @@ let eventsData = [];
 async function loadEvents(){
   try{
     const res = await fetch('events.json', {cache:'no-store'});
-    if (!res.ok){ throw new Error('events.json not found'); }
+    if (!res.ok) throw new Error('events.json not found ('+res.status+')');
     const data = await res.json();
-    eventsData = Array.isArray(data)? data: [];
+    eventsData = Array.isArray(data) ? data : [];
+    if (!eventsData.length) {
+      eventList.innerHTML = '<div class="card">No events in events.json yet.</div>';
+      return;
+    }
   }catch(e){
-    eventsData = [];
+    console.error(e);
+    eventList.innerHTML = '<div class="card">❌ Failed to load <code>events.json</code>. Put it next to <code>index.html</code> and redeploy. Then hard-reload.</div>';
+    return;
   }
   renderEvents();
 }
