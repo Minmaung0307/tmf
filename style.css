@@ -1,0 +1,48 @@
+:root{
+  --bg:#0b0f14; --card:#111824; --ink:#e8f1ff; --muted:#9bb0c9;
+  --brand:#5cc4ff; --accent:#8ee59e; --warn:#ffd271;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--ink);
+  background:linear-gradient(180deg,#081018, #0b0f14 30% 70%, #06090e);
+}
+.topbar{position:sticky;top:0;z-index:10;background:#0b121b; border-bottom:1px solid #142035; padding:12px 16px; display:flex; gap:12px; align-items:center; justify-content:space-between}
+.topbar h1{font-size:20px;margin:0}
+.tabs{display:flex; gap:8px}
+.tab{background:#152136;border:1px solid #213150;color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer}
+.tab.active{outline:2px solid var(--brand)}
+
+main{max-width:1200px; margin:20px auto; padding:0 16px}
+.tabpanel{display:none}
+.tabpanel.active{display:block}
+
+.search-row{display:grid; grid-template-columns:1fr 160px 160px 100px; gap:8px; margin:10px 0}
+.search-row input[type="search"]{width:100%; padding:10px 12px; border-radius:12px; border:1px solid #233558; background:#0e1624; color:var(--ink)}
+.search-row select, .search-row button{padding:10px 12px; border-radius:12px; border:1px solid #233558; background:#0e1624; color:var(--ink)}
+
+.split{display:grid; grid-template-columns:1fr 420px; gap:12px}
+.mapwrap{min-height:520px}
+#map{height:520px; border-radius:14px; overflow:hidden; border:1px solid #22324f}
+
+.list{display:grid; gap:10px}
+.card{background:var(--card); border:1px solid #1d2b45; border-radius:16px; padding:14px}
+.card h3{margin:0 0 6px 0}
+.meta{color:var(--muted); font-size:14px}
+.badge{display:inline-block; padding:3px 8px; border-radius:999px; background:#13243b; border:1px solid #23406b; margin-right:6px}
+.actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+.actions a{color:var(--brand)}
+
+.cards{display:grid; gap:10px}
+.event-title{font-weight:700}
+.status{margin-top:8px; color:var(--muted)}
+.footer{max-width:1200px;margin:30px auto 40px; padding:0 16px; color:var(--muted)}
+
+@media (max-width: 1024px){
+  .split{grid-template-columns:1fr}
+}
+@media (max-width: 680px){
+  .search-row{grid-template-columns:1fr 1fr; grid-auto-rows:auto}
+  .search-row button{grid-column:1 / -1}
+}
