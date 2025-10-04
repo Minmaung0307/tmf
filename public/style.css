@@ -1,6 +1,6 @@
 :root{
   --bg:#0b0f14; --card:#111824; --ink:#e8f1ff; --muted:#9bb0c9;
-  --brand:#5cc4ff; --accent:#8ee59e; --warn:#ffd271;
+  --brand:#5cc4ff; --accent:#8ee59e; --warn:#ffd271; --error:#ff9aa2; --ok:#8ee59e;
 }
 *{box-sizing:border-box}
 html,body{height:100%}
@@ -22,8 +22,6 @@ main{max-width:1200px; margin:20px auto; padding:0 16px}
 .search-row input[type="search"]{width:100%; padding:10px 12px; border-radius:12px; border:1px solid #233558; background:#0e1624; color:var(--ink)}
 .search-row select, .search-row button{padding:10px 12px; border-radius:12px; border:1px solid #233558; background:#0e1624; color:var(--ink)}
 
-.hint{color:var(--muted); margin:8px 0}
-
 .split{display:grid; grid-template-columns:1fr 420px; gap:12px}
 .mapwrap{min-height:520px}
 #map{height:520px; border-radius:14px; overflow:hidden; border:1px solid #22324f}
@@ -37,9 +35,26 @@ main{max-width:1200px; margin:20px auto; padding:0 16px}
 .actions a{color:#5cc4ff}
 
 .cards{display:grid; gap:10px}
+.event-card{background:var(--card); border:1px solid #1d2b45; border-radius:16px; padding:14px; display:grid; gap:6px}
 .event-title{font-weight:700}
-.status{margin-top:8px; color:var(--muted)}
+.status{margin-left:8px; color:var(--muted)}
+.hint{color:var(--muted); margin:8px 0}
 .footer{max-width:1200px;margin:30px auto 40px; padding:0 16px; color:var(--muted)}
+
+.form-card{padding:0}
+.form-header{padding:16px 16px 0 16px}
+.form-header h2{margin:0}
+.form-header .muted{color:var(--muted); margin-top:6px}
+.form-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; padding:16px}
+.field{display:grid; gap:6px}
+.field span{font-size:14px; color:var(--muted)}
+.field.full{grid-column:1 / -1}
+.field input, .field select, .field textarea{
+  padding:12px; border-radius:12px; border:1px solid #233558; background:#0e1624; color:var(--ink)
+}
+.form-actions{display:flex; align-items:center; gap:12px; padding:0 16px 16px 16px}
+.btn-primary{background:#1a3458; border:1px solid #2b4f82; color:#e8f1ff; padding:10px 14px; border-radius:12px; cursor:pointer}
+.btn-primary:hover{filter:brightness(1.1)}
 
 @media (max-width: 1024px){
   .split{grid-template-columns:1fr}
@@ -47,4 +62,5 @@ main{max-width:1200px; margin:20px auto; padding:0 16px}
 @media (max-width: 680px){
   .search-row{grid-template-columns:1fr 1fr; grid-auto-rows:auto}
   .search-row button{grid-column:1 / -1}
+  .form-grid{grid-template-columns:1fr}
 }

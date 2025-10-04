@@ -48,32 +48,74 @@
 
     <section id="events" class="tabpanel" role="tabpanel">
       <div class="search-row">
-        <p class="hint">Events are community-submitted (EmailJS). Use the form below to add festival dates (Vesak, Kathina, Thingyan, etc.).</p>
+        <input id="eventSearch" type="search" placeholder="Search events… (title, temple, state)" />
+        <select id="eventMonth"></select>
+        <select id="eventState"></select>
+        <button id="resetEvents">Reset</button>
       </div>
       <div id="eventList" class="cards" aria-live="polite"></div>
+      <p class="hint">Events are loaded from <code>events.json</code>. Edit that file to add Vesak, Kathina, Thingyan, etc.</p>
     </section>
 
     <section id="submit" class="tabpanel" role="tabpanel">
-      <form id="submitForm" class="card">
-        <h2>Suggest a Correction / New Temple / Festival</h2>
-        <label>
-          Your Name
-          <input name="from_name" required />
-        </label>
-        <label>
-          Your Email
-          <input type="email" name="reply_to" required />
-        </label>
-        <label>
-          Subject
-          <input name="subject" placeholder="New temple / Contact change / Festival dates…" required />
-        </label>
-        <label>
-          Details (temple name, city/state, links, phones, emails, event dates) — မြန်မာ/English OK
-          <textarea name="message" rows="6" required></textarea>
-        </label>
-        <button type="submit">Send via EmailJS</button>
-        <p id="submitStatus" class="status"></p>
+      <form id="submitForm" class="card form-card">
+        <div class="form-header">
+          <h2>Suggest a Correction / New Temple / Festival</h2>
+          <p class="muted">This sends an email via EmailJS to the recipient configured in your EmailJS Template.</p>
+        </div>
+        <div class="form-grid">
+          <label class="field">
+            <span>Your Name</span>
+            <input name="from_name" placeholder="e.g., Aung Aung" required />
+          </label>
+          <label class="field">
+            <span>Your Email</span>
+            <input type="email" name="reply_to" placeholder="you@example.com" required />
+          </label>
+          <label class="field full">
+            <span>Subject</span>
+            <input name="subject" placeholder="New temple / Contact change / Festival dates…" required />
+          </label>
+          <label class="field">
+            <span>Temple Name</span>
+            <input name="temple_name" placeholder="e.g., ရွှေသြဇာကျောင်း / Shwe Oo Zaw" />
+          </label>
+          <label class="field">
+            <span>City, State</span>
+            <input name="city_state" placeholder="e.g., Fort Worth, TX" />
+          </label>
+          <label class="field">
+            <span>Event Type</span>
+            <select name="event_type">
+              <option value="">—</option>
+              <option>Vesak</option>
+              <option>Kathina</option>
+              <option>Thingyan</option>
+              <option>Ordination</option>
+              <option>Retreat</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Event Date (start)</span>
+            <input type="date" name="event_start" />
+          </label>
+          <label class="field">
+            <span>Event Date (end)</span>
+            <input type="date" name="event_end" />
+          </label>
+          <label class="field full">
+            <span>Official Link</span>
+            <input name="link" placeholder="Website / Facebook event URL" />
+          </label>
+          <label class="field full">
+            <span>Details (မြန်မာ/English welcome)</span>
+            <textarea name="message" rows="6" placeholder="Please include phone/email if possible…" required></textarea>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">✉️ Send via EmailJS</button>
+          <span id="submitStatus" class="status"></span>
+        </div>
       </form>
     </section>
   </main>
@@ -85,10 +127,8 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script type="module" src="app.js"></script>
 
-  <!-- Load Google Maps JS API (Places library). -->
   <script>
     function initPlaces(){
-      // call the app's init AFTER Google Maps JS API is ready
       if (window.tmfInit) window.tmfInit();
     }
   </script>

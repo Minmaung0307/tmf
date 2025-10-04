@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Vesak Day",
+    "templeName": "Wat Thai of Los Angeles",
+    "city": "North Hollywood",
+    "state": "CA",
+    "address": "Main Hall",
+    "dateStart": "2025-05-12",
+    "dateEnd": "2025-05-12",
+    "link": "https://example.org"
+  },
+  {
+    "title": "Kathina Ceremony",
+    "templeName": "Sitagu Dhamma Vihara",
+    "city": "Austin",
+    "state": "TX",
+    "address": "Temple Grounds",
+    "dateStart": "2025-11-02",
+    "dateEnd": "2025-11-02",
+    "link": "https://example.org"
+  }
+]
