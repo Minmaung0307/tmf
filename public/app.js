@@ -151,7 +151,8 @@ resetFilters.addEventListener('click', ()=>{
   search.value=''; traditionSel.value=''; stateSel.value=''; searchTemples();
 });
 
-searchTemples();
+// IMPORTANT: Do NOT auto-run here. Expose init for Google callback.
+window.tmfInit = () => searchTemples();
 
 const submitForm = document.getElementById('submitForm');
 const submitStatus = document.getElementById('submitStatus');

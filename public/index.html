@@ -85,12 +85,14 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script type="module" src="app.js"></script>
 
-  <!-- Load Google Maps JS API (Places library). Replace YOUR_GOOGLE_MAPS_API_KEY -->
+  <!-- Load Google Maps JS API (Places library). -->
   <script>
-    window.__GMAPS_API_KEY__ = 'AIzaSyAEb6TbKs1ex-9S8PQe2bd9k8oaXe34goQ';
-    function initPlaces(){ /* callback required by script tag */ }
+    function initPlaces(){
+      // call the app's init AFTER Google Maps JS API is ready
+      if (window.tmfInit) window.tmfInit();
+    }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEb6TbKs1ex-9S8PQe2bd9k8oaXe34goQ&libraries=places&callback=initPlaces" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initPlaces" async defer></script>
 
   <script>
     if ('serviceWorker' in navigator) {
