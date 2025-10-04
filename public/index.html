@@ -22,7 +22,7 @@
   <main>
     <section id="temples" class="tabpanel active" role="tabpanel">
       <div class="search-row">
-        <input id="search" type="search" placeholder="Search by temple name (မြန်မာ/English) … " />
+        <input id="search" type="search" placeholder="Search by temple name (မြန်မာ/English)… eg: ရွှေသြဇာကျောင်း" />
         <select id="tradition">
           <option value="">All Traditions</option>
           <option>Myanmar</option>
@@ -53,69 +53,31 @@
         <select id="eventState"></select>
         <button id="resetEvents">Reset</button>
       </div>
-      <div id="eventList" class="cards" aria-live="polite"></div>
-      <p class="hint">Events are loaded from <code>events.json</code>. Edit that file to add Vesak, Kathina, Thingyan, etc.</p>
+      <div id="eventGrid" class="event-grid" aria-live="polite"></div>
+      <p class="hint">Images are optional—add an <code>image</code> field in <code>events.json</code>, or a thumbnail will use the placeholder.</p>
     </section>
 
     <section id="submit" class="tabpanel" role="tabpanel">
       <form id="submitForm" class="card form-card">
         <div class="form-header">
           <h2>Suggest a Correction / New Temple / Festival</h2>
-          <p class="muted">This sends an email via EmailJS to the recipient configured in your EmailJS Template.</p>
+          <p class="muted">Sends an email via EmailJS to the recipient set in your EmailJS Template.</p>
         </div>
         <div class="form-grid">
-          <label class="field">
-            <span>Your Name</span>
-            <input name="from_name" placeholder="e.g., Aung Aung" required />
+          <label class="field"><span>Your Name</span><input name="from_name" placeholder="e.g., Aung Aung" required /></label>
+          <label class="field"><span>Your Email</span><input type="email" name="reply_to" placeholder="you@example.com" required /></label>
+          <label class="field full"><span>Subject</span><input name="subject" placeholder="New temple / Contact change / Festival dates…" required /></label>
+          <label class="field"><span>Temple Name</span><input name="temple_name" placeholder="e.g., ရွှေသြဇာကျောင်း / Shwe Oo Zaw" /></label>
+          <label class="field"><span>City, State</span><input name="city_state" placeholder="e.g., Fort Worth, TX" /></label>
+          <label class="field"><span>Event Type</span>
+            <select name="event_type"><option value="">—</option><option>Vesak</option><option>Kathina</option><option>Thingyan</option><option>Ordination</option><option>Retreat</option></select>
           </label>
-          <label class="field">
-            <span>Your Email</span>
-            <input type="email" name="reply_to" placeholder="you@example.com" required />
-          </label>
-          <label class="field full">
-            <span>Subject</span>
-            <input name="subject" placeholder="New temple / Contact change / Festival dates…" required />
-          </label>
-          <label class="field">
-            <span>Temple Name</span>
-            <input name="temple_name" placeholder="e.g., ရွှေသြဇာကျောင်း / Shwe Oo Zaw" />
-          </label>
-          <label class="field">
-            <span>City, State</span>
-            <input name="city_state" placeholder="e.g., Fort Worth, TX" />
-          </label>
-          <label class="field">
-            <span>Event Type</span>
-            <select name="event_type">
-              <option value="">—</option>
-              <option>Vesak</option>
-              <option>Kathina</option>
-              <option>Thingyan</option>
-              <option>Ordination</option>
-              <option>Retreat</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Event Date (start)</span>
-            <input type="date" name="event_start" />
-          </label>
-          <label class="field">
-            <span>Event Date (end)</span>
-            <input type="date" name="event_end" />
-          </label>
-          <label class="field full">
-            <span>Official Link</span>
-            <input name="link" placeholder="Website / Facebook event URL" />
-          </label>
-          <label class="field full">
-            <span>Details (မြန်မာ/English welcome)</span>
-            <textarea name="message" rows="6" placeholder="Please include phone/email if possible…" required></textarea>
-          </label>
+          <label class="field"><span>Event Date (start)</span><input type="date" name="event_start" /></label>
+          <label class="field"><span>Event Date (end)</span><input type="date" name="event_end" /></label>
+          <label class="field full"><span>Official Link</span><input name="link" placeholder="Website / Facebook event URL" /></label>
+          <label class="field full"><span>Details (မြန်မာ/English welcome)</span><textarea name="message" rows="6" placeholder="Please include phone/email if possible…" required></textarea></label>
         </div>
-        <div class="form-actions">
-          <button type="submit" class="btn-primary">✉️ Send via EmailJS</button>
-          <span id="submitStatus" class="status"></span>
-        </div>
+        <div class="form-actions"><button type="submit" class="btn-primary">✉️ Send via EmailJS</button><span id="submitStatus" class="status"></span></div>
       </form>
     </section>
   </main>
@@ -128,16 +90,12 @@
   <script type="module" src="app.js"></script>
 
   <script>
-    function initPlaces(){
-      if (window.tmfInit) window.tmfInit();
-    }
+    function initPlaces(){ if (window.tmfInit) window.tmfInit(); }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEb6TbKs1ex-9S8PQe2bd9k8oaXe34goQ&libraries=places&callback=initPlaces" async defer></script>
 
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js');
-    }
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js'); }
   </script>
 </body>
 </html>

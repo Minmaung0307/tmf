@@ -7,7 +7,8 @@
     "address": "Temple Grounds",
     "dateStart": "2025-04-13",
     "dateEnd": "2025-04-16",
-    "link": "https://example.org/thingyan"
+    "link": "https://example.org/thingyan",
+    "image": "images/event-placeholder.jpg"
   },
   {
     "title": "Vesak Day",
@@ -17,7 +18,8 @@
     "address": "Main Hall",
     "dateStart": "2025-05-12",
     "dateEnd": "2025-05-12",
-    "link": "https://example.org/vesak"
+    "link": "https://example.org/vesak",
+    "image": "images/event-placeholder.jpg"
   },
   {
     "title": "Kathina Ceremony",
@@ -27,36 +29,7 @@
     "address": "Dana Hall",
     "dateStart": "2025-11-02",
     "dateEnd": "2025-11-02",
-    "link": "https://example.org/kathina"
-  },
-  {
-    "title": "Pavarana & Robe Offering",
-    "templeName": "Wat Lao Xayaram",
-    "city": "Fort Worth",
-    "state": "TX",
-    "address": "Main Hall",
-    "dateStart": "2025-10-17",
-    "dateEnd": "2025-10-17",
-    "link": "https://example.org/pavarana"
-  },
-  {
-    "title": "Magha Puja",
-    "templeName": "Wat Khmer Samaki",
-    "city": "Lowell",
-    "state": "MA",
-    "address": "Temple Grounds",
-    "dateStart": "2025-02-12",
-    "dateEnd": "2025-02-12",
-    "link": "https://example.org/magha"
-  },
-  {
-    "title": "New Year Blessing",
-    "templeName": "Abhayagiri Buddhist Monastery",
-    "city": "Redwood Valley",
-    "state": "CA",
-    "address": "Dhamma Hall",
-    "dateStart": "2025-01-01",
-    "dateEnd": "2025-01-01",
-    "link": "https://example.org/newyear"
+    "link": "https://example.org/kathina",
+    "image": "images/event-placeholder.jpg"
   }
 ]
