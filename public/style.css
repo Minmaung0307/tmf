@@ -12,7 +12,7 @@ body{
 .topbar h1{font-size:20px;margin:0}
 .tabs{display:flex; gap:8px}
 .tab{background:#152136;border:1px solid #213150;color:var(--ink);padding:8px 12px;border-radius:10px;cursor:pointer}
-.tab.active{outline:2px solid var(--brand)}
+.tab.active{outline:2px solid #5cc4ff}
 
 main{max-width:1200px; margin:20px auto; padding:0 16px}
 .tabpanel{display:none}
@@ -21,6 +21,8 @@ main{max-width:1200px; margin:20px auto; padding:0 16px}
 .search-row{display:grid; grid-template-columns:1fr 160px 160px 100px; gap:8px; margin:10px 0}
 .search-row input[type="search"]{width:100%; padding:10px 12px; border-radius:12px; border:1px solid #233558; background:#0e1624; color:var(--ink)}
 .search-row select, .search-row button{padding:10px 12px; border-radius:12px; border:1px solid #233558; background:#0e1624; color:var(--ink)}
+
+.hint{color:var(--muted); margin:8px 0}
 
 .split{display:grid; grid-template-columns:1fr 420px; gap:12px}
 .mapwrap{min-height:520px}
@@ -32,7 +34,7 @@ main{max-width:1200px; margin:20px auto; padding:0 16px}
 .meta{color:var(--muted); font-size:14px}
 .badge{display:inline-block; padding:3px 8px; border-radius:999px; background:#13243b; border:1px solid #23406b; margin-right:6px}
 .actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
-.actions a{color:var(--brand)}
+.actions a{color:#5cc4ff}
 
 .cards{display:grid; gap:10px}
 .event-title{font-weight:700}

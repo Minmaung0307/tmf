@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js"></script>
-  <script type="module" src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -24,7 +22,7 @@
   <main>
     <section id="temples" class="tabpanel active" role="tabpanel">
       <div class="search-row">
-        <input id="search" type="search" placeholder="Search by name, city, state…" />
+        <input id="search" type="search" placeholder="Search by temple name (မြန်မာ/English)… eg: ရွှေသြဇာကျောင်း" />
         <select id="tradition">
           <option value="">All Traditions</option>
           <option>Myanmar</option>
@@ -50,17 +48,14 @@
 
     <section id="events" class="tabpanel" role="tabpanel">
       <div class="search-row">
-        <input id="eventSearch" type="search" placeholder="Search events by title, state, temple…" />
-        <select id="eventMonth"></select>
-        <select id="eventState"></select>
-        <button id="resetEvents">Reset</button>
+        <p class="hint">Events are community-submitted (EmailJS). Use the form below to add festival dates (Vesak, Kathina, Thingyan, etc.).</p>
       </div>
       <div id="eventList" class="cards" aria-live="polite"></div>
     </section>
 
     <section id="submit" class="tabpanel" role="tabpanel">
       <form id="submitForm" class="card">
-        <h2>Suggest a Correction / New Temple</h2>
+        <h2>Suggest a Correction / New Temple / Festival</h2>
         <label>
           Your Name
           <input name="from_name" required />
@@ -74,30 +69,28 @@
           <input name="subject" placeholder="New temple / Contact change / Festival dates…" required />
         </label>
         <label>
-          Details (please include temple name, city/state, links, phones, emails, event dates)
+          Details (temple name, city/state, links, phones, emails, event dates) — မြန်မာ/English OK
           <textarea name="message" rows="6" required></textarea>
         </label>
         <button type="submit">Send via EmailJS</button>
         <p id="submitStatus" class="status"></p>
       </form>
-
-      <details class="card">
-        <summary>Owner Tools (local-only)</summary>
-        <p>For quick testing, you can add sample data to your Firestore. Remove this in production.</p>
-        <button id="seedBtn">➕ Add Sample Data</button>
-        <button id="wipeBtn">🗑️ Delete All Sample Data</button>
-        <p id="seedStatus" class="status"></p>
-      </details>
     </section>
   </main>
 
   <footer class="footer">
-    <small>Data © respective monasteries • Map data © OpenStreetMap contributors</small>
+    <small>Temple results via Google Places • Map © OpenStreetMap contributors</small>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script type="module" src="firebase.js"></script>
   <script type="module" src="app.js"></script>
+
+  <!-- Load Google Maps JS API (Places library). Replace YOUR_GOOGLE_MAPS_API_KEY -->
+  <script>
+    window.__GMAPS_API_KEY__ = 'AIzaSyAEb6TbKs1ex-9S8PQe2bd9k8oaXe34goQ';
+    function initPlaces(){ /* callback required by script tag */ }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEb6TbKs1ex-9S8PQe2bd9k8oaXe34goQ&libraries=places&callback=initPlaces" async defer></script>
 
   <script>
     if ('serviceWorker' in navigator) {
