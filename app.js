@@ -4,7 +4,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js';
 
 (function(){
-  emailjs.init({ publicKey: 'YOUR_EMAILJS_PUBLIC_KEY' });
+  emailjs.init({ publicKey: 'WT0GOYrL9HnDKvLUf' });
 })();
 
 const traditions = ['Myanmar','Sri Lanka','Thailand','Laos','Cambodia','USA'];
@@ -160,7 +160,7 @@ const submitStatus = document.getElementById('submitStatus');
 submitForm.addEventListener('submit', async (e)=>{
   e.preventDefault(); submitStatus.textContent='Sending…';
   try{
-    const res = await emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID', Object.fromEntries(new FormData(submitForm)));
+    const res = await emailjs.send('service_z9tkmvr','template_q5q471f', Object.fromEntries(new FormData(submitForm)));
     submitStatus.textContent='✅ Thanks! We received your submission.';
     submitForm.reset();
   }catch(err){
