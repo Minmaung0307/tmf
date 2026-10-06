@@ -8,7 +8,8 @@
     "dateStart": "2025-04-13",
     "dateEnd": "2025-04-16",
     "link": "https://example.org/thingyan",
-    "image": "images/newyear.png"
+    "image": "images/newyear.webp",
+    "sample": true
   },
   {
     "title": "Vesak Day",
@@ -19,7 +20,8 @@
     "dateStart": "2025-05-12",
     "dateEnd": "2025-05-12",
     "link": "https://example.org/vesak",
-    "image": "images/vesak.png"
+    "image": "images/vesak.webp",
+    "sample": true
   },
   {
     "title": "Kathina Ceremony",
@@ -30,6 +32,7 @@
     "dateStart": "2025-11-02",
     "dateEnd": "2025-11-02",
     "link": "https://example.org/kathina",
-    "image": "images/pavarana.png"
+    "image": "images/pavarana.webp",
+    "sample": true
   }
 ]

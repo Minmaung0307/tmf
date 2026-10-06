@@ -1,4 +1,49 @@
 {
-  "indexes": [],
-  "fieldOverrides": []
+  "indexes": [
+    {
+      "collectionGroup": "tmf_events",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "dateStart",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "tmf_places",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "tmf_media",
+      "fieldPath": "data",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "tmf_submissions",
+      "fieldPath": "photo",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "tmf_privacy_requests",
+      "fieldPath": "photo",
+      "indexes": []
+    }
+  ]
 }

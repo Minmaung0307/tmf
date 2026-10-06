@@ -1,0 +1,191 @@
+[
+  {
+    "id": "sitagu-austin",
+    "match": "Sitagu",
+    "name": "Sitagu Buddhist Vihara",
+    "aliases": [
+      "သီတဂူ",
+      "သီတဂူကျောင်း",
+      "Sitagu Buddha Vihara",
+      "Sitagu Austin"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "9001 Honeycomb Dr, Austin, TX 78737",
+    "city": "Austin",
+    "state": "TX",
+    "stateName": "Texas",
+    "website": "https://sitagu.org/austin/",
+    "phone": "",
+    "source": "https://sitagu.org/austin/contact/contact.html",
+    "sourceType": "official"
+  },
+  {
+    "id": "baci-indianapolis",
+    "match": "Burmese American Community Institute",
+    "name": "Burmese American Community Institute (BACI)",
+    "aliases": [
+      "BACI",
+      "မြန်မာ အသင်းအဖွဲ့",
+      "Myanmar community"
+    ],
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "4925 Shelby Street, Suite 200, Indianapolis, IN 46227",
+    "city": "Indianapolis",
+    "state": "IN",
+    "stateName": "Indiana",
+    "website": "https://thebaci.org/",
+    "phone": "+1 317-731-5537",
+    "source": "https://thebaci.org/contact-us/",
+    "sourceType": "official"
+  },
+  {
+    "id": "brcw-milwaukee",
+    "match": "Burmese Rohingya Community of Wisconsin",
+    "name": "Burmese Rohingya Community of Wisconsin",
+    "aliases": [
+      "BRCW",
+      "Myanmar community",
+      "မြန်မာ အသင်းအဖွဲ့"
+    ],
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "2330 W Scott St, Milwaukee, WI 53204",
+    "city": "Milwaukee",
+    "state": "WI",
+    "stateName": "Wisconsin",
+    "website": "https://www.brcw.org/",
+    "phone": "+1 414-502-8893",
+    "source": "https://www.brcw.org/resources",
+    "sourceType": "official"
+  },
+  {
+    "id": "brcg-clarkston",
+    "match": "Burmese Rohingya Community of Georgia",
+    "name": "Burmese Rohingya Community of Georgia",
+    "address": "715 Northern Avenue, Clarkston, GA 30021",
+    "city": "Clarkston",
+    "state": "GA",
+    "stateName": "Georgia",
+    "phone": "+1 404-447-8923",
+    "website": "https://www.brcgrohingya.org/",
+    "source": "https://www.brcgrohingya.org/contactus",
+    "sourceType": "official",
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "aliases": [
+      "Myanmar community",
+      "မြန်မာ အသင်းအဖွဲ့"
+    ]
+  },
+  {
+    "id": "burma-center-michigan",
+    "match": "Burma Center",
+    "name": "Burma Center",
+    "address": "765 Upton Ave, Springfield, MI 49037",
+    "city": "Springfield",
+    "state": "MI",
+    "stateName": "Michigan",
+    "phone": "+1 269-441-1131",
+    "website": "https://www.burmacenterusa.org/",
+    "source": "https://www.burmacenterusa.org/home",
+    "sourceType": "official",
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "aliases": [
+      "Myanmar community",
+      "မြန်မာ အသင်းအဖွဲ့"
+    ]
+  },
+  {
+    "id": "burmese-kansas",
+    "match": "Burmese Community of Kansas",
+    "name": "Burmese Community of Kansas",
+    "address": "8224 Garfield Avenue, Kansas City, KS 66112",
+    "city": "Kansas City",
+    "state": "KS",
+    "stateName": "Kansas",
+    "phone": "+1 913-912-0144",
+    "website": "https://www.burmesekc.org/",
+    "source": "https://www.burmesekc.org/contact-us",
+    "sourceType": "official",
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "aliases": [
+      "Myanmar community",
+      "မြန်မာ အသင်းအဖွဲ့"
+    ]
+  },
+  {
+    "id": "rohingya-cs-georgia",
+    "match": "Rohingya Community Service of Georgia",
+    "name": "Rohingya Community Service of Georgia",
+    "address": "5895 Memorial Dr, Suite A/W, Stone Mountain, GA 30083",
+    "city": "Stone Mountain",
+    "state": "GA",
+    "stateName": "Georgia",
+    "phone": "+1 770-376-0612",
+    "website": "https://rohingyacsga.org/",
+    "source": "https://rohingyacsga.org/about/",
+    "sourceType": "official",
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "aliases": [
+      "Myanmar community",
+      "မြန်မာ အသင်းအဖွဲ့"
+    ]
+  },
+  {
+    "id": "myanmar-center-ithaca",
+    "match": "Myanmar Center",
+    "name": "Myanmar Center",
+    "address": "Ithaca, New York (contact organization for visiting address)",
+    "city": "Ithaca",
+    "state": "NY",
+    "stateName": "New York",
+    "phone": "",
+    "website": "https://www.myanmar-center.com/",
+    "source": "https://www.myanmar-center.com/contact",
+    "sourceType": "official",
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "aliases": [
+      "Myanmar community",
+      "မြန်မာ အသင်းအဖွဲ့"
+    ]
+  }
+]

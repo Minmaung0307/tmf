@@ -1,11 +1,17 @@
 {
-  "name": "Theravada Monastery Finder (USA)",
-  "short_name": "Monasteries",
+  "name": "TMF Free \u00b7 Myanmar Community Directory",
+  "short_name": "TMF Free",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#0b0f14",
-  "theme_color": "#0b0f14",
+  "background_color": "#f8f7f2",
+  "theme_color": "#173f35",
   "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
@@ -16,5 +22,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "scope": "./"
 }

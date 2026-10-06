@@ -1,18 +1,141 @@
-rules_version='2'
-
+rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      // This rule allows anyone with your database reference to view, edit,
-      // and delete all data in your database. It is useful for getting
-      // started, but it is configured to expire after 30 days because it
-      // leaves your app open to attackers. At that time, all client
-      // requests to your database will be denied.
-      //
-      // Make sure to write security rules for your app before that time, or
-      // else all client requests to your database will be denied until you
-      // update your rules.
-      allow read, write: if request.time < timestamp.date(2025, 11, 2);
+    function admin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.auth.token.email in ['minmaung0307@gmail.com', 'panna07@gmail.com'];
     }
+    function freshAdmin() {
+      return admin() && request.auth.token.auth_time >= request.time.toMillis() / 1000 - 900;
+    }
+    function text(v, max) { return v is string && v.size() <= max; }
+    function imageFields(d) {
+      return (!('hasPhoto' in d) || d.hasPhoto is bool)
+        && (!('imageAlt' in d) || text(d.imageAlt,180));
+    }
+    function googleUser() { return request.auth != null && request.auth.token.email_verified == true && request.auth.token.firebase.sign_in_provider == 'google.com'; }
+    function publishedEvent(id) { return get(/databases/$(database)/documents/tmf_events/$(id)).data.status == 'published'; }
+    function validPlace(d) {
+      return d.keys().hasAll(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy'])
+        && d.keys().hasOnly(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt'])
+        && text(d.name,180) && d.name.size()>0 && d.category in ['monastery','temple','organization']
+        && text(d.city,100) && d.city.size()>0 && text(d.address,300) && d.address.size()>0
+        && text(d.state,2) && d.state.matches('^[A-Z]{2}$') && text(d.phone,60)
+        && text(d.website,600) && (d.website=='' || d.website.matches('^https://[^\\s]+$'))
+        && text(d.description,4000) && text(d.hours,500) && text(d.aliasesText,500)
+        && d.status in ['draft','published','archived'] && imageFields(d)
+        && d.createdAt is timestamp && d.updatedAt==request.time && d.updatedBy==request.auth.uid;
+    }
+    function validEvent(d) {
+      return d.keys().hasAll(['title','templeName','city','state','address','dateStart','dateEnd','link','description','status','createdAt','updatedAt','updatedBy'])
+        && d.keys().hasOnly(['title','templeName','city','state','address','dateStart','dateEnd','link','description','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt'])
+        && imageFields(d)
+        && text(d.title,180) && d.title.size()>0
+        && text(d.templeName,180) && d.templeName.size()>0
+        && text(d.city,100) && d.city.size()>0
+        && text(d.address,300) && d.address.size()>0
+        && text(d.state,2) && d.state.matches('^[A-Z]{2}$')
+        && text(d.dateStart,10) && d.dateStart.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
+        && text(d.dateEnd,10) && d.dateEnd.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')
+        && d.dateEnd >= d.dateStart
+        && text(d.link,600) && (d.link == '' || d.link.matches('^https://[^\\s]+$'))
+        && text(d.description,4000)
+        && d.status in ['draft','published','archived']
+        && d.createdAt is timestamp && d.updatedAt == request.time
+        && d.updatedBy == request.auth.uid;
+    }
+    match /tmf_events/{eventId} {
+      allow get: if admin() || resource.data.status == 'published';
+      allow list: if request.query.limit != null && request.query.limit <= 100
+        && (admin() || resource.data.status == 'published');
+      allow create: if freshAdmin() && validEvent(request.resource.data)
+        && request.resource.data.createdAt == request.time;
+      allow update: if freshAdmin() && validEvent(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if freshAdmin();
+    }
+    match /tmf_places/{id} {
+      allow get: if admin() || resource.data.status=='published';
+      allow list: if request.query.limit!=null && request.query.limit<=100 && (admin() || resource.data.status=='published');
+      allow create: if freshAdmin() && validPlace(request.resource.data) && request.resource.data.createdAt==request.time;
+      allow update: if freshAdmin() && validPlace(request.resource.data) && request.resource.data.createdAt==resource.data.createdAt;
+      allow delete: if freshAdmin();
+    }
+    match /tmf_media/{id} {
+      allow get: if admin() || (resource.data.parentCollection in ['tmf_events','tmf_places'] && get(/databases/$(database)/documents/$(resource.data.parentCollection)/$(resource.data.parentId)).data.status=='published');
+      allow list: if false;
+      allow create, update: if freshAdmin()
+        && request.resource.data.keys().hasOnly(['data','width','height','parentCollection','parentId','updatedAt'])
+        && request.resource.data.parentCollection in ['tmf_events','tmf_places']
+        && request.resource.data.parentId is string
+        && id==request.resource.data.parentCollection+'_'+request.resource.data.parentId
+        && getAfter(/databases/$(database)/documents/$(request.resource.data.parentCollection)/$(request.resource.data.parentId)).data.hasPhoto==true
+        && text(request.resource.data.data,160023) && request.resource.data.data.matches('^data:image/webp;base64,[A-Za-z0-9+/=]+$')
+        && request.resource.data.width is int && request.resource.data.width>0 && request.resource.data.width<=1200
+        && request.resource.data.height is int && request.resource.data.height>0 && request.resource.data.height<=1200
+        && request.resource.data.updatedAt==request.time;
+      allow delete: if freshAdmin();
+    }
+    match /tmf_events/{id}/reactions/{uid} {
+      // Public aggregates contain only emoji choices and timestamps, never email/name.
+      allow read: if publishedEvent(id);
+      allow create: if googleUser() && request.auth.uid==uid && publishedEvent(id) && validReaction();
+      allow update: if googleUser() && request.auth.uid==uid && publishedEvent(id) && validReaction()
+        && request.time >= resource.data.updatedAt + duration.value(5,'s');
+      allow delete: if false;
+      function validReaction() { return request.resource.data.keys().hasOnly(['emoji','updatedAt'])
+        && request.resource.data.emoji in ['heart','prayer','celebrate','none'] && request.resource.data.updatedAt==request.time; }
+    }
+    // This endpoint reveals only whether a signed-in account has admin access.
+    match /tmf_admin_access/check { allow get: if admin(); allow list, write: if false; }
+    function validSubmission(d,uid,kind) {
+      return d.keys().hasAll(['type','from_name','subject','temple_name','city_state','place_category','address','public_phone','hours','event_type','link','event_start','event_end','message','reply_to','ownerUid','status','createdAt'])
+        && d.keys().hasOnly(['type','from_name','subject','temple_name','city_state','place_category','address','public_phone','hours','event_type','link','event_start','event_end','message','reply_to','ownerUid','status','createdAt','photo'])
+        && d.type==kind && d.ownerUid==uid && uid==request.auth.uid
+        && d.reply_to==request.auth.token.email && text(d.reply_to,254)
+        && d.status=='pending' && d.createdAt==request.time
+        && text(d.from_name,100)
+        && text(d.subject,200)
+        && text(d.temple_name,200)
+        && text(d.city_state,200)
+        && text(d.place_category,20)
+        && text(d.address,300)
+        && text(d.public_phone,60)
+        && text(d.hours,500)
+        && text(d.event_type,80)
+        && text(d.link,500)
+        && text(d.event_start,10)
+        && text(d.event_end,10)
+        && text(d.message,5000)
+        && d.from_name.size()>0 && d.subject.size()>0 && d.message.size()>0
+        && d.place_category in ['monastery','temple','organization']
+        && (!('photo' in d) || (d.photo is map && d.photo.keys().hasOnly(['data','width','height'])
+          && text(d.photo.data,160023) && d.photo.data.matches('^data:image/webp;base64,[A-Za-z0-9+/=]+$')
+          && d.photo.width is int && d.photo.height is int && d.photo.width>0 && d.photo.height>0 && d.photo.width<=1200 && d.photo.height<=1200));
+    }
+    match /tmf_submissions/{uid} {
+      allow get: if admin() || (googleUser() && request.auth.uid==uid);
+      allow list: if admin() && request.query.limit!=null && request.query.limit<=25;
+      allow create: if googleUser() && validSubmission(request.resource.data,uid,'tmf-suggestion');
+      allow update: if (freshAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','reviewedAt'])
+          && request.resource.data.status=='reviewed' && request.resource.data.reviewedAt==request.time)
+        || (googleUser() && request.auth.uid==uid && resource.data.status=='reviewed'
+          && request.time>=resource.data.createdAt+duration.value(60,'s') && validSubmission(request.resource.data,uid,'tmf-suggestion'));
+      allow delete: if freshAdmin();
+    }
+    match /tmf_privacy_requests/{uid} {
+      allow get: if admin() || (googleUser() && request.auth.uid==uid);
+      allow list: if admin() && request.query.limit!=null && request.query.limit<=25;
+      allow create: if googleUser() && validSubmission(request.resource.data,uid,'tmf-privacy-request');
+      allow update: if (freshAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','reviewedAt'])
+          && request.resource.data.status=='reviewed' && request.resource.data.reviewedAt==request.time)
+        || (googleUser() && request.auth.uid==uid && resource.data.status=='reviewed'
+          && request.time>=resource.data.createdAt+duration.value(60,'s') && validSubmission(request.resource.data,uid,'tmf-privacy-request'));
+      allow delete: if freshAdmin();
+    }
+    // No public place/event submission endpoint and no client-created admin roles.
+    match /{document=**} { allow read, write: if false; }
   }
 }

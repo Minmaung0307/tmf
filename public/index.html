@@ -1,101 +1,495 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Theravada Monastery Finder (USA)</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-</head>
-<body>
-  <header class="topbar">
-    <h1>Theravada Monastery Finder (USA)</h1>
-    <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="temples">Temples</button>
-      <button class="tab" data-tab="events">Events</button>
-      <button class="tab" data-tab="submit">Submit Update</button>
-    </nav>
-  </header>
-
-  <main>
-    <section id="temples" class="tabpanel active" role="tabpanel">
-      <div class="search-row">
-        <input id="search" type="search" placeholder="Search by temple name (မြန်မာ/English)… eg: ရွှေသြဇာကျောင်း" />
-        <select id="tradition">
-          <option value="">All Traditions</option>
-          <option>Myanmar</option>
-          <option>Sri Lanka</option>
-          <option>Thailand</option>
-          <option>Laos</option>
-          <option>Cambodia</option>
-          <option>USA</option>
-        </select>
-        <select id="state">
-          <option value="">All States</option>
-        </select>
-        <button id="resetFilters">Reset</button>
-      </div>
-
-      <div class="split">
-        <div class="list" id="templeList" aria-live="polite"></div>
-        <div class="mapwrap">
-          <div id="map"></div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#173f35" />
+    <meta
+      name="description"
+      content="Find monasteries, pagodas and Myanmar community organizations across the United States."
+    />
+    <title>TMF Free · A little closer to home</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg?v=4" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="icons/icon-32.png?v=4"
+    />
+    <link rel="apple-touch-icon" href="icons/icon-180.png?v=4" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="header">
+      <a class="brand" href="#discover"
+        ><img
+          class="brand-mark"
+          src="icons/brand.svg"
+          width="46"
+          height="46"
+          alt=""
+        /><span
+          >TMF<span class="brand-sub"
+            >MYANMAR COMMUNITY · FREE EDITION</span
+          ></span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#discover" class="active">Discover</a
+        ><a href="#events">Events</a
+        ><a href="#submit">Contribute <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main">
+      <section id="discover" class="panel">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span></span> ROOTED IN CULTURE. CONNECTED BY COMMUNITY.
+            </p>
+            <h1>A little closer<br />to <em>home.</em></h1>
+            <p class="hero-description">
+              Find a place to reflect, celebrate, and belong.<br />Monasteries,
+              pagodas & Myanmar communities across the USA.
+            </p>
+            <p class="burmese" lang="my">
+              ကိုယ့်အသိုင်းအဝိုင်းနဲ့ ပြန်လည်ချိတ်ဆက်ပါ။
+            </p>
+            <a class="hero-link" href="#search-area"
+              >Search for a place <span>↓</span></a
+            ><a class="hero-link browse-hero-link" href="#browse-area"
+              >Browse names <span>↓</span></a
+            >
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="sun"></div>
+            <div class="arch">
+              <img
+                class="pagoda-art"
+                src="art/pagoda.svg"
+                alt=""
+                width="400"
+                height="440"
+              />
+            </div>
+            <div class="art-note">
+              A shared heritage.<br /><i>A place to belong.</i>
+            </div>
+            <span class="art-star">✳</span>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section id="events" class="tabpanel" role="tabpanel">
-      <div class="search-row">
-        <input id="eventSearch" type="search" placeholder="Search events… (title, temple, state)" />
-        <select id="eventMonth"></select>
-        <select id="eventState"></select>
-        <button id="resetEvents">Reset</button>
-      </div>
-      <div id="eventGrid" class="event-grid" aria-live="polite"></div>
-      <p class="hint">Images are optional—add an <code>image</code> field in <code>events.json</code>, or a thumbnail will use the placeholder.</p>
-    </section>
-
-    <section id="submit" class="tabpanel" role="tabpanel">
-      <form id="submitForm" class="card form-card">
-        <div class="form-header">
-          <h2>Suggest a Correction / New Temple / Festival</h2>
-          <p class="muted">Sends an email via EmailJS to the recipient set in your EmailJS Template.</p>
+        <section
+          class="browse-section"
+          id="browse-area"
+          aria-labelledby="browseTitle"
+        >
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">FIND A FAMILIAR NAME</p>
+              <h2 id="browseTitle">Browse by name</h2>
+              <p lang="my" class="browse-help">
+                မရှာဘဲ နာမည်စာရင်းမှ ရွေးကြည့်ပါ။ နာမည်ကို နှိပ်ရင် အသေးစိတ်
+                ပြပေးပါမယ်။
+              </p>
+            </div>
+            <a class="secondary" href="#search-area">Search instead ↓</a>
+          </div>
+          <p id="browseStatus" class="subtle" role="status">Loading names…</p>
+          <p id="profileCloudStatus" class="subtle" role="status"></p>
+          <button id="refreshProfiles" class="secondary profile-refresh">
+            Refresh community profiles</button
+          ><button id="moreProfiles" class="secondary profile-refresh" hidden>
+            Load more community profiles
+          </button>
+          <div id="browseGroups" class="browse-groups"></div>
+          <p class="browse-footnote">
+            Names are listed alphabetically. A place may appear in more than one
+            category.
+          </p>
+        </section>
+        <div class="discovery" id="search-area">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">EXPLORE THE DIRECTORY</p>
+              <h2>Where would you like to go?</h2>
+            </div>
+            <span class="subtle">မြန်မာ / English</span>
+          </div>
+          <form id="searchForm" class="search-box">
+            <label class="search-input"
+              ><span aria-hidden="true">⌕</span
+              ><input
+                id="search"
+                type="search"
+                aria-label="Place name, city or keyword"
+                placeholder="Place name, city or keyword…"
+                maxlength="180" /></label
+            ><label class="state-label"
+              ><span class="sr-only">State</span
+              ><select id="state">
+                <option value="">All states</option>
+              </select></label
+            ><button class="primary" type="submit">
+              Search <span aria-hidden="true">↗</span>
+            </button>
+          </form>
+          <div class="filter-row">
+            <div class="chips" aria-label="Place categories">
+              <button type="button" data-category="all" aria-pressed="true">
+                All places</button
+              ><button
+                type="button"
+                data-category="monastery"
+                aria-pressed="false"
+              >
+                Monasteries <span lang="my">ဘုန်းကြီးကျောင်း</span></button
+              ><button
+                type="button"
+                data-category="temple"
+                aria-pressed="false"
+              >
+                Pagodas & temples</button
+              ><button
+                type="button"
+                data-category="organization"
+                aria-pressed="false"
+              >
+                Myanmar organizations
+              </button>
+            </div>
+            <label class="tradition-label"
+              ><span class="sr-only">Tradition</span
+              ><select id="tradition">
+                <option value="">All traditions</option>
+                <option>Myanmar</option>
+                <option>Sri Lanka</option>
+                <option>Thailand</option>
+                <option>Laos</option>
+                <option>Cambodia</option>
+                <option>USA</option>
+              </select></label
+            ><button class="text-button" id="resetFilters">Reset</button>
+          </div>
+          <div class="results-heading">
+            <div>
+              <h3 id="resultTitle">Discover your next connection</h3>
+              <p id="resultNote" class="subtle">
+                Choose a category or search by name and location.
+              </p>
+            </div>
+            <button
+              id="mapToggle"
+              class="secondary"
+              aria-expanded="false"
+              disabled
+            >
+              Show map
+            </button>
+          </div>
+          <div id="notice" role="status"></div>
+          <div id="map" hidden aria-label="Search results map"></div>
+          <div id="templeList" class="results" aria-live="polite"></div>
+          <div id="pagination"></div>
+          <p id="attribution" class="subtle" hidden>Open directory</p>
+          <div class="community-banner">
+            <div>
+              <p class="eyebrow">BETTER, TOGETHER</p>
+              <h3>Help someone find their community.</h3>
+              <p>Know a place we should include? Have an update to share?</p>
+            </div>
+            <a class="secondary" href="#submit"
+              >Suggest a place <span>↗</span></a
+            >
+          </div>
         </div>
-        <div class="form-grid">
-          <label class="field"><span>Your Name</span><input name="from_name" placeholder="e.g., Aung Aung" required /></label>
-          <label class="field"><span>Your Email</span><input type="email" name="reply_to" placeholder="you@example.com" required /></label>
-          <label class="field full"><span>Subject</span><input name="subject" placeholder="New temple / Contact change / Festival dates…" required /></label>
-          <label class="field"><span>Temple Name</span><input name="temple_name" placeholder="e.g., ရွှေသြဇာကျောင်း / Shwe Oo Zaw" /></label>
-          <label class="field"><span>City, State</span><input name="city_state" placeholder="e.g., Fort Worth, TX" /></label>
-          <label class="field"><span>Event Type</span>
-            <select name="event_type"><option value="">—</option><option>Vesak</option><option>Kathina</option><option>Thingyan</option><option>Ordination</option><option>Retreat</option></select>
-          </label>
-          <label class="field"><span>Event Date (start)</span><input type="date" name="event_start" /></label>
-          <label class="field"><span>Event Date (end)</span><input type="date" name="event_end" /></label>
-          <label class="field full"><span>Official Link</span><input name="link" placeholder="Website / Facebook event URL" /></label>
-          <label class="field full"><span>Details (မြန်မာ/English welcome)</span><textarea name="message" rows="6" placeholder="Please include phone/email if possible…" required></textarea></label>
+      </section>
+      <section id="events" class="panel page-section" hidden>
+        <p class="eyebrow">GATHER. CELEBRATE. CONNECT.</p>
+        <h1>Community <em>moments.</em></h1>
+        <p class="intro">Festivals, ceremonies, and days spent together.</p>
+        <p class="notice">
+          Published community events and a clearly labeled sample archive.
+          Confirm dates with the organizer before making plans.
+        </p>
+        <p id="eventCloudStatus" class="subtle" role="status"></p>
+        <button id="refreshEvents" class="secondary">Refresh events</button>
+        <div class="event-filters">
+          <label
+            >Search events<input
+              id="eventSearch"
+              type="search"
+              placeholder="Name, city or monastery" /></label
+          ><label
+            >Month<select id="eventMonth">
+              <option value="">All months</option>
+            </select></label
+          ><label
+            >State<select id="eventState">
+              <option value="">All states</option>
+            </select></label
+          ><label
+            >When<select id="eventPeriod">
+              <option value="all">All dates</option>
+              <option value="upcoming">Upcoming</option>
+              <option value="past">Past events</option>
+            </select></label
+          ><button id="resetEvents" class="secondary">Reset</button>
         </div>
-        <div class="form-actions"><button type="submit" class="btn-primary">✉️ Send via EmailJS</button><span id="submitStatus" class="status"></span></div>
-      </form>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <small>Temple results via Google Places • Map © OpenStreetMap contributors</small>
-  </footer>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script type="module" src="app.js"></script>
-
-  <script>
-    function initPlaces(){ if (window.tmfInit) window.tmfInit(); }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEb6TbKs1ex-9S8PQe2bd9k8oaXe34goQ&libraries=places&callback=initPlaces" async defer></script>
-
-  <script>
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js'); }
-  </script>
-</body>
+        <p id="eventCount" role="status"></p>
+        <div id="eventGrid" class="event-grid" aria-live="polite"></div>
+      </section>
+      <section id="submit" class="panel page-section" hidden>
+        <p class="eyebrow">A DIRECTORY BUILT TOGETHER</p>
+        <h1>Share a <em>connection.</em></h1>
+        <p class="intro">
+          Suggest a place, correct a detail, or share a community event.<br /><span
+            lang="my"
+            >မြန်မာလိုဖြစ်ဖြစ် English လိုဖြစ်ဖြစ် ရေးပို့နိုင်ပါတယ်။</span
+          >
+        </p>
+        <div class="contribution-account">
+          <p class="notice">
+            <strong>This sends to the website’s Admin.</strong>
+          </p>
+          <div class="admin-toolbar">
+            <button id="submissionSignIn" type="button" class="primary">
+              Sign in with Google</button
+            ><button
+              id="submissionSignOut"
+              type="button"
+              class="secondary"
+              hidden
+            >
+              Sign out</button
+            ><span id="submissionAccount" class="subtle"></span>
+          </div>
+          <p id="submissionAccountMessage" role="status"></p>
+          <label
+            >What would you like to send?<select id="submissionPurpose">
+              <option value="community">Place, event or correction</option>
+              <option value="privacy">Private privacy / removal request</option>
+            </select></label
+          >
+          <div class="admin-toolbar">
+            <button id="mySubmissionStatus" class="secondary" type="button">
+              My submission status
+            </button>
+          </div>
+          <p id="mySubmissionResult" role="status"></p>
+        </div>
+        <form id="submitForm" class="contribute-form">
+          <div class="form-grid">
+            <label
+              >Your name<input
+                name="from_name"
+                autocomplete="name"
+                required
+                maxlength="100" /></label
+            ><label class="full"
+              >Subject<input
+                name="subject"
+                required
+                placeholder="New place, correction, or event"
+                maxlength="200" /></label
+            ><label
+              >Place / organization name<input
+                name="temple_name"
+                maxlength="200" /></label
+            ><label
+              >City, state<input name="city_state" maxlength="200" /></label
+            ><label
+              >Place category<select name="place_category">
+                <option value="monastery">Monastery</option>
+                <option value="temple">Pagoda / temple</option>
+                <option value="organization">Myanmar organization</option>
+              </select></label
+            ><label
+              >Public address<input name="address" maxlength="300" /></label
+            ><label
+              >Public phone (optional)<input
+                name="public_phone"
+                maxlength="60" /></label
+            ><label
+              >Opening hours (optional)<input
+                name="hours"
+                maxlength="500" /></label
+            ><label
+              >Event type<select name="event_type">
+                <option value="">Not an event</option>
+                <option>Vesak</option>
+                <option>Kathina</option>
+                <option>Thingyan</option>
+                <option>Ordination</option>
+                <option>Retreat</option>
+                <option>Other</option>
+              </select></label
+            ><label
+              >Website / official link (optional)<input
+                name="link"
+                type="url"
+                placeholder="https://"
+                maxlength="500" /></label
+            ><label>Start date<input name="event_start" type="date" /></label
+            ><label>End date<input name="event_end" type="date" /></label
+            ><label class="full"
+              >Details<textarea
+                name="message"
+                rows="5"
+                required
+                maxlength="5000"
+                placeholder="Share the address, contact details, or what needs updating…"
+              ></textarea>
+            </label>
+          </div>
+          <fieldset class="photo-editor">
+            <legend>Photo or poster (optional)</legend>
+            <input
+              id="suggestionPhoto"
+              type="file"
+              accept=".png,.jpg,.jpeg,.tif,.tiff,.svg,.webp,.gif,.bmp,.avif"
+              aria-label="Suggestion photo"
+            />
+            <p id="suggestionPhotoStatus" class="subtle" role="status">
+              One photo, up to 12 MB. It is optimized locally and sent privately
+              with your suggestion. Use an image you have permission to share.
+            </p>
+            <button
+              id="clearSuggestionPhoto"
+              class="secondary"
+              type="button"
+              hidden
+            >
+              Remove photo
+            </button>
+          </fieldset>
+          <p class="subtle">
+            No website? We can publish a community profile with your approved
+            address, contact details, opening hours and story.
+          </p>
+          <p class="subtle">
+            Sign in with Google to send directly to the private review inbox.
+            Your Google email and sender name are visible only to you and the
+            site administrators. One pending suggestion per account. Nothing is
+            published automatically.
+          </p>
+          <p class="subtle">
+            By submitting, you confirm you have permission to share these
+            details and have read our
+            <a href="privacy.html">Privacy Policy</a> and
+            <a href="terms.html">Terms</a>. Privacy requests are never used as
+            public drafts.
+          </p>
+          <button id="sendSuggestion" class="primary" type="submit">
+            Send for review ↗
+          </button>
+          <p id="submitStatus" role="status"></p>
+        </form>
+      </section>
+    </main>
+    <dialog
+      id="placeDialog"
+      class="place-dialog"
+      aria-labelledby="placeDialogTitle"
+    >
+      <button
+        id="closePlaceDialog"
+        class="dialog-close"
+        type="button"
+        aria-label="Close place details"
+        autofocus
+      >
+        ✕
+      </button>
+      <p class="eyebrow">YOUR COMMUNITY DIRECTORY</p>
+      <div id="placeDialogContent"></div>
+      <p class="subtle">
+        Please confirm details with the place before visiting.
+      </p>
+    </dialog>
+    <footer class="site-footer">
+      <section class="footer-support" aria-labelledby="supportTitle">
+        <div class="support-intro">
+          <p class="eyebrow">SUPPORT &amp; GIVING</p>
+          <h2 id="supportTitle">
+            A little kindness<br />
+            goes a long way.
+          </h2>
+          <p lang="my">အားပေးမှုတိုင်းအတွက် ကျေးဇူးတင်ပါတယ်။</p>
+        </div>
+        <div class="support-options">
+          <div class="support-grid" id="supportLinks">
+            <button
+              class="support-card"
+              data-support="coffee"
+              type="button"
+              disabled
+            >
+              <span class="support-icon" aria-hidden="true">☕</span
+              ><span class="support-label"
+                >Coffee<span class="support-price">$5</span></span
+              ><span class="support-arrow" aria-hidden="true">↗</span></button
+            ><button
+              class="support-card"
+              data-support="burger"
+              type="button"
+              disabled
+            >
+              <span class="support-icon" aria-hidden="true">🍔</span
+              ><span class="support-label"
+                >Burger<span class="support-price">$10</span></span
+              ><span class="support-arrow" aria-hidden="true">↗</span></button
+            ><button
+              class="support-card"
+              data-support="meal"
+              type="button"
+              disabled
+            >
+              <span class="support-icon" aria-hidden="true">🍽️</span
+              ><span class="support-label"
+                >Big Meal<span class="support-price">$15</span></span
+              ><span class="support-arrow" aria-hidden="true">↗</span></button
+            ><button
+              class="support-card support-charity"
+              data-support="charity"
+              type="button"
+              disabled
+            >
+              <span class="support-icon" aria-hidden="true">♡</span
+              ><span class="support-label"
+                >Donation / Charity<span class="support-price support-custom"
+                  >Give with kindness</span
+                ></span
+              ><span class="support-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <p id="supportStatus" class="support-note" role="status">
+            Support links will be available soon.
+          </p>
+        </div>
+      </section>
+      <div class="footer-bottom">
+        <span><strong>TMF</strong> A little closer to home.</span
+        ><span class="maker-credit"
+          >Made by MM
+          <span class="maker-heart" aria-label="with love">♥</span> · ©
+          <span data-current-year>2026</span></span
+        >
+        <nav class="footer-links" aria-label="Footer">
+          <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a
+          ><a href="admin.html">Admin</a><span>TMF Free v5.2</span>
+        </nav>
+      </div>
+    </footer>
+    <noscript
+      ><p class="notice">
+        Enable JavaScript to search this directory.
+      </p></noscript
+    >
+    <script src="vendor/leaflet/leaflet.js" defer></script>
+    <script src="site-footer.js" defer></script>
+    <script type="module" src="app.js"></script>
+  </body>
 </html>

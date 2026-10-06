@@ -1,0 +1,16 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
+import {filterDirectory,normalize,safeUrl,mapsUrl,matchesEvent,validPlace} from '../public/search.js';
+const places=[{id:'s',name:'Sitagu Buddhist Vihara',aliases:['သီတဂူ','Sitagu Austin'],categories:['monastery','temple'],traditions:['Myanmar'],address:'Austin TX',state:'TX',stateName:'Texas'},{id:'b',name:'Burmese American Community Institute',aliases:['BACI'],categories:['organization'],traditions:['Myanmar'],city:'Indianapolis',state:'IN',stateName:'Indiana'}];
+test('Sitagu English and Burmese aliases match locally',()=>{for(const query of ['Sitagu','သီတဂူ','austin sitagu','Texas'])assert.equal(filterDirectory(places,{query})[0].id,'s');});
+test('organization category does not include monasteries',()=>assert.deepEqual(filterDirectory(places,{category:'organization'}).map(p=>p.id),['b']));
+test('state and category filters compose',()=>{assert.equal(filterDirectory(places,{state:'IN',category:'monastery'}).length,0);assert.equal(filterDirectory(places,{state:'TX',category:'temple'}).length,1);});
+test('Burmese and Myanmar search aliases are equivalent',()=>assert.equal(filterDirectory(places,{query:'Myanmar American'}).length,1));
+test('unknown terms return honest empty result',()=>assert.equal(filterDirectory(places,{query:'missing-place-xyz'}).length,0));
+test('tradition is ignored only for organization filter',()=>{assert.equal(filterDirectory(places,{tradition:'Thailand'}).length,0);assert.equal(filterDirectory(places,{tradition:'Thailand',category:'organization'}).length,1);});
+test('Unicode text is normalized',()=>assert.equal(normalize('  သီတဂူ\u200b '),'သီတဂူ'));
+test('unsafe provider links are rejected',()=>{assert.equal(safeUrl('javascript:alert(1)'),'');assert.equal(safeUrl('data:text/html,hi'),'');assert.equal(safeUrl('https://example.org'),'https://example.org/');});
+test('directions use a normal website URL, no API key',()=>{const u=new URL(mapsUrl('Sitagu Austin'));assert.equal(u.searchParams.get('query'),'Sitagu Austin');assert.ok(!u.searchParams.has('key'));});
+test('event month filter spans year boundary',()=>assert.ok(matchesEvent({title:'Retreat',dateStart:'2025-12-25',dateEnd:'2026-02-02'},{month:'1'})));
+test('invalid records rejected',()=>{assert.ok(validPlace(places[0]));assert.ok(!validPlace({id:'a',name:'X'}));});
+test('bundled data contains real Sitagu and organization entries with sources',()=>{const d=JSON.parse(readFileSync(new URL('../public/directory.json',import.meta.url)));assert.ok(d.places.length>10);assert.ok(d.places.every(validPlace));assert.ok(d.places.every(p=>safeUrl(p.source)));assert.ok(filterDirectory(d.places,{query:'Sitagu',state:'TX'}).length);assert.ok(filterDirectory(d.places,{category:'organization'}).length);assert.equal(new Set(d.places.map(p=>p.id)).size,d.places.length);});
+test('local search code contains no paid Places or EmailJS integration',()=>{for(const file of ['app.js','config.js','index.html']){const s=readFileSync(new URL('../public/'+file,import.meta.url),'utf8');assert.doesNotMatch(s,/maps\.googleapis\.com|places\.Place|emailjs\.send|emailjs\/browser/);}});

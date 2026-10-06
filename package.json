@@ -1,0 +1,16 @@
+{
+  "name": "tmf-free-community-directory",
+  "version": "5.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "start": "python3 -m http.server 8080 --directory public",
+    "test:rules": "firebase emulators:exec --project demo-tmf-security --only firestore \"node --test tests/firestore.rules.test.mjs\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "5.0.2",
+    "firebase": "12.19.0",
+    "firebase-tools": "15.32.1"
+  }
+}
