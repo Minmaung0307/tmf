@@ -1,3 +1,19 @@
+## v5.3.1 — Responsive polish
+
+Restored the pagoda illustration on tablet and desktop, added a compact mobile illustration, centered the footer, and separated search controls with contained keyboard focus indicators.
+
+Deploy: `firebase deploy --only hosting --project tmf-mm`
+
+# TMF v5.3 — Compact search-first layout
+
+The home page opens directly to search; Browse names is a separate view with initially collapsed groups. Mobile hides the decorative hero artwork and keeps search near the top. Sticky view shortcuts retain query/filter state. Footer support links are compact, with the same payment destinations and legal/admin links.
+
+Deploy from this project folder: `firebase deploy --only hosting --project tmf-mm`. Firestore rules/data/config are unchanged. This package has not been deployed to production. Service worker cache is bumped to v5.3.0; reload after deployment.
+
+Validation: 20 Node tests and `tests/compact-layout-check.mjs` passed. Chrome tested widths 320, 390, 768, 1024 and 1440; no horizontal overflow, mobile search above 450px, view switching preserves text, collapsed browse opens the detail dialog, footer height and all four support URLs checked. External cloud transport blocked in the layout test; no production writes or sign-in were performed.
+
+---
+
 # TMF Free v5.2 — Search အတွက် Google billing မလိုပါ
 
 အသုံးပြုနည်း၊ Contribute/Events အလုပ်လုပ်ပုံ၊ Admin setup နဲ့ account လုံခြုံရေး: **[မြန်မာလမ်းညွှန်](TMF-User-Admin-Guide-MM.md)**။ SVG branding, optimized cover uploads, community profiles, authenticated emoji reactions and pastel category cards are included. Live Firebase setup/deployment is still required; production sign-in has not been tested.

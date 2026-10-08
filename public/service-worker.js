@@ -1,5 +1,5 @@
-const CACHE='tmf-free-v5.2.0';
-const ASSETS=['./','./index.html','./style.css','./app.js','./search.js','./config.js','./cloud.js','./community-ui.js','./media.js','./submissions.js','./contribution.js','./site-footer.js','./privacy.html','./terms.html','./place-model.js','./cloud-config.js','./favicon.svg','./icons/brand.svg','./art/pagoda.svg','./directory.json','./manifest.webmanifest','./events.json','./images/event-placeholder.jpg','./icons/icon-192.png','./vendor/leaflet/leaflet.js','./vendor/leaflet/leaflet.css'];
+const CACHE='tmf-free-v5.3.1';
+const ASSETS=['./','./index.html','./style.css','./compact-layout.css','./app.js','./search.js','./config.js','./cloud.js','./community-ui.js','./media.js','./submissions.js','./contribution.js','./site-footer.js','./privacy.html','./terms.html','./place-model.js','./cloud-config.js','./favicon.svg','./icons/brand.svg','./art/pagoda.svg','./directory.json','./manifest.webmanifest','./events.json','./images/event-placeholder.jpg','./icons/icon-192.png','./vendor/leaflet/leaflet.js','./vendor/leaflet/leaflet.css'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('tmf-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

@@ -9,7 +9,7 @@ function element(tag, className, text) { const el=document.createElement(tag); i
 function link(text,url,className='') { const a=element('a',className,text); a.href=url; a.target='_blank'; a.rel='noopener noreferrer'; return a; }
 function empty(title,message,actions=[]) { const el=element('div','empty'); el.append(element('div','place-icon','⌕'),element('h3','',title),element('p','',message)); const row=element('div','empty-actions'); row.append(...actions); el.append(row); return el; }
 function button(text,action,className='secondary') { const b=element('button',className,text); b.type='button'; b.addEventListener('click',action); return b; }
-function route(){ const hash=location.hash.slice(1); const target=['events','submit'].includes(hash)?hash:'discover'; document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==target); document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+target;a.classList.toggle('active',active); if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}); if(target==='events'&&!eventsLoaded)loadEvents(); }
+function route(){ const hash=location.hash.slice(1); const target=['events','submit'].includes(hash)?hash:'discover'; document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==target); document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+target;a.classList.toggle('active',active); if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}); const browsing=hash==='browse-area';$('browse-area').hidden=!browsing;$('search-area').hidden=browsing;document.querySelectorAll('[data-discovery-view]').forEach(a=>{const active=(a.dataset.discoveryView==='browse')===browsing;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});if(target==='events'&&!eventsLoaded)loadEvents(); }
 let directoryPromise, directoryMeta, directory=[];
 async function loadDirectory(){
  if(directoryPromise)return directoryPromise;
@@ -28,7 +28,7 @@ function renderBrowse(){
  const collator=new Intl.Collator('en',{sensitivity:'base',numeric:true});
  for(const [key,title,myanmar] of groups){
   const places=directory.filter(p=>p.categories.includes(key)).sort((a,b)=>collator.compare(a.name,b.name)||collator.compare(a.stateName||'',b.stateName||''));
-  const group=element('details','browse-group tone-'+key);group.open=true;
+  const group=element('details','browse-group tone-'+key);group.open=false;
   const summary=element('summary','browse-summary');const heading=element('span','browse-heading',title);const subtitle=element('span','browse-subtitle',myanmar);subtitle.lang='my';heading.append(subtitle);summary.append(heading,element('span','browse-count',String(places.length)));group.append(summary);
   const control=element('label','browse-letter-label','Jump to a name');const select=element('select');select.setAttribute('aria-label',title+' starting letter');select.add(new Option('All names · A–Z',''));
   const letterFor=p=>{const first=p.name.trim().charAt(0).toUpperCase();return /^[A-Z]$/.test(first)?first:'Other';};

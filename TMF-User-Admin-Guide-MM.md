@@ -1,3 +1,26 @@
+## v5.3.1 — Responsive polish
+
+Restored the pagoda illustration on tablet and desktop, added a compact mobile illustration, centered the footer, and separated search controls with contained keyboard focus indicators.
+
+Deploy: `firebase deploy --only hosting --project tmf-mm`
+
+# v5.3 အသစ် — Search ကို အရင်ပြသော ကျစ်လစ်သည့်ဒီဇိုင်း
+
+- ဆိုက်ဖွင့်လျှင် Search၊ State နှင့် category စစ်ထုတ်မှုကို အရင်တွေ့မည်။ Mobile တွင် decorative hero ပုံကြီး မပြတော့ပါ။
+- အပေါ်မှ Search / Browse names ခလုတ်များဖြင့် ပြောင်းနိုင်သည်။ Scroll လုပ်နေချိန်တွင်လည်း ယင်းခလုတ်များကို အပေါ်နားတွင် သုံးနိုင်သည်။
+- Browse names မှာ အမျိုးအစားများကို အစတွင် ခေါက်ထားသည်။ လိုချင်သည့်အမျိုးအစားကိုဖွင့်၍ နာမည်ရွေးပါ။ နာမည်စာရင်းအတွင်း scroll လုပ်နိုင်ပြီး A–Z စစ်ထုတ်မှု ဆက်ရှိသည်။
+- Mobile၊ tablet/iPad၊ desktop အတွက် အရွယ်အစားအလိုက် စီထားသည်။ Footer support လင့်ခ်များကို ခလုတ်သေးသေးဖြင့်ပြပြီး payment destinations မပြောင်းပါ။
+
+ဒီ ZIP သည် **TMF** အတွက်ဖြစ်သည်။ FoodFinder အတွက်မဟုတ်ပါ။
+
+```sh
+firebase deploy --only hosting --project tmf-mm
+```
+
+တင်ပြီး reload/hard refresh လုပ်ပါ။ Offline cache version ကိုလည်း တိုးထားသည်။ Admin/rules/data ပြောင်းလဲခြင်းမရှိပါ။ Live deploy မလုပ်ထားပါ။
+
+---
+
 # TMF v5.2 — အသုံးပြုနည်းနှင့် Private Inbox
 
 
