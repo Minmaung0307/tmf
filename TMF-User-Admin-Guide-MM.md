@@ -1,3 +1,7 @@
+## v5.3.2 — မြန်မာစာဖြင့် ရှာဖွေခြင်း
+
+စာရိုက်သည့်အခါ ရလဒ်အလိုအလျောက် ပြောင်းပါသည်။ အသင်းအဖွဲ့၊ မြန်မာဘုန်းကြီးကျောင်း၊ သီတဂူ၊ အဘယဂိရိ စသည်တို့ဖြင့် ရှာနိုင်ပါသည်။ State / category filter များ ဆက်သက်ရောက်ပါသည်။ ရွှေစည်းခုံ၊ ချမ်းမြေ့ နာမည်များကို English spelling နှင့် ချိတ်ထားသော်လည်း လက်ရှိ directory တွင် ထိုမှတ်တမ်းများ မပါသေးပါ။ ဤလုပ်ဆောင်ချက်သည် Unicode မြန်မာစာအတွက် ဖြစ်ပြီး Zawgyi converter မပါဝင်ပါ။
+
 ## v5.3.1 — Responsive polish
 
 Restored the pagoda illustration on tablet and desktop, added a compact mobile illustration, centered the footer, and separated search controls with contained keyboard focus indicators.

@@ -63,7 +63,26 @@ for p in json.load(open(root/'scripts/official-places.json')):
    if k not in p:p[k]=match[k]
   unique.remove(match)
  p.setdefault('lat',None);p.setdefault('lon',None);unique.append(p)
+# Evidence-backed corrections, retained when rebuilding the directory.
+for correction in json.load(open(root/'scripts/tradition-overrides.json')):
+ for place in unique:
+  if place['name']==correction['name'] and place['state']==correction['state']:
+   if correction['tradition'] not in place['traditions']:place['traditions'].append(correction['tradition'])
+   if correction.get('monastery') and 'monastery' not in place['categories']:place['categories'].append('monastery')
+   place['traditionSource']=correction['source']
+# Reviewed Wikipedia additions and alias corrections, keyed by stable record ID.
+for update in json.load(open(root/'scripts/wikipedia-updates.json')):
+ match=next((p for p in unique if p['id']==update['id']),None)
+ if match:match.update(update)
+ elif 'name' in update and 'state' in update:unique.append(update.copy())
+# Sitagu 2024 directory reconciliation: reviewed additions, aliases and duplicate removal.
+review=json.load(open(root/'scripts/sitagu-2024-review.json'))
+unique=[p for p in unique if p['id'] not in review['removedDuplicateIds']]
+for update in json.load(open(root/'scripts/sitagu-2024-updates.json')):
+ match=next((p for p in unique if p['id']==update['id']),None)
+ if match:match.update(update)
+ else:unique.append(update.copy())
 unique.sort(key=lambda p:p['name'].casefold())
-result={'version':3,'updated':'2026-10-06','osmTimestamp':osm.get('osm3s',{}).get('timestamp_osm_base',''),'license':'ODbL-1.0','attribution':'© OpenStreetMap contributors; official-source additions linked per record','places':unique}
+result={'version':3,'updated':'2026-10-08','osmTimestamp':osm.get('osm3s',{}).get('timestamp_osm_base',''),'license':'ODbL-1.0','attribution':'© OpenStreetMap contributors; official-source additions linked per record','places':unique}
 (root/'public/directory.json').write_text(json.dumps(result,ensure_ascii=False,separators=(',',':'))+'\n')
 print('Places:',len(unique),'States:',len(set(p['state'] for p in unique)),'Categories:',{c:sum(c in p['categories'] for p in unique) for c in ['monastery','temple','organization']})

@@ -1,0 +1,2346 @@
+[
+  {
+    "id": "osm-node-13115687318",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-5831263186",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-relation-3439271",
+    "aliases": [
+      "Beginner's Mind Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-310343940",
+    "aliases": [
+      "Shogakuji;Berkeley Zen Center Zendo"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-153309100",
+    "aliases": [
+      "City Of Ten Thousand Buddhas"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-596474175",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-358834074",
+    "aliases": [
+      "Fresno Buddhist Temple (Mrauk Oo Dhamma)"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-9386453344",
+    "aliases": [
+      "Green Dragon Temple",
+      "Green Gulch Farm"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-d67b6d87463c",
+    "name": "Hartford Street Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "San Francisco",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-d54967ea5cce",
+    "name": "Hazy Moon Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Los Angeles",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-1102757137",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-1858245167",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-3cd1184d15aa",
+    "name": "Metta Forest Monastery",
+    "aliases": [],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Valley Center",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-1e122414d5ee",
+    "name": "Mount Baldy Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Mount San Antonio",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-504453046",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-58ce02ae78d7",
+    "name": "Pacific Zen Institute",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Santa Rosa",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-276755820",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-relation-3439271",
+    "aliases": [
+      "Beginner's Mind Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-40a060288f5b",
+    "name": "Senshin Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Los Angeles",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-38c86273f2f1",
+    "name": "Shasta Abbey",
+    "aliases": [],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Mount Shasta",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-c993b8954b78",
+    "name": "Sonoma Mountain Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Santa Rosa",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-582d6d93a9cf",
+    "name": "Spirit Rock Meditation Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Woodacre",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-d6996670e67e",
+    "name": "Tassajara Zen Mountain Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Carmel Valley",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-1a9ddba8c4d7",
+    "name": "Walnut Grove Buddhist Church",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Walnut Grove",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-613cb54b5ef2",
+    "name": "Wat Buddhanusorn",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Fremont",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-69020458",
+    "aliases": [
+      "Berkeley Thai Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-9e0d5d11ffea",
+    "name": "Yokoji Zen Mountain Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Idyllwild",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-10254662be3e",
+    "name": "Zen Center of Los Angeles",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Los Angeles",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-56d004f2ebc5",
+    "name": "Zenshuji Soto Mission",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Los Angeles",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-766574528",
+    "aliases": [
+      "Chùa Bát Nhã",
+      "Bát Nhã Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-1564276785",
+    "aliases": [
+      "Giáo Hội Phật Giáo Việt Nam Trên Thế Giới",
+      "Chùa Bảo Quang",
+      "Bảo Quang Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-bfe95dd4ea1e",
+    "name": "Điều Ngự Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Westminster",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-bb2f7e3ce345",
+    "name": "Huệ Quang Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Westminster",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-845881296",
+    "aliases": [
+      "Đức Viên Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-002527298e5b",
+    "name": "Quan Âm Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Garden Grove",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-28c22ce43640",
+    "name": "Khánh Hỷ Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Garden Grove",
+    "state": "CA",
+    "stateName": "California",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-2609626585",
+    "aliases": [
+      "Chöying Dzong"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-358947547",
+    "aliases": [
+      "Great Stupa of Dharmakaya"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-4549713374",
+    "aliases": [
+      "Longchen Jigme Samten Ling"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-379086512",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-016705041004",
+    "name": "Phuntsok Choling",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Ward",
+    "state": "CO",
+    "stateName": "Colorado",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-99730384",
+    "aliases": [
+      "Tri-State Denver Buddhist Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-1e2c2fb5bb15",
+    "name": "Wat Buddhapunyaram",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Brighton",
+    "state": "CO",
+    "stateName": "Colorado",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-725e1ed9d1c5",
+    "name": "Buddhist Faith Fellowship of Connecticut",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Middletown",
+    "state": "CT",
+    "stateName": "Connecticut",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-845536707",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-1054037898",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-72cbc57e7a1a",
+    "name": "Wat Florida Dhammaram",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Kissimmee",
+    "state": "FL",
+    "stateName": "Florida",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-1185523001",
+    "aliases": [
+      "Wat Mongkolratanaram"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-51beef991fcc",
+    "name": "Atlanta Soto Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Atlanta",
+    "state": "GA",
+    "stateName": "Georgia",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-79ab339649f7",
+    "name": "Broken Ridge Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Honolulu",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-2a40157d2543",
+    "name": "Byodo-In Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Kaneohe",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-a7aadd22a2a5",
+    "name": "Daifukuji Soto Zen Mission",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Honalo",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-1decbfcf417e",
+    "name": "Daihonzan Chozen-ji",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Oahu",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-2e6c95f95bba",
+    "name": "Hawaii Shingon Mission",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Honolulu",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-ba698fd6d5c6",
+    "name": "Lāhainā Jodo Mission",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Lahaina",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-85977127d64b",
+    "name": "Wood Valley Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Pahala",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-643b6e05e40c",
+    "name": "Chân Không Monastery",
+    "aliases": [],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Honolulu",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-229b34b2b72f",
+    "name": "Long Sơn Thanh Nguyên Monastery",
+    "aliases": [],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Kunia",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-64e472ee84e1",
+    "name": "Linh Sơn Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Wahiawa",
+    "state": "HI",
+    "stateName": "Hawaii",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-210381710",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-b6be67db5211",
+    "name": "Chicago Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Evanston",
+    "state": "IL",
+    "stateName": "Illinois",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-1995bd4ec031",
+    "name": "Daiyuzenji",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Chicago",
+    "state": "IL",
+    "stateName": "Illinois",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-210686235",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-2794b5d039ec",
+    "name": "Furnace Mountain",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Stanton",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-6644f0e42c50",
+    "name": "The Contemplative Garden",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Louisville",
+    "state": "KY",
+    "stateName": "Kentucky",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-2c5e57dbb541",
+    "name": "Chua Bo De",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "New Orleans",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-2e7c6b318d7d",
+    "name": "New Orleans Zen Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "New Orleans",
+    "state": "LA",
+    "stateName": "Louisiana",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-1248979072",
+    "aliases": [
+      "วัดพุทธสามัคคีวนาราม"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-1198490938",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-8ed92f594a7d",
+    "name": "Boundless Way Zen",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Worcester",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-29924956",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-a584088b6a5d",
+    "name": "Glory Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Lowell",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-159432883",
+    "aliases": [
+      "New England Peace Pagoda"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-ef475ceb6a8a",
+    "name": "Tsegyalgar East",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Conway",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-f42a689fc689",
+    "name": "Valley Zendo",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Charlemont",
+    "state": "MA",
+    "stateName": "Massachusetts",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-211982834",
+    "aliases": [
+      "Wat Boston Buddha Vararam"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-639474017",
+    "aliases": [
+      "NMR Buddhist Meditation Center"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-eb53342b67f5",
+    "name": "Lake Superior Zendo",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Marquette",
+    "state": "MI",
+    "stateName": "Michigan",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-4819219125",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-1157969039",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-89263288",
+    "aliases": [
+      "Minnesota Zen Center"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-11805933333",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-82caded34c3a",
+    "name": "Dinh Quang Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Springfield",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-699477077",
+    "aliases": [
+      "Fo Guang Shan St. Louis Buddhist Center"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-9d90f705bee1",
+    "name": "Light of Dhamma Burmese Buddhist Monastery",
+    "aliases": [],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "",
+    "city": "Kansas City",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-795464703",
+    "aliases": [
+      "Mid-America Buddhist Association"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-04095916adb3",
+    "name": "Missouri Buddhist Meditation Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Hazelwood",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-364a98ddeeab",
+    "name": "Pho Hien Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Kansas City",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-497283134",
+    "aliases": [
+      "Quan Am Temple - Kansas City"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-503663529",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-0fa33eb0a15c",
+    "name": "Temple Buddhist Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Kansas City",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-edcae38f7f0f",
+    "name": "Tu Bi Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Kansas City",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-3e2d139dbdab",
+    "name": "Wat Buddhamanee Rattanaram",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Arnold",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-41739fda16e7",
+    "name": "Wat Buddha Samagkeedham Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "St. Louis",
+    "state": "MO",
+    "stateName": "Missouri",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-664774206",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-632359939",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-39eb13c21793",
+    "name": "Garden of One Thousand Buddhas",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "",
+    "state": "MT",
+    "stateName": "Montana",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-199416130",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-41f2a0f15fb0",
+    "name": "Las Vegas Buddhist Sangha",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Las Vegas",
+    "state": "NV",
+    "stateName": "Nevada",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-8026607841",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-b26509442e5c",
+    "name": "Seabrook Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Upper Deerfield Township",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-6a6f622e5a3c",
+    "name": "So Shim Sa Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Plainfield",
+    "state": "NJ",
+    "stateName": "New Jersey",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-b28b7bfc3ddd",
+    "name": "Hokoji Zendo",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Arroyo Seco",
+    "state": "NM",
+    "stateName": "New Mexico",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-341359732",
+    "aliases": [
+      "KSK Buddhist Center of Santa Fe",
+      "Kagyu Shenpen Kunchab"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-997959062",
+    "aliases": [
+      "Upaya Institute and Zen Center"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-25368e471b16",
+    "name": "Zuni Mountain Stupa",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Grants",
+    "state": "NM",
+    "stateName": "New Mexico",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-8780238308",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-relation-10352471",
+    "aliases": [
+      "Chapin Mill Buddhist Retreat Center"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-fd2ff61d8faa",
+    "name": "Chogye International Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "New York",
+    "state": "NY",
+    "stateName": "New York",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-600622961",
+    "aliases": [
+      "Chuang Yen Monastery"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-972661938",
+    "aliases": [
+      "Dai Bosatsu Zendo Kongo-ji"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-233883909",
+    "aliases": [
+      "Karma Triyana Dharmachakra"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-2f7a11ba5a64",
+    "name": "Mahamevnawa Buddhist Meditation Center of New York",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Staten Island",
+    "state": "NY",
+    "stateName": "New York",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-357620590",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-6593f2a281d1",
+    "name": "New York Mahayana Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Leeds",
+    "state": "NY",
+    "stateName": "New York",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-8832589721",
+    "aliases": [
+      "New York Zendo Shobo-Ji"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-e3748a2582f3",
+    "name": "Palden Padma Samye Ling",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Sidney Center",
+    "state": "NY",
+    "stateName": "New York",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-5511503633",
+    "aliases": [
+      "RZC"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-1314034150",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-522046f4f085",
+    "name": "Village Zendo",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "New York",
+    "state": "NY",
+    "stateName": "New York",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-8fe6981a169f",
+    "name": "Zen Center of Syracuse",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Syracuse",
+    "state": "NY",
+    "stateName": "New York",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-1010825400",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-949199026",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-428367730",
+    "aliases": [
+      "The Buddhist Temple of Toledo"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-7c073bb2f5fe",
+    "name": "Cleveland Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Shaker Heights",
+    "state": "OH",
+    "stateName": "Ohio",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-d7e09171c0b2",
+    "name": "Cleveland Buddhist Vihara & Meditation Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Akron",
+    "state": "OH",
+    "stateName": "Ohio",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-866362892",
+    "aliases": [
+      "Zen Community of Oregon"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-13207878708",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-367938803",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-673779119",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-456378236",
+    "aliases": [
+      "Chùa Bồ Đề"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-aa122bf395c6",
+    "name": "Pittsburgh Buddhist Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Allison Park",
+    "state": "PA",
+    "stateName": "Pennsylvania",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-428817650",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-576007489",
+    "aliases": [
+      "Wat Khmer Palelai Monastery"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-899211199",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-550681534",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-a3f238de0afa",
+    "name": "Providence Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Cumberland",
+    "state": "RI",
+    "stateName": "Rhode Island",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-11898655993",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-96e8d908fcab",
+    "name": "Chua Buu Mon",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Port Arthur",
+    "state": "TX",
+    "stateName": "Texas",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-766562610",
+    "aliases": [
+      "Building A",
+      "Chùa Linh-Sơn;Linh-Son Buddhist Temple",
+      "Chua Linh-Son Buddhist Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-9b806759730f",
+    "name": "Jade Buddha Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Houston",
+    "state": "TX",
+    "stateName": "Texas",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-e3b8ac3e6cc4",
+    "name": "Maria Kannon Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Dallas",
+    "state": "TX",
+    "stateName": "Texas",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-382512288",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-543339368",
+    "aliases": [
+      "Chùa Việt Nam",
+      "Trung Tâm Phật Giáo Việt Nam",
+      "Vietnamm Buddhist Center - Trung Tâm Phật Giáo Chùa Việt Nam"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-6c166bad4e70",
+    "name": "Honeyville Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Honeyville",
+    "state": "UT",
+    "stateName": "Utah",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-c616da931d96",
+    "name": "Kanzeon Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Salt Lake City",
+    "state": "UT",
+    "stateName": "Utah",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-60246660",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-238249913",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-356605910",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-way-943833510",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-7004774482e0",
+    "name": "Buddhangkura Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [
+      "Thailand"
+    ],
+    "address": "",
+    "city": "Olympia",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-617130133",
+    "aliases": [
+      "Chua Lien Hoa"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "osm-node-356550320",
+    "aliases": [
+      "Dai Bai Zan Cho Bo Zen Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-2f28bfcfdb78",
+    "name": "Ground Zero for Nonviolent Action Peace Pagoda",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Bremerton",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-bcf55e23ecbf",
+    "name": "Mt. Adams Buddhist Temple",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Trout Lake",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-a9ef25654a84",
+    "name": "Nalanda Institute",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Olympia",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-00d4dea44b15",
+    "name": "Olympia Zen Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Olympia",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-3fcb4b70f8a7",
+    "name": "Open Gate Zendo",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Olympia",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-7006601064",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-41925162d9d2",
+    "name": "Padma Raja Society",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Poulsbo",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-228732859",
+    "aliases": [
+      "Seattle Betsuin Buddhist Temple"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-a0fdcb105f81",
+    "name": "Spokane Buddhist Church",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Spokane",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "wiki-2bd8bc7a4136",
+    "name": "Sravasti Abbey",
+    "aliases": [],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Newport",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-627649480",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-a6cac33cf086",
+    "name": "Tushita Kadampa Buddhist Center",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Olympia",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-499810142",
+    "aliases": [],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-1908aa934bba",
+    "name": "Yakima Buddhist Church",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Wapato",
+    "state": "WA",
+    "stateName": "Washington",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-way-1221349815",
+    "aliases": [
+      "Deer Park Buddhist Center and Monastery"
+    ],
+    "additionalSource": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141"
+  },
+  {
+    "id": "wiki-162b4ca283aa",
+    "name": "Sotekizan Korinzenji",
+    "aliases": [],
+    "categories": [
+      "temple"
+    ],
+    "traditions": [],
+    "address": "",
+    "city": "Madison",
+    "state": "WI",
+    "stateName": "Wisconsin",
+    "lat": null,
+    "lon": null,
+    "website": "",
+    "phone": "",
+    "source": "https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141",
+    "sourceType": "wikipedia",
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Listed in Wikipedia. Street address and current visiting arrangements are not verified; check before traveling."
+  },
+  {
+    "id": "osm-node-358834074",
+    "name": "Mrauk Oo Dhamma Center",
+    "aliases": [
+      "Fresno Buddhist Temple (Mrauk Oo Dhamma)",
+      "Fresno Buddhist Temple",
+      "မြောက်ဦးဓမ္မစင်တာ"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "1340 Kern Street, Fresno, CA 93706",
+    "city": "Fresno",
+    "website": "https://www.mraukoo.org/",
+    "source": "https://www.mraukoo.org/copy-of-about-us",
+    "sourceType": "official",
+    "traditionSource": "https://www.mraukoo.org/about-us"
+  }
+]

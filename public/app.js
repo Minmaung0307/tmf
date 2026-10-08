@@ -54,9 +54,10 @@ $('placeDialog').addEventListener('click',event=>{if(event.target===$('placeDial
 
 let category='all',generation=0,lastPlaces=[],map,markerLayer,pageNumber=0;const PAGE_SIZE=24;
 const params=new URLSearchParams(location.search);
-$('search').value=params.get('q')||'';$('state').value=params.get('state')||'';$('tradition').value=params.get('tradition')||'';
+$('search').value=params.get('q')||'';$('state').value=params.get('state')||'';const restoredTradition=(params.get('tradition')||'').replace(/(?:\s*\(\d+\))+\s*$/,'').trim();
+$('tradition').value=['Myanmar','Sri Lanka','Thailand','Laos','Cambodia','other','unrecorded'].includes(restoredTradition)?restoredTradition:'';
 if(['all','monastery','temple','organization'].includes(params.get('category')))category=params.get('category');
-function syncCategory(){document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===category)));$('tradition').disabled=category==='organization';}
+function syncCategory(){document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===category)));$('tradition').disabled=false;}
 syncCategory();
 function filters(){return {query:$('search').value,category,tradition:$('tradition').value,state:$('state').value};}
 function externalSearch(){const terms={all:'Buddhist monastery Myanmar community',monastery:'Buddhist monastery',temple:'Buddhist pagoda temple',organization:'Myanmar community organization'};return 'https://www.google.com/search?'+new URLSearchParams({q:[$('search').value,terms[category],states[$('state').value]||'', 'United States'].join(' ')});}
@@ -67,11 +68,21 @@ async function runSearch(){
  $('resultTitle').textContent='Loading the community directory…';$('resultNote').textContent='Find a place to reflect, celebrate, and belong.';$('templeList').setAttribute('aria-busy','true');$('templeList').replaceChildren(...Array.from({length:3},()=>{const s=element('div','skeleton');s.setAttribute('aria-hidden','true');return s;}));
  try {
    await loadDirectory();if(request!==generation)return;
-   lastPlaces=filterDirectory(directory,f);renderResults();
+   lastPlaces=filterDirectory(directory,f);
+   for(const option of $('tradition').options){option.value=option.getAttribute('value')??option.textContent.replace(/(?:\s*\(\d+\))+\s*$/,'').trim();const count=filterDirectory(directory,{...f,tradition:option.value}).length;option.textContent=`${({unrecorded:'Not recorded yet',other:'Other traditions'})[option.value]||option.value||'All traditions'} (${count})`;}
+   renderResults();
+   const areaPlaces=filterDirectory(directory,{...f,tradition:''});
+   const unknown=areaPlaces.filter(p=>!p.traditions.length).length;
+   $('notice').append(element('p','directory-note',`${areaPlaces.length} places: ${areaPlaces.length-unknown} with recorded traditions · ${unknown} not recorded yet. Some places have more than one tradition. မသတ်မှတ်ရသေးသောစာရင်းများကို Not recorded yet မှာ ကြည့်နိုင်ပါသည်။`));
+   if(f.tradition){
+    const wider=filterDirectory(directory,{...f,category:'all'}).length;
+    if(f.category!=='all' && wider>lastPlaces.length)$('notice').append(button(`Show ${wider} matching places across categories`,()=>{category='all';syncCategory();runSearch();},'secondary'));
+    if(!lastPlaces.length && areaPlaces.length)$('notice').append(button(`Show all ${areaPlaces.length} places in this category`,()=>{$('tradition').value='';runSearch();},'secondary'));
+   }
    $('resultTitle').textContent=`${lastPlaces.length} ${lastPlaces.length===1?"place":"places"} to explore`;
    $('resultNote').textContent=`${directory.length} listed places · Updated ${directoryMeta.updated} · Free community directory`;
    $('notice').append(element('p','directory-note','This community-sourced directory is not complete. Confirm details before visiting. Missing a place? Suggest an update.'));
-   $('attribution').replaceChildren(document.createTextNode('Directory: '),link('© OpenStreetMap contributors','https://www.openstreetmap.org/copyright'),document.createTextNode(' · '),link('ODbL 1.0','https://opendatacommons.org/licenses/odbl/1-0/'),document.createTextNode(' · '),link('Download directory data','directory.json'));
+   $('attribution').replaceChildren(document.createTextNode('Directory: '),link('© OpenStreetMap contributors','https://www.openstreetmap.org/copyright'),document.createTextNode(' · '),link('ODbL 1.0','https://opendatacommons.org/licenses/odbl/1-0/'),document.createTextNode(' · '),link('Download directory data','directory.json'),document.createTextNode(' · Wikipedia contributors: '),link('reviewed list','https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141'),document.createTextNode(' · adapted under '),link('CC BY-SA 4.0','https://creativecommons.org/licenses/by-sa/4.0/'));
    $('attribution').hidden=false;$('mapToggle').disabled=!lastPlaces.some(hasLocation);
  }catch(error){if(request!==generation)return;if(!browseReady){$('browseStatus').textContent='Names could not load. Please retry.';$('browseGroups').replaceChildren(button('Retry name list',runSearch));}$('resultTitle').textContent='The directory could not load';$('resultNote').textContent='Check your connection or that the full public folder was uploaded.';$('templeList').replaceChildren(empty('Please try again.','စာရင်းဖိုင်ကို ဖွင့်လို့မရသေးပါ။ Check your internet connection. The directory has no Google billing requirement.',[button('Try again',runSearch,'primary'),link('Search the web ↗',externalSearch(),'secondary')]));
  }finally{if(request===generation)$('templeList').removeAttribute('aria-busy');}
@@ -79,7 +90,7 @@ async function runSearch(){
 function hasLocation(p){return Number.isFinite(p.lat)&&Number.isFinite(p.lon);}
 function renderResults(){
  $('templeList').replaceChildren();$('pagination').replaceChildren();
- if(!lastPlaces.length){$('templeList').append(empty('Not in this directory yet.','စာရင်းထဲမှာ မတွေ့သေးပါ။ Try an English name, fewer words, or another state. Missing results do not mean the place does not exist.',[button('Clear filters',reset),link('Search the web ↗',externalSearch(),'secondary')]));return;}
+ if(!lastPlaces.length){$('templeList').append(empty('Not in this directory yet.','စာရင်းထဲမှာ မတွေ့သေးပါ။ မြန်မာ / English နာမည်အတို၊ အခြားပြည်နယ် သို့မဟုတ် All places ဖြင့် ပြန်ရှာကြည့်ပါ။ Missing results do not mean the place does not exist.',[button('Clear filters',reset),link('Search the web ↗',externalSearch(),'secondary')]));return;}
  const start=pageNumber*PAGE_SIZE;lastPlaces.slice(start,start+PAGE_SIZE).forEach(p=>$('templeList').append(placeCard(p)));
  const row=element('div','pagination');const prev=button('← Previous',()=>{pageNumber--;renderResults();$('resultTitle').scrollIntoView({block:'start'});});prev.disabled=pageNumber===0;const next=button('Next →',()=>{pageNumber++;renderResults();$('resultTitle').scrollIntoView({block:'start'});});next.disabled=start+PAGE_SIZE>=lastPlaces.length;
  row.append(prev,element('span','subtle',`${start+1}–${Math.min(start+PAGE_SIZE,lastPlaces.length)} of ${lastPlaces.length}`),next);$('pagination').append(row);
@@ -92,7 +103,8 @@ function placeCard(p){
  if(safeUrl(p.website))actions.append(link('Website ↗',safeUrl(p.website)));
  if(p.phone){const phone=element('a','','Call');phone.href='tel:'+p.phone.replace(/[^+\d]/g,'');if(/[0-9]/.test(phone.href))actions.append(phone);}
  if(p.community)actions.append(button('View profile',()=>openPlace(p),'profile-link'));card.append(actions);
- if(safeUrl(p.source))card.append(link(p.sourceType==='official'?'Official source ↗':'OpenStreetMap record ↗',safeUrl(p.source),'subtle'));
+ if(p.verificationNote)card.append(element('p','directory-note',p.verificationNote));
+ if(safeUrl(p.source))card.append(link(p.sourceType==='official'?'Official source ↗':p.sourceType==='osm'?'OpenStreetMap record ↗':p.sourceType==='wikipedia'?'Wikipedia source ↗':'Directory source ↗',safeUrl(p.source),'subtle'));
  return card;
 }
 function showMap(){
@@ -105,7 +117,12 @@ function showMap(){
  $('mapToggle').textContent='Hide map';$('mapToggle').setAttribute('aria-expanded','true');
 }
 function reset(){category='all';$('searchForm').reset();$('tradition').value='';syncCategory();runSearch();}
-$('searchForm').addEventListener('submit',e=>{e.preventDefault();runSearch();});
+let searchTimer, composingSearch=false;
+function scheduleSearch(){clearTimeout(searchTimer);if(!composingSearch)searchTimer=setTimeout(runSearch,180);}
+$('search').addEventListener('compositionstart',()=>{composingSearch=true;clearTimeout(searchTimer);});
+$('search').addEventListener('compositionend',()=>{composingSearch=false;scheduleSearch();});
+$('search').addEventListener('input',scheduleSearch);
+$('searchForm').addEventListener('submit',e=>{e.preventDefault();clearTimeout(searchTimer);runSearch();});
 document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;syncCategory();runSearch();}));
 $('state').addEventListener('change',runSearch);$('tradition').addEventListener('change',runSearch);$('resetFilters').addEventListener('click',reset);$('mapToggle').addEventListener('click',showMap);
 let eventsData=[],eventsLoaded=false,eventLoadVersion=0;

@@ -187,5 +187,237 @@
       "Myanmar community",
       "မြန်မာ အသင်းအဖွဲ့"
     ]
+  },
+  {
+    "id": "sitagu-nashville",
+    "match": "The Buddhist Temple (Nashville)",
+    "name": "The Buddhist Temple (Nashville)",
+    "aliases": [
+      "Nashville Buddhist Temple",
+      "Sitagu Nashville",
+      "သီတဂူ နက်ရှ်ဗီးလ်",
+      "The Buddhist Temple"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "99 Lyle Lane, Nashville, TN 37210",
+    "city": "Nashville",
+    "state": "TN",
+    "stateName": "Tennessee",
+    "website": "https://sitagu.org/tn/index.html",
+    "source": "https://www.sitagu.org/tn/Community/Donations/Donations.html",
+    "sourceType": "official",
+    "phone": "",
+    "lat": null,
+    "lon": null,
+    "sourceChecked": "2026-10-08",
+    "verificationNote": ""
+  },
+  {
+    "id": "dhamma-viman-nc",
+    "match": "Dhamma Viman Monastery",
+    "name": "Dhamma Viman Monastery",
+    "aliases": [
+      "ဓမ္မဝိမာန်",
+      "DhammaViman",
+      "Myanmar Buddhist Association Jamestown"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "6612 Brass Road, Jamestown, NC 27282",
+    "city": "Jamestown",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "website": "https://dhammaviman.wordpress.com/",
+    "source": "https://dhammaviman.wordpress.com/category/uncategorized/",
+    "sourceType": "official",
+    "phone": "",
+    "lat": null,
+    "lon": null,
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "The temple website lists this address in older posts. Confirm visiting arrangements before traveling."
+  },
+  {
+    "id": "dhammikarama-nc",
+    "match": "Dhammikarama Temple",
+    "name": "Dhammikarama Temple",
+    "aliases": [
+      "ဓမ္မိကာရာမကျောင်း",
+      "Dha Mii Karr Yarr Ma Kyoung"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "2214 Hwy 54 West, Chapel Hill, NC",
+    "city": "Chapel Hill",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "website": "",
+    "source": "https://townofcarrboro.org/DocumentCenter/View/8319",
+    "sourceType": "public-resource",
+    "phone": "",
+    "lat": null,
+    "lon": null,
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Address from the Orange County refugee resource guide (2017 edition). Confirm the current address before traveling."
+  },
+  {
+    "id": "serenity-insight-nc",
+    "match": "Serenity Insight Meditation Center",
+    "name": "Serenity Insight Meditation Center",
+    "aliases": [
+      "Serenity Insight Monastery",
+      "SIMC"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "211 Bee Ridge Road, Asheville, NC 28803",
+    "city": "Asheville",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "website": "",
+    "source": "https://www.wcu.edu/WebFiles/CAPSSpiritualityResources2023.pdf",
+    "sourceType": "public-resource",
+    "phone": "",
+    "lat": null,
+    "lon": null,
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Address from Western Carolina University’s 2023 resource guide; Burmese monastic background documented in Morgan (2019), WCU. Confirm visiting arrangements.",
+    "traditionSource": "https://libres.uncg.edu/ir/wcu/f/Morgan2019.pdf"
+  },
+  {
+    "id": "charlotte-myanmar-association",
+    "match": "Charlotte Myanmar Buddhist Association",
+    "name": "Charlotte Myanmar Buddhist Association",
+    "aliases": [
+      "Charlotte Myanmar",
+      "ရှားလော့ မြန်မာအသင်း"
+    ],
+    "categories": [
+      "organization"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "7239 Tuckaseegee Road, Charlotte, NC 28214",
+    "city": "Charlotte",
+    "state": "NC",
+    "stateName": "North Carolina",
+    "website": "",
+    "source": "https://www.charitynavigator.org/ein/472431624",
+    "sourceType": "registry",
+    "phone": "",
+    "lat": null,
+    "lon": null,
+    "sourceChecked": "2026-10-08",
+    "verificationNote": "Registered organization address. A public temple visiting location has not yet been confirmed."
+  },
+  {
+    "id": "asokarama-michigan",
+    "match": "Asokarama Monastery",
+    "name": "Asokarama Monastery",
+    "aliases": [
+      "အသောကာရာမ",
+      "Theravada Buddhist Association Michigan",
+      "TBAM"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "400 Charlotte Street, Mulliken, MI 48861",
+    "city": "Mulliken",
+    "state": "MI",
+    "stateName": "Michigan",
+    "website": "https://tbamichigan.org/aboutus",
+    "source": "https://tbamichigan.org/aboutus",
+    "sourceType": "official",
+    "phone": "",
+    "lat": null,
+    "lon": null,
+    "sourceChecked": "2026-10-08",
+    "verificationNote": ""
+  },
+  {
+    "id": "sitagu-minnesota",
+    "match": "Sitagu Dhamma Vihara (Minnesota)",
+    "name": "Sitagu Dhamma Vihara (Minnesota)",
+    "aliases": [
+      "Sitagu Dhammavihara",
+      "Sitagu Dhamma Vihara",
+      "သီတဂူ ဓမ္မဝိဟာရ",
+      "သီတဂူ မင်နီဆိုတာ",
+      "Theravada Dhamma Society of Minnesota",
+      "TDSM"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "32500 Lofton Avenue, Chisago City, MN 55013",
+    "city": "Chisago City",
+    "state": "MN",
+    "stateName": "Minnesota",
+    "lat": null,
+    "lon": null,
+    "website": "https://sitagu.org/mn/",
+    "phone": "",
+    "source": "https://sitagu.org/mn/newbies/newbies.html",
+    "sourceType": "official",
+    "sourceChecked": "2026-10-08"
+  },
+  {
+    "id": "chanmyay-springfield",
+    "match": "Chanmyay Satipatthana Vihara",
+    "name": "Chanmyay Satipatthana Vihara",
+    "aliases": [
+      "ချမ်းမြေ့",
+      "ချမ်းမြေ့ သတိပဋ္ဌာန် ဝိဟာရ",
+      "Chan Myay Satipatthana Vihara",
+      "Satipatthana Vipassana Association"
+    ],
+    "categories": [
+      "monastery",
+      "temple"
+    ],
+    "traditions": [
+      "Myanmar"
+    ],
+    "address": "525 N Bruns Lane, Springfield, IL 62702",
+    "city": "Springfield",
+    "state": "IL",
+    "stateName": "Illinois",
+    "lat": null,
+    "lon": null,
+    "website": "https://chanmyayusa.org/",
+    "phone": "",
+    "source": "https://chanmyayusa.org/contact.html",
+    "sourceType": "official",
+    "sourceChecked": "2026-10-08"
   }
 ]

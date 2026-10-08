@@ -1,3 +1,19 @@
+# TMF v5.4.0 — Myanmar monastery directory expansion
+
+136 new institutions from Sitagu’s 2024 sixth-edition directory; 15 existing entries enriched; one duplicate removed. 1,025 total directory records. NC now has 10 Myanmar monasteries/meditation centers. Azusa is searchable in English and Burmese.
+
+The 153 US source entries are accounted for in `scripts/sitagu-2024-review.json`; two unnamed entries remain pending. Source-year notes distinguish historical listings from currently reconfirmed addresses. See DATA-SOURCES.md.
+
+Validation: 29 automated tests and the browser tradition/state/search checks passed. Rebuilding the directory retains the changes. This package has not been deployed.
+
+Deploy from the extracted tmf-free folder:
+
+```sh
+firebase deploy --only hosting --project tmf-mm
+```
+
+---
+
 ## v5.3.1 — Responsive polish
 
 Restored the pagoda illustration on tablet and desktop, added a compact mobile illustration, centered the footer, and separated search controls with contained keyboard focus indicators.

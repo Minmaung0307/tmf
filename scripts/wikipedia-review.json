@@ -1,0 +1,1020 @@
+[
+  {
+    "name": "Arizona Buddhist Temple",
+    "state": "AZ",
+    "action": "matched",
+    "id": "osm-node-13115687318"
+  },
+  {
+    "name": "Abhayagiri Buddhist Monastery",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-node-5831263186"
+  },
+  {
+    "name": "Beginner's Mind Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-relation-3439271"
+  },
+  {
+    "name": "Berkeley Zen Center",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-310343940"
+  },
+  {
+    "name": "City Of Ten Thousand Buddhas",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-153309100"
+  },
+  {
+    "name": "Deer Park Monastery",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-node-596474175"
+  },
+  {
+    "name": "Fresno Buddhist Temple (Mrauk Oo Dhamma)",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-node-358834074"
+  },
+  {
+    "name": "Green Gulch Farm",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-node-9386453344"
+  },
+  {
+    "name": "Hartford Street Zen Center",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-d67b6d87463c"
+  },
+  {
+    "name": "Hazy Moon Zen Center",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-d54967ea5cce"
+  },
+  {
+    "name": "Hsi Lai Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-1102757137"
+  },
+  {
+    "name": "Koyasan Buddhist Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-node-1858245167"
+  },
+  {
+    "name": "Metta Forest Monastery",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-3cd1184d15aa"
+  },
+  {
+    "name": "Mount Baldy Zen Center",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-1e122414d5ee"
+  },
+  {
+    "name": "Pao Fa Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-504453046"
+  },
+  {
+    "name": "Pacific Zen Institute",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-58ce02ae78d7"
+  },
+  {
+    "name": "San Fran Dhammaram Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-276755820"
+  },
+  {
+    "name": "San Francisco Zen Center",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-relation-3439271"
+  },
+  {
+    "name": "Senshin Buddhist Temple",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-40a060288f5b"
+  },
+  {
+    "name": "Shasta Abbey",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-38c86273f2f1"
+  },
+  {
+    "name": "Sonoma Mountain Zen Center",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-c993b8954b78"
+  },
+  {
+    "name": "Spirit Rock Meditation Center",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-582d6d93a9cf"
+  },
+  {
+    "name": "Tassajara Zen Mountain Center",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-d6996670e67e"
+  },
+  {
+    "name": "Walnut Grove Buddhist Church",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-1a9ddba8c4d7"
+  },
+  {
+    "name": "Wat Buddhanusorn",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-613cb54b5ef2"
+  },
+  {
+    "name": "Wat Mongkolratanaram",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-69020458"
+  },
+  {
+    "name": "Yokoji Zen Mountain Center",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-9e0d5d11ffea"
+  },
+  {
+    "name": "Zen Center of Los Angeles",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-10254662be3e"
+  },
+  {
+    "name": "Zenshuji Soto Mission",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-56d004f2ebc5"
+  },
+  {
+    "name": "Bát Nhã Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-766574528"
+  },
+  {
+    "name": "Bảo Quang Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-1564276785"
+  },
+  {
+    "name": "Điều Ngự Temple",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-bfe95dd4ea1e"
+  },
+  {
+    "name": "Huệ Quang Temple",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-bb2f7e3ce345"
+  },
+  {
+    "name": "Đức Viên Temple",
+    "state": "CA",
+    "action": "matched",
+    "id": "osm-way-845881296"
+  },
+  {
+    "name": "Quan Âm Temple",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-002527298e5b"
+  },
+  {
+    "name": "Khánh Hỷ Temple",
+    "state": "CA",
+    "action": "added",
+    "id": "wiki-28c22ce43640"
+  },
+  {
+    "name": "Chöying Dzong",
+    "state": "CO",
+    "action": "matched",
+    "id": "osm-node-2609626585"
+  },
+  {
+    "name": "Great Stupa of Dharmakaya",
+    "state": "CO",
+    "action": "matched",
+    "id": "osm-node-358947547"
+  },
+  {
+    "name": "Longchen Jigme Samten Ling",
+    "state": "CO",
+    "action": "matched",
+    "id": "osm-node-4549713374"
+  },
+  {
+    "name": "Longmont Buddhist Temple",
+    "state": "CO",
+    "action": "matched",
+    "id": "osm-way-379086512"
+  },
+  {
+    "name": "Phuntsok Choling",
+    "state": "CO",
+    "action": "added",
+    "id": "wiki-016705041004"
+  },
+  {
+    "name": "Tri-State Denver Buddhist Temple",
+    "state": "CO",
+    "action": "matched",
+    "id": "osm-way-99730384"
+  },
+  {
+    "name": "Wat Buddhapunyaram",
+    "state": "CO",
+    "action": "added",
+    "id": "wiki-1e2c2fb5bb15"
+  },
+  {
+    "name": "Buddhist Faith Fellowship of Connecticut",
+    "state": "CT",
+    "action": "added",
+    "id": "wiki-725e1ed9d1c5"
+  },
+  {
+    "name": "Do Ngak Kunphen Ling Tibetan Buddhist Center for Universal Peace",
+    "state": "CT",
+    "action": "matched",
+    "id": "osm-way-845536707"
+  },
+  {
+    "name": "Guang Ming Temple",
+    "state": "FL",
+    "action": "matched",
+    "id": "osm-way-1054037898"
+  },
+  {
+    "name": "Wat Florida Dhammaram",
+    "state": "FL",
+    "action": "added",
+    "id": "wiki-72cbc57e7a1a"
+  },
+  {
+    "name": "Wat Mongkolratanaram",
+    "state": "FL",
+    "action": "matched",
+    "id": "osm-way-1185523001"
+  },
+  {
+    "name": "Atlanta Soto Zen Center",
+    "state": "GA",
+    "action": "added",
+    "id": "wiki-51beef991fcc"
+  },
+  {
+    "name": "Broken Ridge Buddhist Temple",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-79ab339649f7"
+  },
+  {
+    "name": "Byodo-In Temple",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-2a40157d2543"
+  },
+  {
+    "name": "Daifukuji Soto Zen Mission",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-a7aadd22a2a5"
+  },
+  {
+    "name": "Daihonzan Chozen-ji",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-1decbfcf417e"
+  },
+  {
+    "name": "Hawaii Shingon Mission",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-2e6c95f95bba"
+  },
+  {
+    "name": "Lāhainā Jodo Mission",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-ba698fd6d5c6"
+  },
+  {
+    "name": "Wood Valley Temple",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-85977127d64b"
+  },
+  {
+    "name": "Chân Không Monastery",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-643b6e05e40c"
+  },
+  {
+    "name": "Long Sơn Thanh Nguyên Monastery",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-229b34b2b72f"
+  },
+  {
+    "name": "Linh Sơn Temple",
+    "state": "HI",
+    "action": "added",
+    "id": "wiki-64e472ee84e1"
+  },
+  {
+    "name": "Buddhist Temple of Chicago",
+    "state": "IL",
+    "action": "matched",
+    "id": "osm-way-210381710"
+  },
+  {
+    "name": "Chicago Zen Center",
+    "state": "IL",
+    "action": "added",
+    "id": "wiki-b6be67db5211"
+  },
+  {
+    "name": "Daiyuzenji",
+    "state": "IL",
+    "action": "added",
+    "id": "wiki-1995bd4ec031"
+  },
+  {
+    "name": "Midwest Buddhist Temple",
+    "state": "IL",
+    "action": "matched",
+    "id": "osm-way-210686235"
+  },
+  {
+    "name": "Furnace Mountain",
+    "state": "KY",
+    "action": "added",
+    "id": "wiki-2794b5d039ec"
+  },
+  {
+    "name": "The Contemplative Garden",
+    "state": "KY",
+    "action": "added",
+    "id": "wiki-6644f0e42c50"
+  },
+  {
+    "name": "Chua Bo De",
+    "state": "LA",
+    "action": "added",
+    "id": "wiki-2c5e57dbb541"
+  },
+  {
+    "name": "New Orleans Zen Temple",
+    "state": "LA",
+    "action": "added",
+    "id": "wiki-2e7c6b318d7d"
+  },
+  {
+    "name": "Wat Buddhasamakeevanaram",
+    "state": "LA",
+    "action": "matched",
+    "id": "osm-way-1248979072"
+  },
+  {
+    "name": "Kunzang Palyul Choling",
+    "state": "MD",
+    "action": "matched",
+    "id": "osm-way-1198490938"
+  },
+  {
+    "name": "Boundless Way Zen",
+    "state": "MA",
+    "action": "added",
+    "id": "wiki-8ed92f594a7d"
+  },
+  {
+    "name": "Cambridge Zen Center",
+    "state": "MA",
+    "action": "matched",
+    "id": "osm-way-29924956"
+  },
+  {
+    "name": "Glory Buddhist Temple",
+    "state": "MA",
+    "action": "added",
+    "id": "wiki-a584088b6a5d"
+  },
+  {
+    "name": "New England Peace Pagoda",
+    "state": "MA",
+    "action": "matched",
+    "id": "osm-way-159432883"
+  },
+  {
+    "name": "Tsegyalgar East",
+    "state": "MA",
+    "action": "added",
+    "id": "wiki-ef475ceb6a8a"
+  },
+  {
+    "name": "Valley Zendo",
+    "state": "MA",
+    "action": "added",
+    "id": "wiki-f42a689fc689"
+  },
+  {
+    "name": "Wat Boston Buddha Vararam",
+    "state": "MA",
+    "action": "matched",
+    "id": "osm-way-211982834"
+  },
+  {
+    "name": "Wat Nawamintararachutis",
+    "state": "MA",
+    "action": "matched",
+    "id": "osm-way-639474017"
+  },
+  {
+    "name": "Lake Superior Zendo",
+    "state": "MI",
+    "action": "added",
+    "id": "wiki-eb53342b67f5"
+  },
+  {
+    "name": "Dharma Field Zen Center",
+    "state": "MN",
+    "action": "matched",
+    "id": "osm-node-4819219125"
+  },
+  {
+    "name": "Minnesota Buddhist Vihara",
+    "state": "MN",
+    "action": "matched",
+    "id": "osm-way-1157969039"
+  },
+  {
+    "name": "Minnesota Zen Center",
+    "state": "MN",
+    "action": "matched",
+    "id": "osm-way-89263288"
+  },
+  {
+    "name": "Magnolia Grove Monastery",
+    "state": "MS",
+    "action": "matched",
+    "id": "osm-node-11805933333"
+  },
+  {
+    "name": "Dinh Quang Buddhist Temple",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-82caded34c3a"
+  },
+  {
+    "name": "Fo Guang Shan St. Louis Buddhist Center",
+    "state": "MO",
+    "action": "matched",
+    "id": "osm-way-699477077"
+  },
+  {
+    "name": "Light of Dhamma Burmese Buddhist Monastery",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-9d90f705bee1"
+  },
+  {
+    "name": "Mid-America Buddhist Association",
+    "state": "MO",
+    "action": "matched",
+    "id": "osm-way-795464703"
+  },
+  {
+    "name": "Missouri Buddhist Meditation Center",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-04095916adb3"
+  },
+  {
+    "name": "Pho Hien Temple",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-364a98ddeeab"
+  },
+  {
+    "name": "Quan Am Temple - Kansas City",
+    "state": "MO",
+    "action": "matched",
+    "id": "osm-way-497283134"
+  },
+  {
+    "name": "Rime Buddhist Center",
+    "state": "MO",
+    "action": "matched",
+    "id": "osm-way-503663529"
+  },
+  {
+    "name": "Temple Buddhist Center",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-0fa33eb0a15c"
+  },
+  {
+    "name": "Tu Bi Temple",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-edcae38f7f0f"
+  },
+  {
+    "name": "Wat Buddhamanee Rattanaram",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-3e2d139dbdab"
+  },
+  {
+    "name": "Wat Buddha Samagkeedham Temple",
+    "state": "MO",
+    "action": "added",
+    "id": "wiki-41739fda16e7"
+  },
+  {
+    "name": "Wat Phrasriratanaram",
+    "state": "MO",
+    "action": "matched",
+    "id": "osm-way-664774206"
+  },
+  {
+    "name": "Vo Luong Quang Temple",
+    "state": "MO",
+    "action": "matched",
+    "id": "osm-way-632359939"
+  },
+  {
+    "name": "Garden of One Thousand Buddhas",
+    "state": "MT",
+    "action": "added",
+    "id": "wiki-39eb13c21793"
+  },
+  {
+    "name": "Linh Quang Buddhist Center",
+    "state": "NE",
+    "action": "matched",
+    "id": "osm-way-199416130"
+  },
+  {
+    "name": "Las Vegas Buddhist Sangha",
+    "state": "NV",
+    "action": "added",
+    "id": "wiki-41f2a0f15fb0"
+  },
+  {
+    "name": "Empty Cloud Monastery",
+    "state": "NJ",
+    "action": "matched",
+    "id": "osm-node-8026607841"
+  },
+  {
+    "name": "Seabrook Buddhist Temple",
+    "state": "NJ",
+    "action": "added",
+    "id": "wiki-b26509442e5c"
+  },
+  {
+    "name": "So Shim Sa Zen Center",
+    "state": "NJ",
+    "action": "added",
+    "id": "wiki-6a6f622e5a3c"
+  },
+  {
+    "name": "Hokoji Zendo",
+    "state": "NM",
+    "action": "added",
+    "id": "wiki-b28b7bfc3ddd"
+  },
+  {
+    "name": "Kagyu Shenpen Kunchab",
+    "state": "NM",
+    "action": "matched",
+    "id": "osm-way-341359732"
+  },
+  {
+    "name": "Upaya Institute and Zen Center",
+    "state": "NM",
+    "action": "matched",
+    "id": "osm-way-997959062"
+  },
+  {
+    "name": "Zuni Mountain Stupa",
+    "state": "NM",
+    "action": "added",
+    "id": "wiki-25368e471b16"
+  },
+  {
+    "name": "Blue Cliff Monastery",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-node-8780238308"
+  },
+  {
+    "name": "Chapin Mill Buddhist Retreat Center",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-relation-10352471"
+  },
+  {
+    "name": "Chogye International Zen Center",
+    "state": "NY",
+    "action": "added",
+    "id": "wiki-fd2ff61d8faa"
+  },
+  {
+    "name": "Chuang Yen Monastery",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-node-600622961"
+  },
+  {
+    "name": "Dai Bosatsu Zendo Kongo-ji",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-way-972661938"
+  },
+  {
+    "name": "Karma Triyana Dharmachakra",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-way-233883909"
+  },
+  {
+    "name": "Mahamevnawa Buddhist Meditation Center of New York",
+    "state": "NY",
+    "action": "added",
+    "id": "wiki-2f7a11ba5a64"
+  },
+  {
+    "name": "New York Buddhist Church",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-node-357620590"
+  },
+  {
+    "name": "New York Mahayana Temple",
+    "state": "NY",
+    "action": "added",
+    "id": "wiki-6593f2a281d1"
+  },
+  {
+    "name": "New York Zendo Shobo-Ji",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-node-8832589721"
+  },
+  {
+    "name": "Palden Padma Samye Ling",
+    "state": "NY",
+    "action": "added",
+    "id": "wiki-e3748a2582f3"
+  },
+  {
+    "name": "Rochester Zen Center",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-node-5511503633"
+  },
+  {
+    "name": "Shi Yan Ming",
+    "action": "skipped-person-not-place"
+  },
+  {
+    "name": "Vajiradhammapadip Temple",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-way-1314034150"
+  },
+  {
+    "name": "Village Zendo",
+    "state": "NY",
+    "action": "added",
+    "id": "wiki-522046f4f085"
+  },
+  {
+    "name": "Zen Center of Syracuse",
+    "state": "NY",
+    "action": "added",
+    "id": "wiki-8fe6981a169f"
+  },
+  {
+    "name": "Zen Mountain Monastery",
+    "state": "NY",
+    "action": "matched",
+    "id": "osm-way-1010825400"
+  },
+  {
+    "name": "Wat Carolina Buddhajakra Vanaram",
+    "state": "NC",
+    "action": "matched",
+    "id": "osm-way-949199026"
+  },
+  {
+    "name": "The Buddhist Temple of Toledo",
+    "state": "OH",
+    "action": "matched",
+    "id": "osm-way-428367730"
+  },
+  {
+    "name": "Cleveland Buddhist Temple",
+    "state": "OH",
+    "action": "added",
+    "id": "wiki-7c073bb2f5fe"
+  },
+  {
+    "name": "Cleveland Buddhist Vihara & Meditation Center",
+    "state": "OH",
+    "action": "added",
+    "id": "wiki-d7e09171c0b2"
+  },
+  {
+    "name": "Great Vow Zen Monastery",
+    "state": "OR",
+    "action": "matched",
+    "id": "osm-way-866362892"
+  },
+  {
+    "name": "Idaho-Oregon Buddhist Temple",
+    "state": "OR",
+    "action": "matched",
+    "id": "osm-node-13207878708"
+  },
+  {
+    "name": "Oregon Buddhist Temple",
+    "state": "OR",
+    "action": "matched",
+    "id": "osm-way-367938803"
+  },
+  {
+    "name": "Chenrezig Tibetan Buddhist Center of Philadelphia",
+    "state": "PA",
+    "action": "matched",
+    "id": "osm-way-673779119"
+  },
+  {
+    "name": "Chùa Bồ Đề",
+    "state": "PA",
+    "action": "matched",
+    "id": "osm-way-456378236"
+  },
+  {
+    "name": "Pittsburgh Buddhist Center",
+    "state": "PA",
+    "action": "added",
+    "id": "wiki-aa122bf395c6"
+  },
+  {
+    "name": "Preah Buddha Rangsey Temple",
+    "state": "PA",
+    "action": "matched",
+    "id": "osm-way-428817650"
+  },
+  {
+    "name": "Wat Khmer Palelai Monastery",
+    "state": "PA",
+    "action": "matched",
+    "id": "osm-way-576007489"
+  },
+  {
+    "name": "Wat Padhammaratana",
+    "state": "PA",
+    "action": "matched",
+    "id": "osm-way-899211199"
+  },
+  {
+    "name": "Zen Center of Pittsburgh",
+    "state": "PA",
+    "action": "matched",
+    "id": "osm-way-550681534"
+  },
+  {
+    "name": "Providence Zen Center",
+    "state": "RI",
+    "action": "added",
+    "id": "wiki-a3f238de0afa"
+  },
+  {
+    "name": "American Bodhi Center",
+    "state": "TX",
+    "action": "matched",
+    "id": "osm-node-11898655993"
+  },
+  {
+    "name": "Chua Buu Mon",
+    "state": "TX",
+    "action": "added",
+    "id": "wiki-96e8d908fcab"
+  },
+  {
+    "name": "Chua Linh-Son Buddhist Temple",
+    "state": "TX",
+    "action": "matched",
+    "id": "osm-way-766562610"
+  },
+  {
+    "name": "Jade Buddha Temple",
+    "state": "TX",
+    "action": "added",
+    "id": "wiki-9b806759730f"
+  },
+  {
+    "name": "Maria Kannon Zen Center",
+    "state": "TX",
+    "action": "added",
+    "id": "wiki-e3b8ac3e6cc4"
+  },
+  {
+    "name": "Wat Buddhananachat of Austin",
+    "state": "TX",
+    "action": "matched",
+    "id": "osm-way-382512288"
+  },
+  {
+    "name": "Vietnamm Buddhist Center - Trung Tâm Phật Giáo Chùa Việt Nam",
+    "state": "TX",
+    "action": "matched",
+    "id": "osm-way-543339368"
+  },
+  {
+    "name": "Honeyville Buddhist Temple",
+    "state": "UT",
+    "action": "added",
+    "id": "wiki-6c166bad4e70"
+  },
+  {
+    "name": "Kanzeon Zen Center",
+    "state": "UT",
+    "action": "added",
+    "id": "wiki-c616da931d96"
+  },
+  {
+    "name": "Ogden Buddhist Church",
+    "state": "UT",
+    "action": "matched",
+    "id": "osm-way-60246660"
+  },
+  {
+    "name": "Salt Lake Buddhist Temple",
+    "state": "UT",
+    "action": "matched",
+    "id": "osm-way-238249913"
+  },
+  {
+    "name": "Ekoji Buddhist Temple",
+    "state": "VA",
+    "action": "matched",
+    "id": "osm-node-356605910"
+  },
+  {
+    "name": "Wat Pasantidhamma",
+    "state": "VA",
+    "action": "matched",
+    "id": "osm-way-943833510"
+  },
+  {
+    "name": "Buddhangkura Buddhist Temple",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-7004774482e0"
+  },
+  {
+    "name": "Chua Lien Hoa",
+    "state": "WA",
+    "action": "matched",
+    "id": "osm-way-617130133"
+  },
+  {
+    "name": "Dai Bai Zan Cho Bo Zen Temple",
+    "state": "WA",
+    "action": "matched",
+    "id": "osm-node-356550320"
+  },
+  {
+    "name": "Ground Zero for Nonviolent Action Peace Pagoda",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-2f28bfcfdb78"
+  },
+  {
+    "name": "Mt. Adams Buddhist Temple",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-bcf55e23ecbf"
+  },
+  {
+    "name": "Nalanda Institute",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-a9ef25654a84"
+  },
+  {
+    "name": "Olympia Zen Center",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-00d4dea44b15"
+  },
+  {
+    "name": "Open Gate Zendo",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-3fcb4b70f8a7"
+  },
+  {
+    "name": "Pacific Hermitage",
+    "state": "WA",
+    "action": "matched",
+    "id": "osm-node-7006601064"
+  },
+  {
+    "name": "Padma Raja Society",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-41925162d9d2"
+  },
+  {
+    "name": "Seattle Betsuin Buddhist Temple",
+    "state": "WA",
+    "action": "matched",
+    "id": "osm-way-228732859"
+  },
+  {
+    "name": "Spokane Buddhist Church",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-a0fdcb105f81"
+  },
+  {
+    "name": "Sravasti Abbey",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-2bd8bc7a4136"
+  },
+  {
+    "name": "Tacoma Buddhist Temple",
+    "state": "WA",
+    "action": "matched",
+    "id": "osm-way-627649480"
+  },
+  {
+    "name": "Tushita Kadampa Buddhist Center",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-a6cac33cf086"
+  },
+  {
+    "name": "White River Buddhist Temple",
+    "state": "WA",
+    "action": "matched",
+    "id": "osm-way-499810142"
+  },
+  {
+    "name": "Yakima Buddhist Church",
+    "state": "WA",
+    "action": "added",
+    "id": "wiki-1908aa934bba"
+  },
+  {
+    "name": "Deer Park Buddhist Center and Monastery",
+    "state": "WI",
+    "action": "matched",
+    "id": "osm-way-1221349815"
+  },
+  {
+    "name": "Sotekizan Korinzenji",
+    "state": "WI",
+    "action": "added",
+    "id": "wiki-162b4ca283aa"
+  }
+]

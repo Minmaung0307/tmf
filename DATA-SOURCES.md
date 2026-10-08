@@ -57,3 +57,35 @@ This rebuilds the bundled snapshot without network calls. For a future refresh, 
 Leaflet 1.9.4 is bundled under its BSD-2-Clause licence (`public/vendor/leaflet/LICENSE`). OSM tiles are requested only on explicit map display, using the published HTTPS tile URL, browser caching and visible attribution. Tiles are not bundled, prefetched, or saved by the service worker. Tile URL is configurable in `public/config.js`.
 
 https://operations.osmfoundation.org/policies/tiles/
+
+
+## v5.3.5 tradition corrections
+Evidence links for the three corrected records are saved in scripts/tradition-overrides.json and each record’s traditionSource. Tradition tagging remains incomplete; unknown records are not assigned a guessed tradition. USA was removed from the tradition selector because this directory covers US locations. State filtering is tested against every populated state and each available tradition.
+
+
+## v5.3.8 coverage audit (2026-10-08)
+The saved OSM extract contains no Nashville-area records; state filtering cannot retrieve missing source records. Added six independently sourced records, retained in scripts/official-places.json: Nashville Buddhist Temple, Dhamma Viman, Dhammikarama, Serenity Insight Meditation Center, Charlotte Myanmar Buddhist Association (organization only), and Asokarama Michigan. Each record links its source; historical address caveats are displayed on cards. No map coordinates were guessed. Three NC Myanmar monasteries are now included, not a claim that NC only has three. The user's seven-monastery list remains to be reconciled when names are available. Nationwide Myanmar monastery coverage is still incomplete.
+
+
+## v5.3.9 Wikipedia reconciliation
+Source: https://en.wikipedia.org/w/index.php?title=List_of_Buddhist_temples_in_the_United_States&oldid=1367143141 (Wikipedia contributors, CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/). Reviewed 2026-10-08. The state-section lists contained 170 entries: 83 mapped to existing places (including alternate names), 86 added, and one person (Shi Yan Ming) excluded. Captions were not imported as separate records. This is not a nationwide completeness claim.
+
+Adaptations: names and city/state facts normalized into the directory schema; no article prose or images copied. Imported street addresses, coordinates and unsupported traditions remain blank. The imported/alias dataset is retained in scripts/wikipedia-updates.json with CC BY-SA 4.0 attribution here and a source link in the UI. The audit trail is scripts/wikipedia-review.json. Original OSM records retain their ODbL attribution; this does not relicense OSM data.
+
+Fresno's historic Kern Street site was corrected to Mrauk Oo Dhamma Center using https://www.mraukoo.org/copy-of-about-us and https://www.mraukoo.org/about-us. This is distinct from the relocated Fresno Betsuin congregation. The Wikipedia list contains few NC entries and does not resolve the user's seven NC monastery names.
+
+
+## Sitagu 2024 US directory reconciliation — v5.4.0
+
+Source: [Directory of Myanmar Monasteries, sixth edition (2024)](https://sitaguaustin.wordpress.com/wp-content/uploads/2024/05/directory-book.pdf), published by Sitagu. The US section contains 153 numbered entries in 30 states. Reviewed 2026-10-08.
+
+- 136 new institutional records; 15 existing records enriched with aliases, Myanmar tradition and monastery categories.
+- One duplicate Sitagu Austin record removed, retaining mapped coordinates.
+- 2 entries (#78, #127) remain pending: the directory gives monks' names but no institution name. They are not published as invented institutions.
+- Total directory: 1,025 records. NC has 10 Myanmar monastery/meditation-center records.
+- Source-only additions clearly say that their 2024 address/current visiting arrangements have not been independently reconfirmed. No coordinates, personal telephone numbers or emails were guessed/imported.
+- Existing verified addresses take priority. #148's conflicting source postcode was not imported. #137's incomplete street address was omitted. #113 has two source addresses and a confirmation note.
+- Azusa is also corroborated by https://vaddhana.dhamma.org/offsite/Azusa.html and indexed as Brahma Vihara, Thondrarama Brahma Vihara, Progressive Buddhist Association, အဇူဇာကျောင်း and ဗြဟ္မဝိဟာရ.
+- `scripts/sitagu-2024-review.json` accounts for all 153 entries; `scripts/sitagu-2024-updates.json` preserves additions during rebuilds. Source PDF is not redistributed.
+
+Coverage is broader, not a claim to list every currently operating monastery. The directory includes Myanmar-associated Mon and Karen communities and meditation institutions; the Myanmar filter is a community/tradition grouping, not a nationality claim about every member.
