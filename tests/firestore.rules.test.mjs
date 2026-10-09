@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import {test,after} from 'node:test';
 import {initializeTestEnvironment,assertSucceeds,assertFails} from '@firebase/rules-unit-testing';
-import {doc,setDoc,getDoc,getDocs,collection,query,where,limit,updateDoc,deleteDoc,serverTimestamp,writeBatch,getCountFromServer,Timestamp} from 'firebase/firestore';
+import {doc,setDoc,getDoc,getDocs,collection,query,where,limit,updateDoc,deleteDoc,serverTimestamp,writeBatch,getCountFromServer,Timestamp,onSnapshot} from 'firebase/firestore';
 const env=await initializeTestEnvironment({projectId:'demo-tmf-security',firestore:{host:'127.0.0.1',port:8085,rules:await readFile(new URL('../firestore.rules',import.meta.url),'utf8')}});
 after(()=>env.cleanup());
 const context=(email,extra={})=>env.authenticatedContext(email,{email,email_verified:true,firebase:{sign_in_provider:'google.com'},auth_time:Math.floor(Date.now()/1000),...extra}).firestore();
@@ -18,7 +18,7 @@ test('both verified Google admins can create; public only sees published',async(
 });
 test('public, stranger, unverified, password provider, stale login cannot write',async()=>{
  const email='minmaung0307@gmail.com';
- for(const db of [anon,context('stranger@gmail.com'),context(email,{email_verified:false}),context(email,{firebase:{sign_in_provider:'password'}}),context(email,{auth_time:Math.floor(Date.now()/1000)-1800})])await assertFails(setDoc(doc(db,'tmf_events','blocked'),event(email)));
+ for(const db of [anon,context('stranger@gmail.com'),context(email,{email_verified:false}),context(email,{firebase:{sign_in_provider:'password'}})])await assertFails(setDoc(doc(db,'tmf_events','blocked'),event(email)));
 });
 test('schema, ownership attribution and timestamps enforced',async()=>{
  for(const extra of [{injected:'bad'},{link:'javascript:alert(1)'},{updatedBy:'spoof'},{status:'public'},{description:'a'.repeat(4001)}])await assertFails(setDoc(doc(admin,'tmf_events','invalid'),{...event('minmaung0307@gmail.com'),...extra}));
@@ -70,6 +70,7 @@ test('private inbox owner access, no public listing, no forged sender or self-ap
  await assertSucceeds(getDoc(doc(sender,'tmf_submissions',uid)));await assertSucceeds(getDoc(doc(admin,'tmf_submissions',uid)));await assertFails(getDoc(doc(other,'tmf_submissions',uid)));await assertFails(getDocs(query(collection(sender,'tmf_submissions'),limit(25))));
  await assertFails(setDoc(doc(other,'tmf_submissions',uid),data));await assertFails(setDoc(doc(sender,'tmf_submissions',uid),data));await assertFails(updateDoc(doc(sender,'tmf_submissions',uid),{status:'reviewed',reviewedAt:serverTimestamp()}));
  await assertSucceeds(updateDoc(doc(admin,'tmf_submissions',uid),{status:'reviewed',reviewedAt:serverTimestamp()}));await assertFails(updateDoc(doc(admin,'tmf_submissions',uid),{message:'Overwrite sender text'}));
+ await assertSucceeds(updateDoc(doc(admin,'tmf_submissions',uid),{status:'reviewed',reviewedAt:serverTimestamp(),publicationId:'published-test',publicationCollection:'tmf_events'}));await assertFails(updateDoc(doc(sender,'tmf_submissions',uid),{publicationId:'forged',publicationCollection:'tmf_events'}));await assertFails(updateDoc(doc(admin,'tmf_submissions',uid),{status:'reviewed',reviewedAt:serverTimestamp(),publicationId:'private',publicationCollection:'tmf_privacy_requests'}));
  await env.withSecurityRulesDisabled(async c=>updateDoc(doc(c.firestore(),'tmf_submissions',uid),{createdAt:Timestamp.fromMillis(Date.now()-61000)}));await assertSucceeds(setDoc(doc(sender,'tmf_submissions',uid),{...data,subject:'Second submission'}));
  await assertSucceeds(deleteDoc(doc(admin,'tmf_submissions',uid)));
 });
@@ -86,3 +87,18 @@ test('privacy request remains private and separate from a pending community sugg
  const data={type:'tmf-suggestion',from_name:'Requester',subject:'Request',temple_name:'',city_state:'',place_category:'monastery',address:'',public_phone:'',hours:'',event_type:'',link:'',event_start:'',event_end:'',message:'Please review',reply_to:uid,ownerUid:uid,status:'pending',createdAt:serverTimestamp()};
  await assertSucceeds(setDoc(doc(db,'tmf_submissions',uid),data));await assertSucceeds(setDoc(doc(db,'tmf_privacy_requests',uid),{...data,type:'tmf-privacy-request'}));await assertSucceeds(getDoc(doc(db,'tmf_privacy_requests',uid)));await assertSucceeds(getDocs(query(collection(admin,'tmf_privacy_requests'),limit(25))));await assertFails(getDoc(doc(other,'tmf_privacy_requests',uid)));await assertFails(getDoc(doc(anon,'tmf_privacy_requests',uid)));await assertFails(setDoc(doc(db,'tmf_privacy_requests',uid),{...data,type:'tmf-privacy-request'}));await assertSucceeds(updateDoc(doc(admin,'tmf_privacy_requests',uid),{status:'reviewed',reviewedAt:serverTimestamp()}));
 });
+
+test('public live listener sees publish then deletion without refresh',async()=>{
+ const ref=doc(admin,'tmf_events','live-cycle');let stop;
+ const waitFor=(predicate)=>new Promise((resolve,reject)=>{const timer=setTimeout(()=>{stop?.();reject(Error('Live event timeout'));},7000);stop=onSnapshot(query(collection(anon,'tmf_events'),where('status','==','published'),limit(100)),snap=>{if(predicate(snap)){clearTimeout(timer);stop();resolve();}},reject);});
+ const added=waitFor(snap=>snap.docs.some(d=>d.id==='live-cycle'));
+ await setDoc(ref,event('minmaung0307@gmail.com','published'));await added;
+ const removed=waitFor(snap=>!snap.docs.some(d=>d.id==='live-cycle'));
+ await deleteDoc(ref);await removed;
+});
+test('publish and private submission receipt commit atomically',async()=>{
+ const uid='receipt-owner';await env.withSecurityRulesDisabled(async c=>setDoc(doc(c.firestore(),'tmf_submissions',uid),{status:'pending',createdAt:Timestamp.now(),subject:'Event'}));
+ const batch=writeBatch(admin);batch.set(doc(admin,'tmf_events','receipt-event'),event('minmaung0307@gmail.com','published'));batch.update(doc(admin,'tmf_submissions',uid),{status:'reviewed',reviewedAt:serverTimestamp(),publicationId:'receipt-event',publicationCollection:'tmf_events'});await assertSucceeds(batch.commit());
+});
+
+test('valid admin session older than fifteen minutes can write without reauthentication',async()=>{const db=context('minmaung0307@gmail.com',{auth_time:Math.floor(Date.now()/1000)-3600});const ref=doc(db,'tmf_events','active-older-session');await assertSucceeds(setDoc(ref,event('minmaung0307@gmail.com')));await assertSucceeds(deleteDoc(ref));});

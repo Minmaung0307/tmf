@@ -1,3 +1,67 @@
+## v5.4.8 — Immediate delete confirmation and distinct profile UI
+
+List Delete now opens its modal before loading any editor or photo. It validates the selected record revision before deleting. Inbox label/select spacing and focus appearance are fixed. Place profiles no longer displays the duplicate Events submission inbox; it is dedicated to institution profiles. Existing profile data is retained.
+
+Live public code was verified as v5.4.7 with modal code present. The reported 403 request URL/response is still unknown (admin-places.html is the containing page), so this release does not claim to resolve production Publish denial. No production writes or deployment performed.
+
+Local mocked admin workflow including modal delete passed. Deploy UI: `firebase deploy --only hosting --project tmf-mm`. Use matching packaged firestore.rules if earlier rule changes are not deployed.
+
+## v5.4.7 — No repeat Google popup within an active admin session
+
+Removed per-write auth-age reauthentication from the client and matching 15-minute auth_time write restriction from Firestore rules. Verified Google email allowlist, document validation and ownership rules remain enforced. Explicit sign-out, tab session persistence and 15-minute client inactivity logout remain. Delete modal confirmation now proceeds using the existing valid account. Legacy linking controls are hidden when there are no loaded records.
+
+Deploy BOTH: `firebase deploy --only hosting,firestore:rules --project tmf-mm`. Hosting-only deployment leaves the old server auth-age restriction active. Live permission-denied cause was not independently established; local publish/receipt and older-session tests validate the packaged rules. No production deployment performed.
+
+## v5.4.6 — Live admin inbox, modal deletion and Burmese guide
+
+Admin inbox uses a live Firestore listener (latest 25; older submissions via Load more). Logout detaches it. Delete confirmations use an accessible native HTML dialog with cancel focus. Legacy linking is collapsed under Already published and enabled only after selecting an existing record. Reactions update counts optimistically and roll back on failure. Admin guide is available at public/admin-guide.html and linked from both admin pages.
+
+The existing fresh-auth requirement remains: a Google identity confirmation can be required for sensitive writes; it is now explained before the popup. Do not confuse this with logout. Live permission-denied cause could not be established from the screenshot; packaged rules passed atomic publish+receipt and existing security tests. Deploy matching rules, not hosting alone.
+
+Deploy: `firebase deploy --only hosting,firestore:rules,firestore:indexes --project tmf-mm`.
+
+Validation: 13 Firestore emulator tests; mocked admin modal and community reaction checks passed. No production data modifications or deployment performed.
+
+## v5.4.5 — Live events and live submission status
+
+Public Events subscribes to published Firestore documents. Add, edit, archive and delete changes update the open page without refresh. Static sample/archive fixtures are no longer mixed into the public list. The Refresh events button is removed. Contribution status follows the signed-in user's submission and linked publication automatically; My submission status is hidden. Private privacy-request status remains separate. Missing/archived/deleted publication reads display Removed or unpublished; unknown legacy links are not guessed.
+
+Legacy submissions with no publication reference require the existing inbox Link existing event action once. No historical database records were modified by this release.
+
+Deploy: `firebase deploy --only hosting,firestore:rules,firestore:indexes --project tmf-mm`.
+
+Validation: 30 unit tests, 12 local Firestore emulator tests including independent admin publish/delete and public live listener updates, and browser live-add/remove rendering without navigation. No production deployment or data deletion performed.
+
+## v5.4.4 — Shared tab sign-in and editor lifecycle
+
+Public contributions/reactions and admin now use browser-session persistence and await authentication restoration. A rejected admin access check does not sign the public user out. Public Events no longer advertises an admin publishing button. Reactions immediately show selection, roll back on failure, and keep status space stable. Events loads only when entering its panel, not on unrelated route refreshes.
+
+Successful Save/Publish/Delete closes the form. New, Edit/Publish and Review reopen it. Existing unlinked submissions can be explicitly associated with an existing event/profile via the inbox selector and Link existing button; this does not republish or create a copy. The sender can then use My submission status to see actual publication availability.
+
+Deploy: `firebase deploy --only hosting,firestore:rules --project tmf-mm` (rules unchanged from v5.4.3, included for upgrades).
+
+Validation: 30 unit tests; local mocked admin, inbox and community browser checks passed, including reaction add/remove and hidden-editor behavior. No production writes, deletions or deployment performed.
+
+## v5.4.3 — Publication receipts and submission completion
+
+Deploy BOTH hosting and rules: `firebase deploy --only hosting,firestore:rules --project tmf-mm`.
+
+Successful submissions reset the form/photo; failed sends retain them. Admin saves keep the record ID and revision, preventing repeated Publish from creating a second record. Imported community submissions get a private publication reference in the same transaction as the event/profile save. Sender status checks the referenced publication. Existing unlinked publications require review/linking; they are not guessed or deleted. Matching existing event drafts (same title, organizer, start date) reuse the existing record. Public Events reloads on entry.
+
+Public read-only verification found two published ပဝါရဏာ events, both entered as Kitty Hawk, TX, with different dates. No production records were modified.
+
+Validation: 30 unit tests, 11 Firestore emulator security tests (including receipt restrictions), mocked browser admin and submission/publish checks passed. Production deployment remains pending.
+
+## v5.4.2 — Admin publishing and tab session
+
+Review & publish opens the editor. Publish validates and saves publicly; list rows expose Delete with confirmation. Events/community profiles reuse tab-scoped sign-in, recheck server access on each page, and retain the 15-minute idle logout and fresh-write authentication. Event imports preserve the public address. Reviewed submission status identifies its subject.
+
+Validated locally with mocked cloud/auth: publishing, archive, delete, cross-page session restoration, sign-out and responsive layouts. No production events were created, deleted or published. Deploy hosting only; existing rules remain unchanged.
+
+## v5.4.1 — Event submission shortcuts
+
+Events now links directly to Share an event and Admin publishing. Google sign-in unauthorized-domain must be resolved in Firebase Authentication Settings by adding the actual hosting hostname. No production authentication settings were changed.
+
 # TMF v5.4.0 — Myanmar monastery directory expansion
 
 136 new institutions from Sitagu’s 2024 sixth-edition directory; 15 existing entries enriched; one duplicate removed. 1,025 total directory records. NC now has 10 Myanmar monasteries/meditation centers. Azusa is searchable in English and Burmese.

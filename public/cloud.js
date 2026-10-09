@@ -22,3 +22,8 @@ export async function publishedPlaces(reset=true){
 }
 export async function publicPlace(id){const {db,sdk:s}=await getCloud();const d=await s.getDocFromServer(s.doc(db,'tmf_places',id));if(!d.exists())throw Error('Profile unavailable');const {directoryPlace}=await import('./place-model.js');return directoryPlace(d.id,d.data());}
 export async function coverImage(collection,id){const {db,sdk:s}=await getCloud();const d=await s.getDocFromServer(s.doc(db,'tmf_media',collection+'_'+id));return d.exists()?d.data():null;}
+
+export async function watchPublishedEvents(next,error){
+ const {db,sdk:s}=await getCloud();
+ return s.onSnapshot(s.query(s.collection(db,'tmf_events'),s.where('status','==','published'),s.orderBy('dateStart','desc'),s.limit(100)),snap=>next(snap.docs.map(d=>({id:d.id,...d.data(),sample:false,cloud:true,image:'images/event-placeholder.jpg'}))),error);
+}

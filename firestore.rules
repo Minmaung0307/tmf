@@ -8,7 +8,8 @@ service cloud.firestore {
         && request.auth.token.email in ['minmaung0307@gmail.com', 'panna07@gmail.com'];
     }
     function freshAdmin() {
-      return admin() && request.auth.token.auth_time >= request.time.toMillis() / 1000 - 900;
+      // Verified allowlisted admins may write throughout their valid Firebase session.
+      return admin();
     }
     function text(v, max) { return v is string && v.size() <= max; }
     function imageFields(d) {
@@ -119,7 +120,10 @@ service cloud.firestore {
       allow get: if admin() || (googleUser() && request.auth.uid==uid);
       allow list: if admin() && request.query.limit!=null && request.query.limit<=25;
       allow create: if googleUser() && validSubmission(request.resource.data,uid,'tmf-suggestion');
-      allow update: if (freshAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','reviewedAt'])
+      allow update: if (freshAdmin() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status','reviewedAt','publicationId','publicationCollection'])
+          && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['publicationId','publicationCollection'])
+            || (text(request.resource.data.publicationId,200) && request.resource.data.publicationId.size()>0
+              && request.resource.data.publicationCollection in ['tmf_events','tmf_places']))
           && request.resource.data.status=='reviewed' && request.resource.data.reviewedAt==request.time)
         || (googleUser() && request.auth.uid==uid && resource.data.status=='reviewed'
           && request.time>=resource.data.createdAt+duration.value(60,'s') && validSubmission(request.resource.data,uid,'tmf-suggestion'));

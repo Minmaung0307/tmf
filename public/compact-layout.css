@@ -36,3 +36,5 @@ footer.site-footer{padding:0 40px;background:#f1f3eb}.footer-support{padding:22p
  .footer-bottom{align-items:center;justify-content:center}
  .footer-links{width:100%;justify-content:center}
 }
+
+.reaction-note{min-height:3.5em}.reaction-button{min-width:4.5rem}.reaction-button[aria-pressed="true"]{background:#dce8cf;border-color:#729557;color:#173f35}

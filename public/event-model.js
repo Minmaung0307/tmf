@@ -11,4 +11,4 @@ export function validateEvent(e){
  if(!['draft','published','archived'].includes(e.status))throw Error('Choose a valid publication status.');
  return e;
 }
-export function suggestionToEvent(s){if(!s||s.type!=='tmf-suggestion')throw Error('Choose a TMF suggestion file.');return eventFromForm({title:s.subject,templeName:s.temple_name,city:s.city_state,address:'',state:'',dateStart:s.event_start,dateEnd:s.event_end,link:s.link,description:s.message,status:'draft'});}
+export function suggestionToEvent(s){if(!s||s.type!=='tmf-suggestion')throw Error('Choose a TMF suggestion file.');return eventFromForm({title:s.subject,templeName:s.temple_name,city:String(s.city_state||'').replace(/,?\s+[A-Z]{2}$/, ''),address:s.address||'',state:(String(s.city_state||'').match(/(?:,|\s)\s*([A-Z]{2})$/)||[])[1]||'',dateStart:s.event_start,dateEnd:s.event_end,link:s.link,description:s.message,status:'draft'});}
