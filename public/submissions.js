@@ -6,6 +6,7 @@ const fields={from_name:100,subject:200,temple_name:200,city_state:200,place_cat
 async function sender(){if(!cloudEventsEnabled)throw Error('Online submissions are not enabled yet.');const {auth}=await withTimeout(google(),15000);if(!auth.currentUser)throw Error('Please use Sign in with Google first.');const user=auth.currentUser,token=await withTimeout(user.getIdTokenResult(),10000);if(token.signInProvider!=='google.com'||token.claims.email_verified!==true)throw Error('Please use a verified Google account.');return user;}
 const inboxFor=purpose=>purpose==='privacy'?'tmf_privacy_requests':'tmf_submissions';
 export async function submitSuggestion(values,photo,purpose='community'){
+ if(purpose!=='privacy'&&(values.city!==undefined||values.state!==undefined)){if(!String(values.city||'').trim()||!/^([A-Z]{2})$/.test(values.state||''))throw Error('Enter a city and choose a state.');values={...values,city_state:String(values.city).trim()+', '+values.state};}
  const data={};for(const [field,max]of Object.entries(fields)){data[field]=String(values[field]||'').trim();if(data[field].length>max)throw Error('Please shorten '+field+'.');}if(!data.from_name||!data.subject||!data.message)throw Error('Enter your name, subject and details.');
  if(photo&&(!safeImage(photo.data)||!Number.isInteger(photo.width)||!Number.isInteger(photo.height)||photo.width<1||photo.height<1||photo.width>1200||photo.height>1200))throw Error('Please choose the photo again.');
  const user=await sender(),{db,sdk:s}=await getCloud(),ref=s.doc(db,inboxFor(purpose),user.uid);

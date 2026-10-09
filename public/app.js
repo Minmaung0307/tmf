@@ -3,7 +3,7 @@ import {config} from './config.js';
 import {filterDirectory, validPlace, safeUrl, mapsUrl, matchesEvent, withTimeout} from './search.js';
 const $ = id => document.getElementById(id);
 const states = {AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'District of Columbia',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming'};
-for (const [code,name] of Object.entries(states)) for (const id of ['state','eventState']) $(id).add(new Option(`${name} (${code})`,code));
+for (const [code,name] of Object.entries(states)) for (const id of ['state','eventState','submissionState']) $(id).add(new Option(`${name} (${code})`,code));
 for (let i=1;i<=12;i++) $('eventMonth').add(new Option(new Date(2000,i-1,1).toLocaleString('en-US',{month:'long'}),String(i)));
 function element(tag, className, text) { const el=document.createElement(tag); if(className) el.className=className; if(text!=null) el.textContent=text; return el; }
 function link(text,url,className='') { const a=element('a',className,text); a.href=url; a.target='_blank'; a.rel='noopener noreferrer'; return a; }
@@ -41,13 +41,16 @@ function renderBrowse(){
   group.append(list);const prior=previousGroups[groups.findIndex(g=>g[0]===key)];if(prior){group.open=prior.open;select.value=prior.letter;select.dispatchEvent(new Event('change'));}$('browseGroups').append(group);
  }
 }
-function openPlace(place){
- const card=placeCard(place);const heading=card.querySelector('h3');heading.id='placeDialogTitle';
+async function openPlace(place){
+ const card=placeCard(place,true);const heading=card.querySelector('h3');heading.id='placeDialogTitle';
  card.querySelector('.profile-link')?.remove();$('placeDialogContent').replaceChildren(card);
  if(place.community){if(place.description)$('placeDialogContent').append(element('p','profile-story',place.description));if(place.hours){$('placeDialogContent').append(element('h3','','Visiting & opening hours'),element('p','profile-story',place.hours));}$('placeDialogContent').append(element('p','subtle','Community-submitted profile · reviewed by the site administrator. Confirm visiting arrangements directly.'));}
  const share=button('Copy profile link',async()=>{const url=new URL('./',location.href);url.searchParams.set('place',place.id);url.hash='discover';try{await navigator.clipboard.writeText(url.href);share.textContent='Link copied ✓';}catch{const input=element('input','share-url');input.readOnly=true;input.value=url.href;$('placeDialogContent').append(input);input.select();share.textContent='Copy the link below';}});$('placeDialogContent').append(share);
  if(place.aliases?.length)$('placeDialogContent').append(element('p','dialog-aliases',place.aliases.join(' · ')));
  $('placeDialog').showModal();document.body.classList.add('place-dialog-open');
+ const url=new URL('./',location.href);url.searchParams.set('place',place.id);url.hash='discover';
+ try{const {default:qrcode}=await import('./vendor/qr/qrcode.js');const qr=qrcode(0,'M');const clean=v=>String(v||'').replace(/[\r\n]/g,' ').replace(/[,;]/g,' ');qr.addData(['BEGIN:VCARD','VERSION:3.0','FN:'+clean(place.name),'ORG:'+clean(place.name),place.phone?'TEL:'+clean(place.phone):'',place.email?'EMAIL:'+clean(place.email):'',place.address?'ADR:;;'+clean(place.address)+';;;;':'',place.website?'URL:'+clean(place.website):'','NOTE:'+url.href,'END:VCARD'].filter(Boolean).join('\r\n'));qr.make();const img=element('img','event-qr');img.alt='Scan contact details for '+place.name;img.src=qr.createDataURL(5,20);if(card.isConnected)card.append(img,element('p','subtle','Scan to save contact details'));}catch{}
+
 }
 $('closePlaceDialog').addEventListener('click',()=>$('placeDialog').close());
 $('placeDialog').addEventListener('close',()=>{document.body.classList.remove('place-dialog-open');$('placeDialogContent').replaceChildren();});
@@ -96,14 +99,27 @@ function renderResults(){
  const row=element('div','pagination');const prev=button('← Previous',()=>{pageNumber--;renderResults();$('resultTitle').scrollIntoView({block:'start'});});prev.disabled=pageNumber===0;const next=button('Next →',()=>{pageNumber++;renderResults();$('resultTitle').scrollIntoView({block:'start'});});next.disabled=start+PAGE_SIZE>=lastPlaces.length;
  row.append(prev,element('span','subtle',`${start+1}–${Math.min(start+PAGE_SIZE,lastPlaces.length)} of ${lastPlaces.length}`),next);$('pagination').append(row);
 }
-function placeCard(p){
- const card=element('article','place-card tone-'+(p.categories.includes('organization')?'organization':p.categories.includes('monastery')?'monastery':'temple'));if(p.hasPhoto&&p.cloudId){const photo=element('img','profile-cover');photo.src='images/event-placeholder.jpg';photo.alt=p.imageAlt||p.name;photo.loading='lazy';card.append(photo);lazyCover(photo,'tmf_places',p.cloudId);}card.append(element('div','place-icon',p.categories.includes('organization')?'◇':'⌂'),element('h3','',p.name),element('p','address',p.address||[p.city,p.stateName||p.state].filter(Boolean).join(', ')||'Street address not recorded'));
+function placeGallery(p){
+ const gallery=element('div','place-gallery');gallery.setAttribute('aria-label',p.name+' photos');
+ const photos=(p.photos||[]).map(photo=>typeof photo==='string'?photo:photo.url).filter(url=>typeof url==='string'&&url.startsWith('images/'));
+ if(p.hasPhoto&&p.cloudId){const img=element('img','profile-cover');img.alt=p.imageAlt||p.name;img.src='images/event-placeholder.jpg';gallery.append(img);lazyCover(img,'tmf_places',p.cloudId);}
+ for(const url of photos){const img=element('img');img.src=url;img.alt=p.name;img.loading='lazy';gallery.append(img);}
+ if(!gallery.children.length){const kind=p.categories.includes('organization')?'social':p.categories.includes('monastery')?'temple':'pagoda';const art=element('img','place-symbol');art.src='icons/'+kind+'.svg';art.alt=kind;gallery.classList.add('icon-only');gallery.append(art);}else if(gallery.children.length>1){gallery.tabIndex=0;gallery.setAttribute('aria-label','Swipe left or right to browse photos of '+p.name);gallery.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();gallery.scrollBy({left:gallery.clientWidth*(e.key==='ArrowLeft'?-1:1),behavior:'smooth'});}});}
+ return gallery;
+}
+const viewControls=element('div','directory-view-controls');viewControls.setAttribute('aria-label','Result layout');
+$('templeList').classList.add('list-view');
+for(const [value,label] of [['list','☰ List'],['grid','▦ Grid']]){const control=button(label,()=>{ $('templeList').classList.toggle('list-view',value==='list');for(const b of viewControls.children)b.setAttribute('aria-pressed',String(b===control));},'secondary');control.setAttribute('aria-pressed',String(value==='list'));viewControls.append(control);}
+$('templeList').before(viewControls);
+function placeCard(p,details=false){
+ const card=element('article','place-card tone-'+(p.categories.includes('organization')?'organization':p.categories.includes('monastery')?'monastery':'temple'));card.append(placeGallery(p));
+ const title=element('h3','',p.name);if(!details){const open=button(p.name,()=>openPlace(p),'place-open');open.setAttribute('aria-haspopup','dialog');title.replaceChildren(open);card.addEventListener('click',e=>{if(!e.target.closest('a,button,img'))openPlace(p);});}card.append(title,element('p','address',p.address||[p.city,p.stateName||p.state].filter(Boolean).join(', ')||'Street address not recorded'));
  card.append(element('span','subtle',p.categories.map(c=>({monastery:'Monastery',temple:'Temple / pagoda',organization:'Myanmar organization'}[c])).join(' · ')));
  const actions=element('div','card-actions');
  actions.append(link('Directions ↗',mapsUrl(p.name+' '+(p.address||[p.city,p.stateName,'USA'].filter(Boolean).join(' ')))));
  if(safeUrl(p.website))actions.append(link('Website ↗',safeUrl(p.website)));
- if(p.phone){const phone=element('a','','Call');phone.href='tel:'+p.phone.replace(/[^+\d]/g,'');if(/[0-9]/.test(phone.href))actions.append(phone);}
- if(p.community)actions.append(button('View profile',()=>openPlace(p),'profile-link'));card.append(actions);
+ if(p.email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email)){const mail=element('a','',p.email);mail.href='mailto:'+p.email;actions.append(mail);}if(p.phone){const phone=element('a','',p.phone);phone.href='tel:'+p.phone.replace(/[^+\d]/g,'');if(/[0-9]/.test(phone.href))actions.append(phone);}
+ if(!details){if(p.phone)card.append(element('p','subtle',p.phone));if(p.website)card.append(element('p','subtle',p.website.replace(/^https?:\/\//,'')));if(p.hours)card.append(element('p','subtle',p.hours));return card;}card.append(actions);
  if(p.verificationNote)card.append(element('p','directory-note',p.verificationNote));
  if(safeUrl(p.source))card.append(link(p.sourceType==='official'?'Official source ↗':p.sourceType==='osm'?'OpenStreetMap record ↗':p.sourceType==='wikipedia'?'Wikipedia source ↗':'Directory source ↗',safeUrl(p.source),'subtle'));
  return card;
@@ -126,15 +142,16 @@ $('search').addEventListener('input',scheduleSearch);
 $('searchForm').addEventListener('submit',e=>{e.preventDefault();clearTimeout(searchTimer);runSearch();});
 document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;syncCategory();runSearch();}));
 $('state').addEventListener('change',runSearch);$('tradition').addEventListener('change',runSearch);$('resetFilters').addEventListener('click',reset);$('mapToggle').addEventListener('click',showMap);
+let eventLinkOpened=false;
 let eventsData=[],eventsLoaded=false,eventLoadVersion=0,stopEvents;
 async function loadEvents(){
  if(eventsLoaded)return;eventsLoaded=true;
  $('eventCloudStatus').textContent='Connecting to live events…';
- try{const cloud=await import('./cloud.js');stopEvents=await cloud.watchPublishedEvents(live=>{eventsData=live;renderEvents();$('eventCloudStatus').textContent='Live updates · '+live.length+' published events';},()=>{eventsData=[];renderEvents();$('eventCloudStatus').textContent='Connection interrupted. Reconnecting…';eventsLoaded=false;setTimeout(()=>{if(!eventsLoaded)loadEvents();},5000);});}
+ try{const cloud=await import('./cloud.js');stopEvents=await cloud.watchPublishedEvents(live=>{if(JSON.stringify(eventsData)!==JSON.stringify(live)){eventsData=live;renderEvents();}const requested=params.get('event');if(requested&&!eventLinkOpened){const event=live.find(e=>e.id===requested);eventLinkOpened=true;if(event)openEvent(event);else cloud.publicEvent(requested).then(openEvent).catch(()=>{$('eventCloudStatus').textContent='This shared event is unavailable or no longer published.';});}$('eventCloudStatus').textContent='Live updates · '+live.length+' published events';},()=>{eventsData=[];renderEvents();$('eventCloudStatus').textContent='Connection interrupted. Reconnecting…';eventsLoaded=false;setTimeout(()=>{if(!eventsLoaded)loadEvents();},5000);});}
  catch{eventsLoaded=false;$('eventCloudStatus').textContent='Events unavailable. Check your connection.';}
 }
 window.addEventListener('online',()=>{if(!eventsLoaded)loadEvents();});
-function renderEvents(){const filtered=eventsData.filter(e=>matchesEvent(e,{query:$('eventSearch').value,month:$('eventMonth').value,state:$('eventState').value,period:$('eventPeriod').value})).sort((a,b)=>String(b.dateStart).localeCompare(String(a.dateStart)));$('eventCount').textContent=`${filtered.length} event${filtered.length===1?'':'s'}`;$('eventGrid').replaceChildren();if(!filtered.length){$('eventGrid').append(empty('No matching events','Try another month, state, or date range.',[button('Clear event filters',resetEvents)]));return;}for(const e of filtered){const card=element('article','event-card');const img=element('img');img.src=e.image?.startsWith('images/')?e.image:'images/event-placeholder.jpg';img.alt='';img.loading='lazy';img.onerror=()=>{img.onerror=null;img.src='images/event-placeholder.jpg';};if(e.cloud&&e.hasPhoto){img.alt=e.imageAlt||e.title;lazyCover(img,'tmf_events',e.id);}const body=element('div','event-body');body.append(element('span','tag',e.sample?'Sample · archive':(e.dateEnd||e.dateStart)<new Date().toLocaleDateString('en-CA')?'Past event':'Community event'),element('h3','',e.title),element('p','',e.dateStart+(e.dateEnd!==e.dateStart?' — '+e.dateEnd:'')),element('p','',e.templeName),element('p','',[e.city,e.state].filter(Boolean).join(', ')),element('p','',e.address));if(e.description)body.append(element('p','event-description',e.description));const u=safeUrl(e.link);if(u&&!new URL(u).hostname.match(/(^|\.)example\.(org|com|net)$/))body.append(link('Event details ↗',u,'secondary'));if(e.cloud)body.append(reactions(e.id));card.append(img,body);$('eventGrid').append(card);}}
+function renderEvents(){const filtered=eventsData.filter(e=>matchesEvent(e,{query:$('eventSearch').value,month:$('eventMonth').value,state:$('eventState').value,period:$('eventPeriod').value})).sort((a,b)=>String(b.dateStart).localeCompare(String(a.dateStart)));$('eventCount').textContent=`${filtered.length} event${filtered.length===1?'':'s'}`;$('eventGrid').replaceChildren();if(!filtered.length){$('eventGrid').append(empty('No matching events','Try another month, state, or date range.',[button('Clear event filters',resetEvents)]));return;}for(const e of filtered){const card=element('article','event-card');const img=element('img');img.src=e.image?.startsWith('images/')?e.image:'images/event-placeholder.jpg';img.alt='';img.loading='lazy';img.onerror=()=>{img.onerror=null;img.src='images/event-placeholder.jpg';};if(e.cloud&&e.hasPhoto){img.alt=e.imageAlt||e.title;lazyCover(img,'tmf_events',e.id);}const body=element('div','event-body');body.append(element('span','tag',e.sample?'Sample · archive':(e.dateEnd||e.dateStart)<new Date().toLocaleDateString('en-CA')?'Past event':'Community event'),element('h3','',e.title),element('p','',e.dateStart+(e.dateEnd!==e.dateStart?' — '+e.dateEnd:'')),element('p','',e.templeName),element('p','',[e.city,e.state].filter(Boolean).join(', ')),element('p','',e.address));if(e.description)body.append(element('p','event-description',e.description));const u=safeUrl(e.link);if(u&&!new URL(u).hostname.match(/(^|\.)example\.(org|com|net)$/))body.append(link('Organizer website ↗',u,'subtle'));body.append(button('Event details',()=>openEvent(e)));if(e.cloud)body.append(reactions(e.id));card.append(img,body);$('eventGrid').append(card);}}
 function resetEvents(){for(const id of ['eventSearch','eventMonth','eventState'])$(id).value='';$('eventPeriod').value='all';renderEvents();}
 for(const id of ['eventSearch','eventMonth','eventState','eventPeriod'])$(id).addEventListener(id==='eventSearch'?'input':'change',renderEvents);$('resetEvents').addEventListener('click',resetEvents);
 // Payment destinations are supplied by the site owner; never invent a recipient or payment URL.
@@ -154,7 +171,7 @@ function renderSupport(){
 renderSupport();
 
 let profilesLoading=false;let baseDirectory;let communityProfiles=[];
-async function refreshProfiles(more=false){if(profilesLoading)return;profilesLoading=true;$('refreshProfiles').disabled=true;try{await loadDirectory();baseDirectory||=[...directory];const cloud=await import('./cloud.js');if(!cloud.cloudEventsEnabled)return;const places=await withTimeout(cloud.publishedPlaces(!more),10000);communityProfiles=more?[...new Map([...communityProfiles,...places].map(p=>[p.id,p])).values()]:places;directory=[...baseDirectory,...communityProfiles];$('moreProfiles').hidden=places.length<100;browseReady=false;renderBrowse();await runSearch();$('profileCloudStatus').textContent=`${communityProfiles.length} community profiles loaded, alongside the original directory.`;}catch{$('profileCloudStatus').textContent='Community profiles are temporarily unavailable. The original directory still works.';}finally{profilesLoading=false;$('refreshProfiles').disabled=false;}}
+async function refreshProfiles(more=false){if(profilesLoading)return;profilesLoading=true;$('refreshProfiles').disabled=true;try{await loadDirectory();baseDirectory||=[...directory];const cloud=await import('./cloud.js');if(!cloud.cloudEventsEnabled)return;const places=await withTimeout(cloud.publishedPlaces(!more),10000);communityProfiles=more?[...new Map([...communityProfiles,...places].map(p=>[p.id,p])).values()]:places;const overrides=new Map(communityProfiles.filter(p=>p.cloudId?.startsWith('directory-')).map(p=>[p.cloudId.slice(10),p]));directory=[...baseDirectory.map(p=>overrides.has(p.id)?{...p,...overrides.get(p.id),id:p.id,source:p.source,sourceType:p.sourceType}:p),...communityProfiles.filter(p=>!p.cloudId?.startsWith('directory-'))];$('moreProfiles').hidden=places.length<100;browseReady=false;renderBrowse();await runSearch();$('profileCloudStatus').textContent=`${communityProfiles.length} community profiles loaded, alongside the original directory.`;}catch{$('profileCloudStatus').textContent='Community profiles are temporarily unavailable. The original directory still works.';}finally{profilesLoading=false;$('refreshProfiles').disabled=false;}}
 $('refreshProfiles').addEventListener('click',()=>refreshProfiles());$('moreProfiles').addEventListener('click',()=>refreshProfiles(true));
 window.addEventListener('hashchange',route);route();runSearch().then(async()=>{await refreshProfiles();const requested=params.get('place');if(!requested)return;let p=directory.find(p=>p.id===requested);try{if(!p&&requested.startsWith('community-')){const cloud=await import('./cloud.js');p=await withTimeout(cloud.publicPlace(requested.slice(10)),10000);}if(p)openPlace(p);else throw Error('Missing profile');}catch{$('profileCloudStatus').textContent='This profile is unavailable or no longer published.';}});
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
@@ -165,3 +182,18 @@ $('clearSuggestionPhoto').addEventListener('click',()=>{suggestionPhotoVersion++
 
 import {initContribution} from './contribution.js';
 initContribution({getPhoto:()=>suggestionPhoto,purpose:params.get('request')});
+
+async function openEvent(e){
+ const dialog=element('dialog','event-details-dialog');dialog.setAttribute('aria-labelledby','eventDetailTitle');
+ const title=element('h2','',e.title);title.id='eventDetailTitle';const close=button('Close ×',()=>dialog.close());
+ dialog.append(close,title);if(e.hasPhoto){const img=element('img','event-modal-photo');img.alt=e.imageAlt||e.title;img.src='images/event-placeholder.jpg';dialog.append(img);lazyCover(img,'tmf_events',e.id);}
+ const details=[['Organizer',e.templeName],['Dates',e.dateStart+(e.dateEnd&&e.dateEnd!==e.dateStart?' — '+e.dateEnd:'')],['Location',[e.city,e.state].filter(Boolean).join(', ')],['Address',e.address],['Details',e.description]];
+ for(const [label,value] of details)if(value){dialog.append(element('h3','',label),element('p','event-detail-text',value));}
+ const website=safeUrl(e.link);if(website)dialog.append(link('Organizer website ↗',website,'secondary'));
+ const url=new URL(location.pathname,location.origin);url.searchParams.set('event',e.id);url.hash='events';
+ const sharing=element('section','event-sharing');sharing.append(element('h3','','Share this event'));
+ const input=element('input');input.readOnly=true;input.value=url.href;input.setAttribute('aria-label','Event share link');input.onclick=()=>input.select();
+ const notice=element('p','subtle');notice.setAttribute('role','status');sharing.append(input,button('Copy link',async()=>{try{await navigator.clipboard.writeText(url.href);notice.textContent='Link copied.';}catch{input.focus();input.select();notice.textContent='Select and copy the link above.';}}),button('Copy details',async()=>{try{await navigator.clipboard.writeText([e.title,...details.filter(x=>x[1]).map(x=>x[0]+': '+x[1]),website||'',url.href].join('\n'));notice.textContent='Details copied.';}catch{notice.textContent='You can select and copy the event text.';}}),notice);dialog.append(sharing);
+ dialog.addEventListener('close',()=>dialog.remove(),{once:true});document.body.append(dialog);dialog.showModal();close.focus();
+ try{const {default:qrcode}=await import('./vendor/qr/qrcode.js');const qr=qrcode(0,'M');qr.addData(url.href);qr.make();const img=element('img','event-qr');img.alt='Scan to open this event';img.src=qr.createDataURL(5,20);sharing.append(img);}catch{notice.textContent='QR unavailable. Use the share link.';}
+}

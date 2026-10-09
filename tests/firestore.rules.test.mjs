@@ -48,20 +48,28 @@ test('optimized media is atomic, bounded, private for drafts; public cannot uplo
  await assertFails(updateDoc(m,{width:9999,updatedAt:serverTimestamp()}));
  await assertSucceeds(updateDoc(e,{status:'archived',updatedAt:serverTimestamp()}));await assertFails(getDoc(doc(anon,'tmf_media','tmf_events_photo')));
 });
-test('one reaction per Google uid, anti-spoof, cooldown, public counts and archive isolation',async()=>{
+test('each Google user can give all three once; duplicates, removal and spoofing fail',async()=>{
  const owner='visitor@gmail.com',visitor=context(owner),other=context('other@gmail.com');
- await assertSucceeds(setDoc(doc(admin,'tmf_events','react'),event('minmaung0307@gmail.com','published')));
- const ref=doc(visitor,'tmf_events','react','reactions',owner),reaction={emoji:'heart',updatedAt:serverTimestamp()};
- await assertFails(setDoc(doc(anon,'tmf_events','react','reactions','anon'),reaction));
- await assertSucceeds(setDoc(ref,reaction));await assertFails(setDoc(ref,{emoji:'prayer',updatedAt:serverTimestamp()}));
- await assertFails(setDoc(doc(other,'tmf_events','react','reactions',owner),reaction));
- await assertFails(setDoc(doc(context('bad@gmail.com',{email_verified:false}),'tmf_events','react','reactions','bad@gmail.com'),reaction));
- await assertFails(setDoc(doc(other,'tmf_events','react','reactions','other@gmail.com'),{...reaction,count:999}));
- const count=await assertSucceeds(getCountFromServer(query(collection(anon,'tmf_events','react','reactions'),where('emoji','==','heart'))));if(count.data().count!==1)throw Error('Incorrect reaction count');
- await env.withSecurityRulesDisabled(async c=>updateDoc(doc(c.firestore(),'tmf_events','react','reactions',owner),{updatedAt:Timestamp.fromMillis(Date.now()-10000)}));
- await assertSucceeds(setDoc(ref,{emoji:'none',updatedAt:serverTimestamp()}));
- const zero=await getCountFromServer(query(collection(anon,'tmf_events','react','reactions'),where('emoji','==','heart')));if(zero.data().count!==0)throw Error('Removal failed');
- await assertSucceeds(updateDoc(doc(admin,'tmf_events','react'),{status:'archived',updatedAt:serverTimestamp()}));await assertFails(getDocs(collection(anon,'tmf_events','react','reactions')));await assertFails(setDoc(doc(other,'tmf_events','react','reactions','other@gmail.com'),reaction));
+ await setDoc(doc(admin,'tmf_events','react'),event('minmaung0307@gmail.com','published'));
+ const ref=doc(visitor,'tmf_events','react','reactions',owner),reaction=choices=>({choices,updatedAt:serverTimestamp()});
+ await assertFails(setDoc(doc(anon,'tmf_events','react','reactions','anon'),reaction(['heart'])));
+ await assertSucceeds(setDoc(ref,reaction(['heart'])));
+ await assertFails(setDoc(ref,reaction(['heart','heart'])));
+ await assertFails(setDoc(ref,reaction(['prayer'])));
+ await assertFails(setDoc(doc(other,'tmf_events','react','reactions',owner),reaction(['heart','prayer'])));
+ await assertSucceeds(setDoc(ref,reaction(['heart','prayer'])));
+ await assertSucceeds(setDoc(ref,reaction(['heart','prayer','celebrate'])));
+ await assertFails(setDoc(ref,reaction(['heart','prayer','celebrate'])));
+ await assertFails(deleteDoc(ref));
+ for(const choices of [['heart'],['heart','prayer'],['heart','prayer','celebrate']])await assertSucceeds(setDoc(doc(other,'tmf_events','react','reactions','other@gmail.com'),reaction(choices)));
+ const snapshot=await getDocs(collection(anon,'tmf_events','react','reactions'));
+ for(const key of ['heart','prayer','celebrate'])if(snapshot.docs.filter(d=>d.data().choices.includes(key)).length!==2)throw Error('Counts must be two each');
+ await env.withSecurityRulesDisabled(async c=>setDoc(doc(c.firestore(),'tmf_events','react','reactions','legacy@gmail.com'),{emoji:'heart',updatedAt:Timestamp.now()}));
+ const legacy=doc(context('legacy@gmail.com'),'tmf_events','react','reactions','legacy@gmail.com');
+ await assertFails(setDoc(legacy,reaction(['prayer'])));
+ await assertSucceeds(setDoc(legacy,reaction(['heart','prayer'])));
+ await assertFails(setDoc(legacy,{emoji:'none',updatedAt:serverTimestamp()}));
+ await updateDoc(doc(admin,'tmf_events','react'),{status:'archived',updatedAt:serverTimestamp()});await assertFails(getDocs(collection(anon,'tmf_events','react','reactions')));
 });
 test('private inbox owner access, no public listing, no forged sender or self-approval',async()=>{
  const uid='sender@gmail.com',sender=context(uid),other=context('unrelated@gmail.com');

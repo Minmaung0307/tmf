@@ -38,3 +38,5 @@ footer.site-footer{padding:0 40px;background:#f1f3eb}.footer-support{padding:22p
 }
 
 .reaction-note{min-height:3.5em}.reaction-button{min-width:4.5rem}.reaction-button[aria-pressed="true"]{background:#dce8cf;border-color:#729557;color:#173f35}
+
+.event-details-dialog{width:min(680px,calc(100% - 32px));max-height:90dvh;overflow:auto;border:1px solid #d8ddcf;border-radius:22px;padding:28px;background:#faf9f3;color:#173f35}.event-details-dialog::backdrop{background:rgb(20 40 30 / .55)}.event-details-dialog h2{font-size:1.8rem;margin:18px 0}.event-details-dialog h3{font-size:1rem;margin-top:18px}.event-detail-text{white-space:pre-wrap;overflow-wrap:anywhere}.event-modal-photo{max-height:320px;width:100%;object-fit:contain}.event-sharing{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.event-sharing h3,.event-sharing input,.event-sharing p{width:100%}.event-qr{width:220px;height:220px;max-width:100%;image-rendering:pixelated}.event-details-dialog button{min-height:44px}

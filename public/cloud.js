@@ -27,3 +27,4 @@ export async function watchPublishedEvents(next,error){
  const {db,sdk:s}=await getCloud();
  return s.onSnapshot(s.query(s.collection(db,'tmf_events'),s.where('status','==','published'),s.orderBy('dateStart','desc'),s.limit(100)),snap=>next(snap.docs.map(d=>({id:d.id,...d.data(),sample:false,cloud:true,image:'images/event-placeholder.jpg'}))),error);
 }
+export async function publicEvent(id){const {db,sdk:s}=await getCloud();const d=await s.getDocFromServer(s.doc(db,'tmf_events',id));if(!d.exists())throw Error('Event unavailable');return {id:d.id,...d.data(),cloud:true};}

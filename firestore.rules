@@ -20,9 +20,10 @@ service cloud.firestore {
     function publishedEvent(id) { return get(/databases/$(database)/documents/tmf_events/$(id)).data.status == 'published'; }
     function validPlace(d) {
       return d.keys().hasAll(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy'])
-        && d.keys().hasOnly(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt'])
+        && d.keys().hasOnly(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt','email'])
         && text(d.name,180) && d.name.size()>0 && d.category in ['monastery','temple','organization']
         && text(d.city,100) && d.city.size()>0 && text(d.address,300) && d.address.size()>0
+        && text(d.get('email',''),254)
         && text(d.state,2) && d.state.matches('^[A-Z]{2}$') && text(d.phone,60)
         && text(d.website,600) && (d.website=='' || d.website.matches('^https://[^\\s]+$'))
         && text(d.description,4000) && text(d.hours,500) && text(d.aliasesText,500)
@@ -82,13 +83,20 @@ service cloud.firestore {
     match /tmf_events/{id}/reactions/{uid} {
       // Public aggregates contain only emoji choices and timestamps, never email/name.
       allow read: if publishedEvent(id);
-      allow create: if googleUser() && request.auth.uid==uid && publishedEvent(id) && validReaction();
+      allow create: if googleUser() && request.auth.uid==uid && publishedEvent(id) && validReaction()
+        && request.resource.data.choices.size()==1;
       allow update: if googleUser() && request.auth.uid==uid && publishedEvent(id) && validReaction()
-        && request.time >= resource.data.updatedAt + duration.value(5,'s');
+        && request.resource.data.choices.hasAll(previousChoices())
+        && request.resource.data.choices.size()==previousChoices().size()+1;
       allow delete: if false;
-      function validReaction() { return request.resource.data.keys().hasOnly(['emoji','updatedAt'])
-        && request.resource.data.emoji in ['heart','prayer','celebrate','none'] && request.resource.data.updatedAt==request.time; }
+      function previousChoices() { return resource.data.get('choices', resource.data.get('emoji','none') in ['heart','prayer','celebrate'] ? [resource.data.emoji] : []); }
+      function validReaction() { return request.resource.data.keys().hasOnly(['choices','updatedAt'])
+        && request.resource.data.choices is list && request.resource.data.choices.size()<=3
+        && request.resource.data.choices.size()==request.resource.data.choices.toSet().size()
+        && request.resource.data.choices.hasOnly(['heart','prayer','celebrate'])
+        && request.resource.data.updatedAt==request.time; }
     }
+
     // This endpoint reveals only whether a signed-in account has admin access.
     match /tmf_admin_access/check { allow get: if admin(); allow list, write: if false; }
     function validSubmission(d,uid,kind) {

@@ -1,3 +1,13 @@
+## 5.5.0 — Live appreciation and admin guide
+
+Each Google user can give each of three reactions once. Transactions preserve concurrent choices; Firestore rules reject duplicate or removed choices. Legacy single reactions remain counted. Public counts subscribe live; local clicks update immediately. Admin guide uses responsive external CSS and prominent links. Validation: 30 unit tests, 14 emulator tests, two-session browser reactions and responsive guide checks.
+
+## v5.4.9 — Structured location, event details and local QR sharing
+
+Separate City/State user fields serialize into the existing city_state format; event and profile imports parse it. Event details opens a public-details dialog with organizer website, copy controls and locally generated QR linking to the event. Source: qrcode-generator 1.4.4 (MIT header retained). Guide CSS is external for the production CSP. Legacy JSON import is under Advanced. Unchanged event snapshots no longer rebuild reaction controls; stale initial count responses do not overwrite optimistic interaction.
+
+Validated: 30 unit tests, modal/QR rendering and live list browser checks, production-CSP guide styling, community reaction checks. Hosting deployed to tmf-mm; no event records modified.
+
 ## v5.4.8 — Immediate delete confirmation and distinct profile UI
 
 List Delete now opens its modal before loading any editor or photo. It validates the selected record revision before deleting. Inbox label/select spacing and focus appearance are fixed. Place profiles no longer displays the duplicate Events submission inbox; it is dedicated to institution profiles. Existing profile data is retained.
