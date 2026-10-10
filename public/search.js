@@ -18,6 +18,7 @@ export function withTimeout(promise, ms=18000) { let timer; return Promise.race(
 // Canonical search concepts connect Myanmar names with common English spellings.
 // They do not add records or infer a place's nationality from its name.
 const searchAliases = [
+ ['retreat', ['ရိပ်သာများ','ရိပ်သာ','တရားထိုင်','retreat centers','retreat center','retreats','retreat','meditation']],
  ['organization', ['အသင်းအဖွဲ့','အဖွဲ့အစည်း','အသင်း','အဖွဲ့','organizations','organisation','organization']],
  ['monastery', ['ဘုန်းကြီးကျောင်း','ဘုန်းတော်ကြီးကျောင်း','ကျောင်းတိုက်','monasteries','monastery']],
  ['temple', ['စေတီပုထိုး','စေတီ','ဘုရားကျောင်း','ဘုရား','pagodas','pagoda','temples','temple']],

@@ -1,3 +1,4 @@
+import {placePhotos} from './place-photos.js';
 import {lazyCover,reactions} from './community-ui.js';
 import {config} from './config.js';
 import {filterDirectory, validPlace, safeUrl, mapsUrl, matchesEvent, withTimeout} from './search.js';
@@ -9,8 +10,8 @@ function element(tag, className, text) { const el=document.createElement(tag); i
 function link(text,url,className='') { const a=element('a',className,text); a.href=url; a.target='_blank'; a.rel='noopener noreferrer'; return a; }
 function empty(title,message,actions=[]) { const el=element('div','empty'); el.append(element('div','place-icon','⌕'),element('h3','',title),element('p','',message)); const row=element('div','empty-actions'); row.append(...actions); el.append(row); return el; }
 function button(text,action,className='secondary') { const b=element('button',className,text); b.type='button'; b.addEventListener('click',action); return b; }
-let previousPanel;
-function route(){ const hash=location.hash.slice(1); const target=hash==='submit-event'?'submit':['events','submit'].includes(hash)?hash:'discover'; document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==target); document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+target;a.classList.toggle('active',active); if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}); const browsing=hash==='browse-area';$('browse-area').hidden=!browsing;$('search-area').hidden=browsing;document.querySelectorAll('[data-discovery-view]').forEach(a=>{const active=(a.dataset.discoveryView==='browse')===browsing;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});if(target==='events'&&previousPanel!=='events')loadEvents();previousPanel=target; }
+let previousPanel,workspaceModule;
+function route(){ const hash=location.hash.slice(1); const target=hash==='submit-event'?'submit':['events','submit','my-space'].includes(hash)?hash:'discover'; document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==target); document.querySelectorAll('nav a').forEach(a=>{const active=a.hash==='#'+target;a.classList.toggle('active',active); if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');}); const browsing=hash==='browse-area';$('browse-area').hidden=!browsing;$('search-area').hidden=browsing;document.querySelectorAll('[data-discovery-view]').forEach(a=>{const active=(a.dataset.discoveryView==='browse')===browsing;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});if(target==='events'&&previousPanel!=='events')loadEvents();if(target==='my-space'&&!workspaceModule){workspaceModule=import('./profile.js').catch(()=>{workspaceModule=null;$('workspaceStatus').textContent='Your space could not load. Check your connection and try again.';});}previousPanel=target;delete document.documentElement.dataset.startPanel; }
 let directoryPromise, directoryMeta, directory=[];
 async function loadDirectory(){
  if(directoryPromise)return directoryPromise;
@@ -25,12 +26,12 @@ function renderBrowse(){
  $('browseStatus').textContent=`${directory.length} places · Choose a name to see its details`;
  const previousGroups=[...$('browseGroups').querySelectorAll('.browse-group')].map(g=>({open:g.open,letter:g.querySelector('select')?.value||''}));
  $('browseGroups').replaceChildren();
- const groups=[['monastery','Monasteries','ဘုန်းကြီးကျောင်းများ'],['temple','Pagodas & temples','ဘုရား / စေတီများ'],['organization','Myanmar organizations','မြန်မာအသင်းအဖွဲ့များ']];
+ const groups=[['monastery','Monasteries','ဘုန်းကြီးကျောင်းများ'],['temple','Pagodas & temples','ဘုရား / စေတီများ'],['organization','Myanmar organizations','မြန်မာအသင်းအဖွဲ့များ'],['retreat','Retreat centers','ရိပ်သာများ']];
  const collator=new Intl.Collator('en',{sensitivity:'base',numeric:true});
  for(const [key,title,myanmar] of groups){
   const places=directory.filter(p=>p.categories.includes(key)).sort((a,b)=>collator.compare(a.name,b.name)||collator.compare(a.stateName||'',b.stateName||''));
   const group=element('details','browse-group tone-'+key);group.open=false;
-  const summary=element('summary','browse-summary');const heading=element('span','browse-heading',title);const subtitle=element('span','browse-subtitle',myanmar);subtitle.lang='my';heading.append(subtitle);summary.append(heading,element('span','browse-count',String(places.length)));group.append(summary);
+  const summary=element('summary','browse-summary');const icon=element('img','category-icon');icon.src='icons/'+({monastery:'temple',temple:'pagoda',organization:'social',retreat:'retreat'})[key]+'.svg';icon.alt='';summary.append(icon);const heading=element('span','browse-heading',title);const subtitle=element('span','browse-subtitle',myanmar);subtitle.lang='my';heading.append(subtitle);summary.append(heading,element('span','browse-count',String(places.length)));group.append(summary);
   const control=element('label','browse-letter-label','Jump to a name');const select=element('select');select.setAttribute('aria-label',title+' starting letter');select.add(new Option('All names · A–Z',''));
   const letterFor=p=>{const first=p.name.trim().charAt(0).toUpperCase();return /^[A-Z]$/.test(first)?first:'Other';};
   const letters=[...new Set(places.map(letterFor))].sort((a,b)=>a==='Other'?1:b==='Other'?-1:a.localeCompare(b));letters.forEach(letter=>select.add(new Option(letter==='Other'?'Other / မြန်မာ':letter,letter)));control.append(select);group.append(control);
@@ -41,10 +42,12 @@ function renderBrowse(){
   group.append(list);const prior=previousGroups[groups.findIndex(g=>g[0]===key)];if(prior){group.open=prior.open;select.value=prior.letter;select.dispatchEvent(new Event('change'));}$('browseGroups').append(group);
  }
 }
+let openPlacePhotos;
 async function openPlace(place){
+ openPlacePhotos?.dispose();openPlacePhotos=null;
  const card=placeCard(place,true);const heading=card.querySelector('h3');heading.id='placeDialogTitle';
- card.querySelector('.profile-link')?.remove();$('placeDialogContent').replaceChildren(card);
- if(place.community){if(place.description)$('placeDialogContent').append(element('p','profile-story',place.description));if(place.hours){$('placeDialogContent').append(element('h3','','Visiting & opening hours'),element('p','profile-story',place.hours));}$('placeDialogContent').append(element('p','subtle','Community-submitted profile · reviewed by the site administrator. Confirm visiting arrangements directly.'));}
+ card.querySelector('.profile-link')?.remove();$('placeDialogContent').replaceChildren(card);if(place.hasPhoto&&place.cloudId){openPlacePhotos=placePhotos(place);$('placeDialogContent').prepend(openPlacePhotos.root);}
+ if(place.community||place.categories.includes('retreat')){if(place.description)$('placeDialogContent').append(element('p','profile-story',place.description));if(place.hours){$('placeDialogContent').append(element('h3','','Visiting & opening hours'),element('p','profile-story',place.hours));}$('placeDialogContent').append(element('p','subtle',place.community?'Community-submitted profile · reviewed by the site administrator. Confirm visiting arrangements directly.':'Check the official source and confirm course registration or visiting arrangements directly.'));}
  const share=button('Copy profile link',async()=>{const url=new URL('./',location.href);url.searchParams.set('place',place.id);url.hash='discover';try{await navigator.clipboard.writeText(url.href);share.textContent='Link copied ✓';}catch{const input=element('input','share-url');input.readOnly=true;input.value=url.href;$('placeDialogContent').append(input);input.select();share.textContent='Copy the link below';}});$('placeDialogContent').append(share);
  if(place.aliases?.length)$('placeDialogContent').append(element('p','dialog-aliases',place.aliases.join(' · ')));
  $('placeDialog').showModal();document.body.classList.add('place-dialog-open');
@@ -53,23 +56,23 @@ async function openPlace(place){
 
 }
 $('closePlaceDialog').addEventListener('click',()=>$('placeDialog').close());
-$('placeDialog').addEventListener('close',()=>{document.body.classList.remove('place-dialog-open');$('placeDialogContent').replaceChildren();});
+$('placeDialog').addEventListener('close',()=>{openPlacePhotos?.dispose();openPlacePhotos=null;document.body.classList.remove('place-dialog-open');$('placeDialogContent').replaceChildren();});
 $('placeDialog').addEventListener('click',event=>{if(event.target===$('placeDialog')){const r=event.currentTarget.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.currentTarget.close();}});
 
 let category='all',generation=0,lastPlaces=[],map,markerLayer,pageNumber=0;const PAGE_SIZE=24;
 const params=new URLSearchParams(location.search);
 $('search').value=params.get('q')||'';$('state').value=params.get('state')||'';const restoredTradition=(params.get('tradition')||'').replace(/(?:\s*\(\d+\))+\s*$/,'').trim();
 $('tradition').value=['Myanmar','Sri Lanka','Thailand','Laos','Cambodia','other','unrecorded'].includes(restoredTradition)?restoredTradition:'';
-if(['all','monastery','temple','organization'].includes(params.get('category')))category=params.get('category');
+if(['all','monastery','temple','organization','retreat'].includes(params.get('category')))category=params.get('category');
 function syncCategory(){document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===category)));$('tradition').disabled=false;}
 syncCategory();
 function filters(){return {query:$('search').value,category,tradition:$('tradition').value,state:$('state').value};}
-function externalSearch(){const terms={all:'Buddhist monastery Myanmar community',monastery:'Buddhist monastery',temple:'Buddhist pagoda temple',organization:'Myanmar community organization'};return 'https://www.google.com/search?'+new URLSearchParams({q:[$('search').value,terms[category],states[$('state').value]||'', 'United States'].join(' ')});}
+function externalSearch(){const terms={all:'Buddhist monastery Myanmar community',monastery:'Buddhist monastery',temple:'Buddhist pagoda temple',organization:'Myanmar community organization',retreat:'meditation retreat center'};return 'https://www.google.com/search?'+new URLSearchParams({q:[$('search').value,terms[category],states[$('state').value]||'', 'United States'].join(' ')});}
 function clearMap(){if(markerLayer)markerLayer.clearLayers();$('map').hidden=true;$('mapToggle').setAttribute('aria-expanded','false');$('mapToggle').textContent='Show map';}
 async function runSearch(){
  const request=++generation;clearMap();lastPlaces=[];pageNumber=0;$('mapToggle').disabled=true;$('notice').replaceChildren();$('pagination').replaceChildren();$('attribution').hidden=true;
  const f=filters();const url=new URL(location.href);const placeParam=url.searchParams.get('place');url.search='';if(placeParam)url.searchParams.set('place',placeParam);for(const [key,value] of Object.entries({q:f.query,category,state:f.state,tradition:f.tradition}))if(value)url.searchParams.set(key,value);history.replaceState(null,'',url);
- $('resultTitle').textContent='Loading the community directory…';$('resultNote').textContent='Find a place to reflect, celebrate, and belong.';$('templeList').setAttribute('aria-busy','true');$('templeList').replaceChildren(...Array.from({length:3},()=>{const s=element('div','skeleton');s.setAttribute('aria-hidden','true');return s;}));
+ if(!directory.length){$('resultTitle').textContent='Loading the community directory…';$('resultNote').textContent='Find a place to reflect, celebrate, and belong.';$('templeList').setAttribute('aria-busy','true');$('templeList').replaceChildren(...Array.from({length:3},()=>{const s=element('div','skeleton');s.setAttribute('aria-hidden','true');return s;}));}
  try {
    await loadDirectory();if(request!==generation)return;
    lastPlaces=filterDirectory(directory,f);
@@ -99,27 +102,20 @@ function renderResults(){
  const row=element('div','pagination');const prev=button('← Previous',()=>{pageNumber--;renderResults();$('resultTitle').scrollIntoView({block:'start'});});prev.disabled=pageNumber===0;const next=button('Next →',()=>{pageNumber++;renderResults();$('resultTitle').scrollIntoView({block:'start'});});next.disabled=start+PAGE_SIZE>=lastPlaces.length;
  row.append(prev,element('span','subtle',`${start+1}–${Math.min(start+PAGE_SIZE,lastPlaces.length)} of ${lastPlaces.length}`),next);$('pagination').append(row);
 }
-function placeGallery(p){
- const gallery=element('div','place-gallery');gallery.setAttribute('aria-label',p.name+' photos');
- const photos=(p.photos||[]).map(photo=>typeof photo==='string'?photo:photo.url).filter(url=>typeof url==='string'&&url.startsWith('images/'));
- if(p.hasPhoto&&p.cloudId){const img=element('img','profile-cover');img.alt=p.imageAlt||p.name;img.src='images/event-placeholder.jpg';gallery.append(img);lazyCover(img,'tmf_places',p.cloudId);}
- for(const url of photos){const img=element('img');img.src=url;img.alt=p.name;img.loading='lazy';gallery.append(img);}
- if(!gallery.children.length){const kind=p.categories.includes('organization')?'social':p.categories.includes('monastery')?'temple':'pagoda';const art=element('img','place-symbol');art.src='icons/'+kind+'.svg';art.alt=kind;gallery.classList.add('icon-only');gallery.append(art);}else if(gallery.children.length>1){gallery.tabIndex=0;gallery.setAttribute('aria-label','Swipe left or right to browse photos of '+p.name);gallery.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();gallery.scrollBy({left:gallery.clientWidth*(e.key==='ArrowLeft'?-1:1),behavior:'smooth'});}});}
- return gallery;
-}
+function placeGallery(p){const gallery=element('div','place-gallery icon-only');const kind=p.categories.includes('retreat')?'retreat':p.categories.includes('organization')?'social':p.categories.includes('monastery')?'temple':'pagoda';const art=element('img','place-symbol');art.src='icons/'+kind+'.svg';art.alt='';gallery.append(art);return gallery;}
 const viewControls=element('div','directory-view-controls');viewControls.setAttribute('aria-label','Result layout');
 $('templeList').classList.add('list-view');
 for(const [value,label] of [['list','☰ List'],['grid','▦ Grid']]){const control=button(label,()=>{ $('templeList').classList.toggle('list-view',value==='list');for(const b of viewControls.children)b.setAttribute('aria-pressed',String(b===control));},'secondary');control.setAttribute('aria-pressed',String(value==='list'));viewControls.append(control);}
 $('templeList').before(viewControls);
 function placeCard(p,details=false){
- const card=element('article','place-card tone-'+(p.categories.includes('organization')?'organization':p.categories.includes('monastery')?'monastery':'temple'));card.append(placeGallery(p));
+ const card=element('article','place-card tone-'+(p.categories.includes('retreat')?'retreat':p.categories.includes('organization')?'organization':p.categories.includes('monastery')?'monastery':'temple'));card.append(placeGallery(p));
  const title=element('h3','',p.name);if(!details){const open=button(p.name,()=>openPlace(p),'place-open');open.setAttribute('aria-haspopup','dialog');title.replaceChildren(open);card.addEventListener('click',e=>{if(!e.target.closest('a,button,img'))openPlace(p);});}card.append(title,element('p','address',p.address||[p.city,p.stateName||p.state].filter(Boolean).join(', ')||'Street address not recorded'));
- card.append(element('span','subtle',p.categories.map(c=>({monastery:'Monastery',temple:'Temple / pagoda',organization:'Myanmar organization'}[c])).join(' · ')));
+ card.append(element('span','subtle',p.categories.map(c=>({monastery:'Monastery',temple:'Temple / pagoda',organization:'Myanmar organization',retreat:'Retreat / meditation center'}[c])).join(' · ')));
  const actions=element('div','card-actions');
  actions.append(link('Directions ↗',mapsUrl(p.name+' '+(p.address||[p.city,p.stateName,'USA'].filter(Boolean).join(' ')))));
  if(safeUrl(p.website))actions.append(link('Website ↗',safeUrl(p.website)));
  if(p.email&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email)){const mail=element('a','',p.email);mail.href='mailto:'+p.email;actions.append(mail);}if(p.phone){const phone=element('a','',p.phone);phone.href='tel:'+p.phone.replace(/[^+\d]/g,'');if(/[0-9]/.test(phone.href))actions.append(phone);}
- if(!details){if(p.phone)card.append(element('p','subtle',p.phone));if(p.website)card.append(element('p','subtle',p.website.replace(/^https?:\/\//,'')));if(p.hours)card.append(element('p','subtle',p.hours));return card;}card.append(actions);
+ if(!details){if(p.hasPhoto)card.append(element('span','photo-count-badge',`${p.photoCount||1} photo${(p.photoCount||1)>1?'s':''}`));if(p.phone)card.append(element('p','subtle',p.phone));if(p.website)card.append(element('p','subtle',p.website.replace(/^https?:\/\//,'')));if(p.hours)card.append(element('p','subtle',p.hours));return card;}card.append(actions);
  if(p.verificationNote)card.append(element('p','directory-note',p.verificationNote));
  if(safeUrl(p.source))card.append(link(p.sourceType==='official'?'Official source ↗':p.sourceType==='osm'?'OpenStreetMap record ↗':p.sourceType==='wikipedia'?'Wikipedia source ↗':'Directory source ↗',safeUrl(p.source),'subtle'));
  return card;
@@ -143,15 +139,24 @@ $('searchForm').addEventListener('submit',e=>{e.preventDefault();clearTimeout(se
 document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.category;syncCategory();runSearch();}));
 $('state').addEventListener('change',runSearch);$('tradition').addEventListener('change',runSearch);$('resetFilters').addEventListener('click',reset);$('mapToggle').addEventListener('click',showMap);
 let eventLinkOpened=false;
-let eventsData=[],eventsLoaded=false,eventLoadVersion=0,stopEvents;
+let eventsData=[],eventsLoaded=false,eventLoadVersion=0,stopEvents,eventRetry;
 async function loadEvents(){
  if(eventsLoaded)return;eventsLoaded=true;
+ const version=++eventLoadVersion;clearTimeout(eventRetry);stopEvents?.();stopEvents=null;
  $('eventCloudStatus').textContent='Connecting to live events…';
- try{const cloud=await import('./cloud.js');stopEvents=await cloud.watchPublishedEvents(live=>{if(JSON.stringify(eventsData)!==JSON.stringify(live)){eventsData=live;renderEvents();}const requested=params.get('event');if(requested&&!eventLinkOpened){const event=live.find(e=>e.id===requested);eventLinkOpened=true;if(event)openEvent(event);else cloud.publicEvent(requested).then(openEvent).catch(()=>{$('eventCloudStatus').textContent='This shared event is unavailable or no longer published.';});}$('eventCloudStatus').textContent='Live updates · '+live.length+' published events';},()=>{eventsData=[];renderEvents();$('eventCloudStatus').textContent='Connection interrupted. Reconnecting…';eventsLoaded=false;setTimeout(()=>{if(!eventsLoaded)loadEvents();},5000);});}
- catch{eventsLoaded=false;$('eventCloudStatus').textContent='Events unavailable. Check your connection.';}
+ const failed=()=>{if(version!==eventLoadVersion)return;eventsLoaded=false;eventsData=[];renderEvents();$('eventCloudStatus').textContent='Events unavailable. Check your connection. Retrying…';eventRetry=setTimeout(loadEvents,5000);};
+ try{const cloud=await import('./cloud.js');const stop=await cloud.watchPublishedEvents((live,metadata)=>{
+  if(version!==eventLoadVersion)return;
+  if(JSON.stringify(eventsData)!==JSON.stringify(live)){eventsData=live;renderEvents();}
+  if(metadata?.fromCache){$('eventCloudStatus').textContent='Waiting for the server to confirm current events…';return;}
+  $('eventCloudStatus').textContent='Live updates · '+live.length+' published events';
+  const requested=params.get('event');if(requested&&!eventLinkOpened){eventLinkOpened=true;const event=live.find(e=>e.id===requested);if(event)openEvent(event);else cloud.publicEvent(requested).then(openEvent).catch(()=>{$('eventCloudStatus').textContent='This shared event is unavailable or no longer published.';});}
+ },failed);if(version===eventLoadVersion)stopEvents=stop;else stop();}catch{failed();}
 }
 window.addEventListener('online',()=>{if(!eventsLoaded)loadEvents();});
-function renderEvents(){const filtered=eventsData.filter(e=>matchesEvent(e,{query:$('eventSearch').value,month:$('eventMonth').value,state:$('eventState').value,period:$('eventPeriod').value})).sort((a,b)=>String(b.dateStart).localeCompare(String(a.dateStart)));$('eventCount').textContent=`${filtered.length} event${filtered.length===1?'':'s'}`;$('eventGrid').replaceChildren();if(!filtered.length){$('eventGrid').append(empty('No matching events','Try another month, state, or date range.',[button('Clear event filters',resetEvents)]));return;}for(const e of filtered){const card=element('article','event-card');const img=element('img');img.src=e.image?.startsWith('images/')?e.image:'images/event-placeholder.jpg';img.alt='';img.loading='lazy';img.onerror=()=>{img.onerror=null;img.src='images/event-placeholder.jpg';};if(e.cloud&&e.hasPhoto){img.alt=e.imageAlt||e.title;lazyCover(img,'tmf_events',e.id);}const body=element('div','event-body');body.append(element('span','tag',e.sample?'Sample · archive':(e.dateEnd||e.dateStart)<new Date().toLocaleDateString('en-CA')?'Past event':'Community event'),element('h3','',e.title),element('p','',e.dateStart+(e.dateEnd!==e.dateStart?' — '+e.dateEnd:'')),element('p','',e.templeName),element('p','',[e.city,e.state].filter(Boolean).join(', ')),element('p','',e.address));if(e.description)body.append(element('p','event-description',e.description));const u=safeUrl(e.link);if(u&&!new URL(u).hostname.match(/(^|\.)example\.(org|com|net)$/))body.append(link('Organizer website ↗',u,'subtle'));body.append(button('Event details',()=>openEvent(e)));if(e.cloud)body.append(reactions(e.id));card.append(img,body);$('eventGrid').append(card);}}
+window.addEventListener('pageshow',event=>{if(event.persisted){eventsLoaded=false;eventsData=[];renderEvents();loadEvents();}});
+window.addEventListener('offline',()=>{eventsData=[];renderEvents();document.querySelectorAll('.event-details-dialog').forEach(dialog=>dialog.close());$('eventCloudStatus').textContent='Offline. Reconnect to see current events.';});
+function renderEvents(){const filtered=eventsData.filter(e=>matchesEvent(e,{query:$('eventSearch').value,month:$('eventMonth').value,state:$('eventState').value,period:$('eventPeriod').value})).sort((a,b)=>String(b.dateStart).localeCompare(String(a.dateStart)));$('eventCount').textContent=`${filtered.length} event${filtered.length===1?'':'s'}`;$('eventGrid').replaceChildren();if(!filtered.length){$('eventGrid').append(empty('No matching events','Try another month, state, or date range.',[button('Clear event filters',resetEvents)]));return;}for(const e of filtered){const card=element('article','event-card');const img=element('img');img.src=e.image?.startsWith('images/')?e.image:'images/event-placeholder.jpg';img.alt='';img.loading='lazy';img.onerror=()=>{img.onerror=null;img.src='images/event-placeholder.jpg';};if(e.cloud&&e.hasPhoto){img.alt=e.imageAlt||e.title;lazyCover(img,'tmf_events',e.id,false);}const body=element('div','event-body');body.append(element('span','tag',e.sample?'Sample · archive':(e.dateEnd||e.dateStart)<new Date().toLocaleDateString('en-CA')?'Past event':'Community event'),element('h3','',e.title),element('p','',e.dateStart+(e.dateEnd&&e.dateEnd!==e.dateStart?' — '+e.dateEnd:'')),element('p','',e.templeName),element('p','',[e.city,e.state].filter(Boolean).join(', ')),element('p','',e.address));if(e.description)body.append(element('p','event-description',e.description));const u=safeUrl(e.link);if(u&&!new URL(u).hostname.match(/(^|\.)example\.(org|com|net)$/))body.append(link('Organizer website ↗',u,'subtle'));body.append(button('Event details',()=>openEvent(e)));if(e.cloud)body.append(reactions(e.id));card.append(img,body);card.classList.add('event-open-card');card.tabIndex=0;card.setAttribute('aria-label','View event: '+e.title);card.setAttribute('aria-haspopup','dialog');card.addEventListener('click',event=>{if(!event.target.closest('a,button,input,select'))openEvent(e);});card.addEventListener('keydown',event=>{if(event.target===card&&['Enter',' '].includes(event.key)){event.preventDefault();openEvent(e);}});$('eventGrid').append(card);}}
 function resetEvents(){for(const id of ['eventSearch','eventMonth','eventState'])$(id).value='';$('eventPeriod').value='all';renderEvents();}
 for(const id of ['eventSearch','eventMonth','eventState','eventPeriod'])$(id).addEventListener(id==='eventSearch'?'input':'change',renderEvents);$('resetEvents').addEventListener('click',resetEvents);
 // Payment destinations are supplied by the site owner; never invent a recipient or payment URL.
@@ -171,8 +176,16 @@ function renderSupport(){
 renderSupport();
 
 let profilesLoading=false;let baseDirectory;let communityProfiles=[];
-async function refreshProfiles(more=false){if(profilesLoading)return;profilesLoading=true;$('refreshProfiles').disabled=true;try{await loadDirectory();baseDirectory||=[...directory];const cloud=await import('./cloud.js');if(!cloud.cloudEventsEnabled)return;const places=await withTimeout(cloud.publishedPlaces(!more),10000);communityProfiles=more?[...new Map([...communityProfiles,...places].map(p=>[p.id,p])).values()]:places;const overrides=new Map(communityProfiles.filter(p=>p.cloudId?.startsWith('directory-')).map(p=>[p.cloudId.slice(10),p]));directory=[...baseDirectory.map(p=>overrides.has(p.id)?{...p,...overrides.get(p.id),id:p.id,source:p.source,sourceType:p.sourceType}:p),...communityProfiles.filter(p=>!p.cloudId?.startsWith('directory-'))];$('moreProfiles').hidden=places.length<100;browseReady=false;renderBrowse();await runSearch();$('profileCloudStatus').textContent=`${communityProfiles.length} community profiles loaded, alongside the original directory.`;}catch{$('profileCloudStatus').textContent='Community profiles are temporarily unavailable. The original directory still works.';}finally{profilesLoading=false;$('refreshProfiles').disabled=false;}}
+let hiddenDirectoryIds=new Set();
+function composeDirectory(){const overrides=new Map(communityProfiles.filter(p=>p.cloudId?.startsWith('directory-')).map(p=>[p.cloudId.slice(10),p]));directory=[...(baseDirectory||directory).filter(p=>!hiddenDirectoryIds.has(p.id)).map(p=>overrides.has(p.id)?{...p,...overrides.get(p.id),id:p.id,source:p.source,sourceType:p.sourceType}:p),...communityProfiles.filter(p=>!p.cloudId?.startsWith('directory-'))];browseReady=false;renderBrowse();}
+async function refreshProfiles(more=false){if(profilesLoading)return;profilesLoading=true;$('refreshProfiles').disabled=true;try{await loadDirectory();baseDirectory||=[...directory];const cloud=await import('./cloud.js');if(!cloud.cloudEventsEnabled)return;const places=await withTimeout(cloud.publishedPlaces(!more),10000);communityProfiles=more?[...new Map([...communityProfiles,...places].map(p=>[p.id,p])).values()]:places;composeDirectory();$('moreProfiles').hidden=places.length<100;browseReady=false;renderBrowse();await runSearch();$('profileCloudStatus').textContent=`${communityProfiles.length} community profiles loaded, alongside the original directory.`;}catch{$('profileCloudStatus').textContent='Community profiles are temporarily unavailable. The original directory still works.';}finally{profilesLoading=false;$('refreshProfiles').disabled=false;}}
 $('refreshProfiles').addEventListener('click',()=>refreshProfiles());$('moreProfiles').addEventListener('click',()=>refreshProfiles(true));
+document.querySelector('.site-header').addEventListener('click',event=>{
+ const a=event.target.closest('a');if(!a||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ const url=new URL(a.href,location.href);if(url.pathname!==location.pathname||!['#discover','#events','#submit','#my-space'].includes(url.hash))return;
+ event.preventDefault();if(location.hash!==url.hash)history.pushState(null,'',url);window.dispatchEvent(new HashChangeEvent('hashchange'));window.scrollTo({top:0,behavior:'instant'});
+});
+window.addEventListener('popstate',()=>window.dispatchEvent(new HashChangeEvent('hashchange')));
 window.addEventListener('hashchange',route);route();runSearch().then(async()=>{await refreshProfiles();const requested=params.get('place');if(!requested)return;let p=directory.find(p=>p.id===requested);try{if(!p&&requested.startsWith('community-')){const cloud=await import('./cloud.js');p=await withTimeout(cloud.publicPlace(requested.slice(10)),10000);}if(p)openPlace(p);else throw Error('Missing profile');}catch{$('profileCloudStatus').textContent='This profile is unavailable or no longer published.';}});
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
 
@@ -184,16 +197,28 @@ import {initContribution} from './contribution.js';
 initContribution({getPhoto:()=>suggestionPhoto,purpose:params.get('request')});
 
 async function openEvent(e){
- const dialog=element('dialog','event-details-dialog');dialog.setAttribute('aria-labelledby','eventDetailTitle');
- const title=element('h2','',e.title);title.id='eventDetailTitle';const close=button('Close ×',()=>dialog.close());
+ document.querySelectorAll('.event-details-dialog').forEach(d=>d.close());
+ const opener=document.activeElement;
+ const dialog=element('dialog','event-details-dialog');dialog.setAttribute('aria-labelledby','eventDetailTitle');dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
+ const title=element('h2','',e.title);title.id='eventDetailTitle';const close=button('Close ×',()=>dialog.close(),'dialog-close');
  dialog.append(close,title);if(e.hasPhoto){const img=element('img','event-modal-photo');img.alt=e.imageAlt||e.title;img.src='images/event-placeholder.jpg';dialog.append(img);lazyCover(img,'tmf_events',e.id);}
- const details=[['Organizer',e.templeName],['Dates',e.dateStart+(e.dateEnd&&e.dateEnd!==e.dateStart?' — '+e.dateEnd:'')],['Location',[e.city,e.state].filter(Boolean).join(', ')],['Address',e.address],['Details',e.description]];
+ const details=[['Event type',e.eventType],['Organizer',e.templeName],['Dates',e.dateStart+(e.dateEnd&&e.dateEnd&&e.dateEnd!==e.dateStart?' — '+e.dateEnd:'')],['Location',[e.city,e.state].filter(Boolean).join(', ')],['Address',e.address],['Details',e.description]];
  for(const [label,value] of details)if(value){dialog.append(element('h3','',label),element('p','event-detail-text',value));}
  const website=safeUrl(e.link);if(website)dialog.append(link('Organizer website ↗',website,'secondary'));
  const url=new URL(location.pathname,location.origin);url.searchParams.set('event',e.id);url.hash='events';
  const sharing=element('section','event-sharing');sharing.append(element('h3','','Share this event'));
  const input=element('input');input.readOnly=true;input.value=url.href;input.setAttribute('aria-label','Event share link');input.onclick=()=>input.select();
  const notice=element('p','subtle');notice.setAttribute('role','status');sharing.append(input,button('Copy link',async()=>{try{await navigator.clipboard.writeText(url.href);notice.textContent='Link copied.';}catch{input.focus();input.select();notice.textContent='Select and copy the link above.';}}),button('Copy details',async()=>{try{await navigator.clipboard.writeText([e.title,...details.filter(x=>x[1]).map(x=>x[0]+': '+x[1]),website||'',url.href].join('\n'));notice.textContent='Details copied.';}catch{notice.textContent='You can select and copy the event text.';}}),notice);dialog.append(sharing);
- dialog.addEventListener('close',()=>dialog.remove(),{once:true});document.body.append(dialog);dialog.showModal();close.focus();
+ let stopDetail,closed=false;
+ dialog.addEventListener('close',()=>{closed=true;stopDetail?.();dialog.remove();opener?.focus();},{once:true});document.body.append(dialog);dialog.showModal();close.focus();
+ if(e.cloud){
+  const unavailable=()=>{if(closed)return;dialog.close();$('eventCloudStatus').textContent='This event is unavailable or no longer published.';};
+  try{const {watchPublicEvent}=await import('./cloud.js');const stop=await watchPublicEvent(e.id,current=>{if(!current)unavailable();},unavailable);if(closed)stop();else stopDetail=stop;}catch{unavailable();}
+ }
+
  try{const {default:qrcode}=await import('./vendor/qr/qrcode.js');const qr=qrcode(0,'M');qr.addData(url.href);qr.make();const img=element('img','event-qr');img.alt='Scan to open this event';img.src=qr.createDataURL(5,20);sharing.append(img);}catch{notice.textContent='QR unavailable. Use the share link.';}
 }
+
+for(const chip of document.querySelectorAll('[data-category]')){const file={monastery:'temple',temple:'pagoda',organization:'social',retreat:'retreat'}[chip.dataset.category];if(file){const icon=element('img','category-icon');icon.src='icons/'+file+'.svg';icon.alt='';chip.prepend(icon);}}
+
+import('./cloud.js').then(async cloud=>{await loadDirectory();baseDirectory||=[...directory];if(cloud.cloudEventsEnabled&&cloud.watchDirectoryVisibility)await cloud.watchDirectoryVisibility(ids=>{hiddenDirectoryIds=ids;composeDirectory();runSearch();},()=>{});}).catch(()=>{});

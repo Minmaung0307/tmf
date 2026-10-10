@@ -20,8 +20,9 @@ service cloud.firestore {
     function publishedEvent(id) { return get(/databases/$(database)/documents/tmf_events/$(id)).data.status == 'published'; }
     function validPlace(d) {
       return d.keys().hasAll(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy'])
-        && d.keys().hasOnly(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt','email'])
-        && text(d.name,180) && d.name.size()>0 && d.category in ['monastery','temple','organization']
+        && d.keys().hasOnly(['name','category','city','state','address','phone','website','description','hours','aliasesText','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt','email','photoCount'])
+        && (!('photoCount' in d) || (d.photoCount is int && d.photoCount>=0 && d.photoCount<=5 && d.get('hasPhoto',false)==(d.photoCount>0)))
+        && text(d.name,180) && d.name.size()>0 && d.category in ['monastery','temple','organization','retreat']
         && text(d.city,100) && d.city.size()>0 && text(d.address,300) && d.address.size()>0
         && text(d.get('email',''),254)
         && text(d.state,2) && d.state.matches('^[A-Z]{2}$') && text(d.phone,60)
@@ -32,8 +33,9 @@ service cloud.firestore {
     }
     function validEvent(d) {
       return d.keys().hasAll(['title','templeName','city','state','address','dateStart','dateEnd','link','description','status','createdAt','updatedAt','updatedBy'])
-        && d.keys().hasOnly(['title','templeName','city','state','address','dateStart','dateEnd','link','description','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt'])
+        && d.keys().hasOnly(['title','templeName','city','state','address','dateStart','dateEnd','link','description','status','createdAt','updatedAt','updatedBy','hasPhoto','imageAlt','eventType'])
         && imageFields(d)
+        && (!('eventType' in d) || text(d.eventType,80))
         && text(d.title,180) && d.title.size()>0
         && text(d.templeName,180) && d.templeName.size()>0
         && text(d.city,100) && d.city.size()>0
@@ -63,6 +65,23 @@ service cloud.firestore {
       allow list: if request.query.limit!=null && request.query.limit<=100 && (admin() || resource.data.status=='published');
       allow create: if freshAdmin() && validPlace(request.resource.data) && request.resource.data.createdAt==request.time;
       allow update: if freshAdmin() && validPlace(request.resource.data) && request.resource.data.createdAt==resource.data.createdAt;
+      allow delete: if freshAdmin();
+    }
+    match /tmf_places/{placeId}/photos/{slot} {
+      function validSlot() { return slot in ['1','2','3','4']; }
+      function slotNumber() { return slot=='1'?1:slot=='2'?2:slot=='3'?3:4; }
+      allow get: if admin() || (validSlot()
+        && get(/databases/$(database)/documents/tmf_places/$(placeId)).data.status=='published'
+        && get(/databases/$(database)/documents/tmf_places/$(placeId)).data.get('photoCount',0)>slotNumber());
+      allow list: if false;
+      allow create, update: if freshAdmin() && validSlot()
+        && getAfter(/databases/$(database)/documents/tmf_places/$(placeId)).data.get('photoCount',0)>slotNumber()
+        && request.resource.data.keys().hasAll(['data','width','height','updatedAt'])
+        && request.resource.data.keys().hasOnly(['data','width','height','updatedAt'])
+        && text(request.resource.data.data,160023) && request.resource.data.data.matches('^data:image/webp;base64,[A-Za-z0-9+/=]+$')
+        && request.resource.data.width is int && request.resource.data.width>0 && request.resource.data.width<=1200
+        && request.resource.data.height is int && request.resource.data.height>0 && request.resource.data.height<=1200
+        && request.resource.data.updatedAt==request.time;
       allow delete: if freshAdmin();
     }
     match /tmf_media/{id} {
@@ -119,7 +138,7 @@ service cloud.firestore {
         && text(d.event_end,10)
         && text(d.message,5000)
         && d.from_name.size()>0 && d.subject.size()>0 && d.message.size()>0
-        && d.place_category in ['monastery','temple','organization']
+        && d.place_category in ['monastery','temple','organization','retreat']
         && (!('photo' in d) || (d.photo is map && d.photo.keys().hasOnly(['data','width','height'])
           && text(d.photo.data,160023) && d.photo.data.matches('^data:image/webp;base64,[A-Za-z0-9+/=]+$')
           && d.photo.width is int && d.photo.height is int && d.photo.width>0 && d.photo.height>0 && d.photo.width<=1200 && d.photo.height<=1200));
@@ -147,6 +166,59 @@ service cloud.firestore {
           && request.time>=resource.data.createdAt+duration.value(60,'s') && validSubmission(request.resource.data,uid,'tmf-privacy-request'));
       allow delete: if freshAdmin();
     }
+    match /tmf_directory_visibility/{id} {
+      allow get: if true;
+      allow list: if request.query.limit!=null && request.query.limit<=1000;
+      allow create, update: if admin() && request.resource.data.keys().hasOnly(['hidden','updatedAt']) && request.resource.data.hidden is bool && request.resource.data.updatedAt==request.time;
+      allow delete: if admin();
+    }
+    // Personal workspaces are private even from other directory administrators.
+    function owner(uid) { return googleUser() && request.auth.uid==uid; }
+    function validPrivateProfile(d) {
+      return d.keys().hasAll(['displayName','phone','location','bio','avatar','createdAt','updatedAt'])
+        && d.keys().hasOnly(['displayName','phone','location','bio','avatar','createdAt','updatedAt'])
+        && text(d.displayName,100) && d.displayName.size()>0 && text(d.phone,60)
+        && text(d.location,120) && text(d.bio,2000) && text(d.avatar,160023)
+        && (d.avatar=='' || d.avatar.matches('^data:image/webp;base64,[A-Za-z0-9+/=]+$'))
+        && d.createdAt is timestamp && d.updatedAt==request.time;
+    }
+    function privateDate(d) { return text(d,10) && (d=='' || d.matches('^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')); }
+    function validTask(d) {
+      return d.keys().hasAll(['title','details','status','priority','dueDate','position','createdAt','updatedAt'])
+        && d.keys().hasOnly(['title','details','status','priority','dueDate','position','createdAt','updatedAt'])
+        && text(d.title,180) && d.title.size()>0 && text(d.details,4000)
+        && d.status in ['todo','doing','done'] && d.priority in ['normal','high','low']
+        && privateDate(d.dueDate) && d.position is number && d.position>=-1000000000000000 && d.position<=1000000000000000
+        && d.createdAt is timestamp && d.updatedAt==request.time;
+    }
+    function validRecord(d) {
+      return d.keys().hasAll(['title','body','date','createdAt','updatedAt'])
+        && d.keys().hasOnly(['title','body','date','createdAt','updatedAt'])
+        && text(d.title,180) && d.title.size()>0 && text(d.body,8000) && d.body.size()>0
+        && privateDate(d.date) && d.createdAt is timestamp && d.updatedAt==request.time;
+    }
+    match /tmf_users/{uid} {
+      allow get: if owner(uid);
+      allow list: if false;
+      allow create: if owner(uid) && validPrivateProfile(request.resource.data) && request.resource.data.createdAt==request.time;
+      allow update: if owner(uid) && validPrivateProfile(request.resource.data) && request.resource.data.createdAt==resource.data.createdAt;
+      allow delete: if owner(uid);
+      match /tasks/{id} {
+        allow get: if owner(uid);
+        allow list: if owner(uid) && request.query.limit!=null && request.query.limit<=300;
+        allow create: if owner(uid) && validTask(request.resource.data) && request.resource.data.createdAt==request.time;
+        allow update: if owner(uid) && validTask(request.resource.data) && request.resource.data.createdAt==resource.data.createdAt;
+        allow delete: if owner(uid);
+      }
+      match /records/{id} {
+        allow get: if owner(uid);
+        allow list: if owner(uid) && request.query.limit!=null && request.query.limit<=300;
+        allow create: if owner(uid) && validRecord(request.resource.data) && request.resource.data.createdAt==request.time;
+        allow update: if owner(uid) && validRecord(request.resource.data) && request.resource.data.createdAt==resource.data.createdAt;
+        allow delete: if owner(uid);
+      }
+    }
+
     // No public place/event submission endpoint and no client-created admin roles.
     match /{document=**} { allow read, write: if false; }
   }

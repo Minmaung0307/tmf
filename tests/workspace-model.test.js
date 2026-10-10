@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {profileValues,taskValues,noteValues,validDate} from '../public/workspace-model.js';
+import {validateEvent,eventFromForm} from '../public/place-model.js';
+import {filterDirectory} from '../public/search.js';
+test('workspace forms reject invalid dates, empty data and invalid task state',()=>{assert.equal(validDate('2026-02-30'),false);assert.equal(validDate('2028-02-29'),true);assert.throws(()=>profileValues({displayName:' '}));assert.throws(()=>taskValues({title:'Task',status:'bad',priority:'normal'}));assert.throws(()=>noteValues({title:'a',body:' '}));assert.throws(()=>taskValues({title:'a',status:'todo',priority:'normal',dueDate:'2026-02-30'}));});
+test('private profile cannot carry a caller supplied admin role',()=>{assert.deepEqual(profileValues({displayName:' Me ',role:'admin'}),{displayName:'Me',phone:'',location:'',bio:''});});
+test('retreat category can be validated, searched in English and Burmese',()=>{assert.equal(validateEvent(eventFromForm({name:'A retreat',category:'retreat',city:'Austin',state:'TX',address:'Address',status:'published'})).category,'retreat');const places=[{id:'r',name:'Quiet retreat',categories:['retreat'],traditions:[],aliases:[]}];assert.equal(filterDirectory(places,{query:'ရိပ်သာ',category:'retreat'}).length,1);assert.equal(filterDirectory(places,{query:'meditation'}).length,1);});

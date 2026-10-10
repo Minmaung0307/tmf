@@ -1,7 +1,7 @@
 // Decode locally, rasterize SVG, strip metadata, and keep a small cover image.
 export const MAX_IMAGE_BYTES=120000;
 export function safeImage(data){return typeof data==='string'&&data.length<=160023&&/^data:image\/webp;base64,[A-Za-z0-9+/=]+$/.test(data);}
-export async function prepareImage(file){
+export async function prepareImage(file,{maxDimension=1200}={}){
  if(!file||file.size>12*1024*1024)throw Error('Choose an image smaller than 12 MB.');
  const ext=file.name.split('.').pop().toLowerCase();if(!['png','jpg','jpeg','tif','tiff','svg','webp','gif','bmp','avif'].includes(ext))throw Error('Use PNG, JPG, JPEG, TIFF, SVG, WebP, GIF, BMP or AVIF.');
  let source,release=()=>{};
@@ -23,7 +23,7 @@ export async function prepareImage(file){
  try{
   let w=source.naturalWidth||source.width,h=source.naturalHeight||source.height;
   if(!w||!h||w*h>40000000)throw Error('Image is too large. Resize it below 40 megapixels.');
-  let scale=Math.min(1,1200/Math.max(w,h));const canvas=document.createElement('canvas');
+  let scale=Math.min(1,Math.max(1,Math.min(1200,maxDimension))/Math.max(w,h));const canvas=document.createElement('canvas');
   for(let attempt=0;attempt<7;attempt++){
    canvas.width=Math.max(1,Math.round(w*scale));canvas.height=Math.max(1,Math.round(h*scale));const ctx=canvas.getContext('2d');ctx.fillStyle='#f8f7f2';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(source,0,0,canvas.width,canvas.height);
    const data=canvas.toDataURL('image/webp',Math.max(.45,.82-attempt*.06));if(safeImage(data))return {data,width:canvas.width,height:canvas.height};scale*=.8;

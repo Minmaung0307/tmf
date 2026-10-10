@@ -1,6 +1,6 @@
 {
   "name": "tmf-free-community-directory",
-  "version": "5.6.2",
+  "version": "6.3.0",
   "private": true,
   "type": "module",
   "scripts": {

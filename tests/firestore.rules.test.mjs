@@ -97,12 +97,13 @@ test('privacy request remains private and separate from a pending community sugg
 });
 
 test('public live listener sees publish then deletion without refresh',async()=>{
- const ref=doc(admin,'tmf_events','live-cycle');let stop;
- const waitFor=(predicate)=>new Promise((resolve,reject)=>{const timer=setTimeout(()=>{stop?.();reject(Error('Live event timeout'));},7000);stop=onSnapshot(query(collection(anon,'tmf_events'),where('status','==','published'),limit(100)),snap=>{if(predicate(snap)){clearTimeout(timer);stop();resolve();}},reject);});
- const added=waitFor(snap=>snap.docs.some(d=>d.id==='live-cycle'));
- await setDoc(ref,event('minmaung0307@gmail.com','published'));await added;
- const removed=waitFor(snap=>!snap.docs.some(d=>d.id==='live-cycle'));
- await deleteDoc(ref);await removed;
+ const ref=doc(admin,'tmf_events','live-cycle'),publicDB=env.unauthenticatedContext().firestore();
+ let addedResolve,removedResolve,seen=false,stop;
+ const added=new Promise(resolve=>{addedResolve=resolve;}),removed=new Promise(resolve=>{removedResolve=resolve;});
+ const timed=promise=>new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Live event timeout')),12000);promise.then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});});
+ let rejectListener;const failed=new Promise((_,reject)=>{rejectListener=reject;});
+ stop=onSnapshot(query(collection(publicDB,'tmf_events'),where('status','==','published'),limit(100)),{includeMetadataChanges:true},snap=>{if(snap.metadata.fromCache)return;const has=snap.docs.some(d=>d.id==='live-cycle');if(has){seen=true;addedResolve();}else if(seen)removedResolve();},rejectListener);
+ try{await setDoc(ref,event('minmaung0307@gmail.com','published'));await timed(Promise.race([added,failed]));await deleteDoc(ref);await timed(Promise.race([removed,failed]));}finally{stop();}
 });
 test('publish and private submission receipt commit atomically',async()=>{
  const uid='receipt-owner';await env.withSecurityRulesDisabled(async c=>setDoc(doc(c.firestore(),'tmf_submissions',uid),{status:'pending',createdAt:Timestamp.now(),subject:'Event'}));
@@ -110,3 +111,51 @@ test('publish and private submission receipt commit atomically',async()=>{
 });
 
 test('valid admin session older than fifteen minutes can write without reauthentication',async()=>{const db=context('minmaung0307@gmail.com',{auth_time:Math.floor(Date.now()/1000)-3600});const ref=doc(db,'tmf_events','active-older-session');await assertSucceeds(setDoc(ref,event('minmaung0307@gmail.com')));await assertSucceeds(deleteDoc(ref));});
+
+test('private profiles are owner-only, cannot grant roles and validate photos',async()=>{
+ const owner=context('profile-owner@example.com'),stranger=context('profile-stranger@example.com'),uid='profile-owner@example.com';
+ const data={displayName:'My name',phone:'',location:'',bio:'Private bio',avatar:'',createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+ await assertSucceeds(setDoc(doc(owner,'tmf_users',uid),data));
+ await assertSucceeds(getDoc(doc(owner,'tmf_users',uid)));
+ for(const other of [anon,stranger,admin])await assertFails(getDoc(doc(other,'tmf_users',uid)));
+ await assertFails(setDoc(doc(stranger,'tmf_users',uid),data));
+ await assertFails(updateDoc(doc(owner,'tmf_users',uid),{role:'admin',updatedAt:serverTimestamp()}));
+ await assertFails(updateDoc(doc(owner,'tmf_users',uid),{avatar:'data:image/svg+xml;base64,AAAA',updatedAt:serverTimestamp()}));
+ await assertSucceeds(updateDoc(doc(owner,'tmf_users',uid),{avatar:'data:image/webp;base64,UklGRg==',updatedAt:serverTimestamp()}));
+ await assertFails(getDocs(collection(owner,'tmf_users')));
+});
+test('tasks and personal records enforce ownership, schemas and bounded queries',async()=>{
+ const uid='task-owner@example.com',owner=context(uid),stranger=context('task-other@example.com');
+ const task={title:'Visit retreat',details:'Private task',status:'todo',priority:'normal',dueDate:'',position:1,createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+ const record={title:'Reflection',body:'Private notes',date:'2026-10-09',createdAt:serverTimestamp(),updatedAt:serverTimestamp()};
+ for(const [kind,data]of [['tasks',task],['records',record]]){
+  const r=doc(owner,'tmf_users',uid,kind,'one');await assertSucceeds(setDoc(r,data));
+  for(const other of [anon,stranger,admin]){await assertFails(getDoc(doc(other,'tmf_users',uid,kind,'one')));await assertFails(deleteDoc(doc(other,'tmf_users',uid,kind,'one')));}
+  await assertSucceeds(getDocs(query(collection(owner,'tmf_users',uid,kind),limit(300))));
+  await assertFails(getDocs(query(collection(owner,'tmf_users',uid,kind),limit(301))));
+  await assertFails(updateDoc(r,{ownerUid:'spoof',updatedAt:serverTimestamp()}));
+ }
+ await assertSucceeds(updateDoc(doc(owner,'tmf_users',uid,'tasks','one'),{status:'done',updatedAt:serverTimestamp()}));
+ await assertFails(updateDoc(doc(owner,'tmf_users',uid,'tasks','one'),{status:'invalid',updatedAt:serverTimestamp()}));
+ await assertSucceeds(deleteDoc(doc(owner,'tmf_users',uid,'records','one')));
+});
+test('retreat publishing and directory visibility remain admin-only',async()=>{
+ const data={name:'Retreat center',category:'retreat',city:'Austin',state:'TX',address:'Test address',phone:'',website:'',description:'',hours:'',aliasesText:'',status:'published',createdAt:serverTimestamp(),updatedAt:serverTimestamp(),updatedBy:'minmaung0307@gmail.com'};
+ await assertSucceeds(setDoc(doc(admin,'tmf_places','retreat'),data));await assertSucceeds(getDoc(doc(anon,'tmf_places','retreat')));
+ await assertFails(setDoc(doc(context('stranger@example.com'),'tmf_places','retreat-other'),data));
+ await assertSucceeds(setDoc(doc(admin,'tmf_directory_visibility','base-place'),{hidden:true,updatedAt:serverTimestamp()}));
+ await assertSucceeds(getDocs(query(collection(anon,'tmf_directory_visibility'),limit(1000))));
+ await assertFails(setDoc(doc(anon,'tmf_directory_visibility','base-place'),{hidden:false,updatedAt:serverTimestamp()}));
+});
+test('event custom types are optional, bounded, and remain admin-only',async()=>{const ref=doc(admin,'tmf_events','custom-type');await assertSucceeds(setDoc(ref,{...event('minmaung0307@gmail.com','published'),eventType:'Dhamma Q&A'}));await assertSucceeds(getDoc(doc(anon,'tmf_events','custom-type')));await assertFails(updateDoc(ref,{eventType:'x'.repeat(81),updatedAt:serverTimestamp()}));await assertFails(updateDoc(doc(context('member@example.com'),'tmf_events','custom-type'),{eventType:'New type',updatedAt:serverTimestamp()}));});
+
+test('place gallery has five bounded slots, admin-only writes, published-only reads and atomic deletion',async()=>{
+ const uid='minmaung0307@gmail.com',id='gallery-security',parent=doc(admin,'tmf_places',id);
+ const place={name:'Gallery retreat',category:'retreat',city:'Austin',state:'TX',address:'123 Road',phone:'',website:'',description:'',hours:'',aliasesText:'',status:'draft',hasPhoto:true,photoCount:5,createdAt:serverTimestamp(),updatedAt:serverTimestamp(),updatedBy:uid};
+ const photo={data:'data:image/webp;base64,UklGRg==',width:960,height:640,updatedAt:serverTimestamp()};
+ const batch=writeBatch(admin);batch.set(parent,place);batch.set(doc(admin,'tmf_media','tmf_places_'+id),{...photo,parentCollection:'tmf_places',parentId:id});for(let i=1;i<5;i++)batch.set(doc(admin,'tmf_places',id,'photos',String(i)),photo);await assertSucceeds(batch.commit());
+ await assertFails(getDoc(doc(anon,'tmf_places',id,'photos','1')));await assertFails(setDoc(doc(admin,'tmf_places',id,'photos','5'),photo));await assertFails(updateDoc(parent,{photoCount:6,updatedAt:serverTimestamp()}));await assertFails(updateDoc(parent,{photoCount:0,updatedAt:serverTimestamp()}));await assertFails(setDoc(doc(admin,'tmf_places',id,'photos','1'),{...photo,data:'data:image/webp;base64,'+'A'.repeat(160024)}));
+ await assertSucceeds(updateDoc(parent,{status:'published',updatedAt:serverTimestamp()}));for(let i=1;i<5;i++)await assertSucceeds(getDoc(doc(anon,'tmf_places',id,'photos',String(i))));await assertFails(setDoc(doc(context('member@example.com'),'tmf_places',id,'photos','1'),photo));await assertFails(getDocs(query(collection(anon,'tmf_places',id,'photos'),limit(5))));
+ await assertSucceeds(updateDoc(parent,{photoCount:2,updatedAt:serverTimestamp()}));await assertFails(getDoc(doc(anon,'tmf_places',id,'photos','2')));await assertFails(setDoc(doc(admin,'tmf_places',id,'photos','2'),photo));await assertSucceeds(updateDoc(parent,{status:'archived',updatedAt:serverTimestamp()}));await assertFails(getDoc(doc(anon,'tmf_places',id,'photos','1')));
+ const remove=writeBatch(admin);remove.delete(parent);remove.delete(doc(admin,'tmf_media','tmf_places_'+id));for(let i=1;i<5;i++)remove.delete(doc(admin,'tmf_places',id,'photos',String(i)));await assertSucceeds(remove.commit());await assertFails(getDoc(doc(anon,'tmf_places',id,'photos','1')));
+});

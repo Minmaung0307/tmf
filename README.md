@@ -1,3 +1,13 @@
+> Latest: TDSA 6.3. See `TDSA-6.3-GUIDE-MM.md` for the five-photo place gallery and required Hosting + Firestore rules deployment.
+
+# TDSA 6.1
+
+Current release: [TDSA-6.1-GUIDE-MM.md](TDSA-6.1-GUIDE-MM.md). Instant task movement, simple Notes, profile editor closes after save, fixed navigation, and custom event types. Deploy Firestore rules and Hosting together.
+
+# TDSA 6.0
+
+Start with [TDSA-6.0-GUIDE-MM.md](TDSA-6.0-GUIDE-MM.md) for this release. Deploy **Firestore rules and Hosting** together. Existing `tmf-mm` Firebase data is preserved. The historical documentation below describes earlier releases.
+
 ## 5.5.0 — Live appreciation and admin guide
 
 Each Google user can give each of three reactions once. Transactions preserve concurrent choices; Firestore rules reject duplicate or removed choices. Legacy single reactions remain counted. Public counts subscribe live; local clicks update immediately. Admin guide uses responsive external CSS and prominent links. Validation: 30 unit tests, 14 emulator tests, two-session browser reactions and responsive guide checks.

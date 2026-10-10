@@ -25,6 +25,18 @@ export async function coverImage(collection,id){const {db,sdk:s}=await getCloud(
 
 export async function watchPublishedEvents(next,error){
  const {db,sdk:s}=await getCloud();
- return s.onSnapshot(s.query(s.collection(db,'tmf_events'),s.where('status','==','published'),s.orderBy('dateStart','desc'),s.limit(100)),snap=>next(snap.docs.map(d=>({id:d.id,...d.data(),sample:false,cloud:true,image:'images/event-placeholder.jpg'}))),error);
+ return s.onSnapshot(s.query(s.collection(db,'tmf_events'),s.where('status','==','published'),s.orderBy('dateStart','desc'),s.limit(100)),{includeMetadataChanges:true},snap=>{if(snap.metadata.fromCache){next([], {fromCache:true});return;}next(snap.docs.map(d=>({...d.data(),id:d.id,sample:false,cloud:true,image:'images/event-placeholder.jpg'})),{fromCache:false});},error);
 }
-export async function publicEvent(id){const {db,sdk:s}=await getCloud();const d=await s.getDocFromServer(s.doc(db,'tmf_events',id));if(!d.exists())throw Error('Event unavailable');return {id:d.id,...d.data(),cloud:true};}
+export async function publicEvent(id){const {db,sdk:s}=await getCloud();const d=await s.getDocFromServer(s.doc(db,'tmf_events',id));if(!d.exists()||d.data().status!=='published')throw Error('Event unavailable');return {id:d.id,...d.data(),cloud:true};}
+
+export async function watchPublicEvent(id,next,error){
+ const {db,sdk:s}=await getCloud();
+ return s.onSnapshot(s.doc(db,'tmf_events',id),{includeMetadataChanges:true},snap=>{
+  if(snap.metadata.fromCache)return;
+  next(snap.exists()&&snap.data().status==='published'?{...snap.data(),id:snap.id,cloud:true}:null);
+ },error);
+}
+
+export async function watchDirectoryVisibility(next,error){const {db,sdk:s}=await getCloud();return s.onSnapshot(s.query(s.collection(db,'tmf_directory_visibility'),s.limit(1000)),snap=>next(new Set(snap.docs.filter(d=>d.data().hidden).map(d=>d.id))),error);}
+
+export async function placePhoto(id,index=0){if(!Number.isInteger(index)||index<0||index>4)throw Error('Invalid photo');const {db,sdk:s}=await getCloud();const parent=await s.getDocFromServer(s.doc(db,'tmf_places',id));if(!parent.exists()||parent.data().status!=='published'||index>=(parent.data().photoCount??(parent.data().hasPhoto?1:0)))throw Error('Photo unavailable');const ref=index===0?s.doc(db,'tmf_media','tmf_places_'+id):s.doc(db,'tmf_places',id,'photos',String(index));const d=await s.getDocFromServer(ref);return d.exists()?d.data():null;}

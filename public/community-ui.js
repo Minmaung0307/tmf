@@ -2,10 +2,10 @@ import {safeImage} from './media.js';
 import {withTimeout} from './search.js';
 const jobs=new WeakMap();
 const observer=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){observer.unobserve(e.target);jobs.get(e.target)?.();}},{rootMargin:'100px'});
-export function lazyCover(img,collection,id){jobs.set(img,async()=>{try{const {coverImage}=await import('./cloud.js');const photo=await withTimeout(coverImage(collection,id),10000);if(photo&&safeImage(photo.data)){img.src=photo.data;img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','View full photo: '+(img.alt||'Community photo'));img.classList.add('expandable-photo');const open=()=>showPhoto(img);img.addEventListener('click',open);img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});}}catch{img.alt=img.alt||'Photo temporarily unavailable';}});observer.observe(img);}
+export function lazyCover(img,collection,id,expand=true){jobs.set(img,async()=>{try{const {coverImage}=await import('./cloud.js');const photo=await withTimeout(coverImage(collection,id),10000);if(photo&&safeImage(photo.data)){img.src=photo.data;if(!expand)return;img.tabIndex=0;img.setAttribute('role','button');img.setAttribute('aria-label','View full photo: '+(img.alt||'Community photo'));img.classList.add('expandable-photo');const open=()=>showPhoto(img);img.addEventListener('click',open);img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});}}catch{img.alt=img.alt||'Photo temporarily unavailable';}});observer.observe(img);}
 const options=[['heart','❤️','Love this'],['prayer','🙏','With gratitude'],['celebrate','🎉','Celebrate']];
-let authPromise;
-export async function google(){if(!authPromise)authPromise=withTimeout(Promise.all([import('./cloud.js'),import('https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js')]).then(async([c,a])=>{const {app}=await c.getCloud();const auth=a.getAuth(app);await a.setPersistence(auth,a.browserSessionPersistence);await auth.authStateReady();return {a,auth};}),15000).catch(e=>{authPromise=null;throw e;});return authPromise;}
+import {getSession} from './auth-session.js';
+export const google=()=>withTimeout(getSession(),15000);
 const reactionChoices=data=>[...new Set(Array.isArray(data?.choices)?data.choices:options.some(([key])=>key===data?.emoji)?[data.emoji]:[])].filter(key=>options.some(([value])=>value===key));
 const activeReactions=new Map();
 new MutationObserver(()=>{for(const [box,stop] of activeReactions)if(!box.isConnected){stop();activeReactions.delete(box);}}).observe(document.documentElement,{childList:true,subtree:true});
